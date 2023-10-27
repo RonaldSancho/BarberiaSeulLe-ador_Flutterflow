@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "424198379779",
+    "project_id": "proyectoseulbarberia",
+    "storage_bucket": "proyectoseulbarberia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424198379779:android:80ed1f8efb020d32c37136",
+        "android_client_info": {
+          "package_name": "com.mycompany.seulbarberia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxrcQXMs1u49td_hs8ZTCHrDCa6FfoESg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
