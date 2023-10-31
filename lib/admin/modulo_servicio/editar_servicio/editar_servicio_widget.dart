@@ -74,6 +74,102 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
         children: [
           Row(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  var confirmDialogResponse = await showDialog<bool>(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('¿Cambiar la imagen?'),
+                            content: Text(
+                                'Esta seguro que quiere cambiar la imagen'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext, false),
+                                child: Text('No'),
+                              ),
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext, true),
+                                child: Text('Si'),
+                              ),
+                            ],
+                          );
+                        },
+                      ) ??
+                      false;
+                  if (confirmDialogResponse) {
+                    final selectedMedia =
+                        await selectMediaWithSourceBottomSheet(
+                      context: context,
+                      allowPhoto: true,
+                    );
+                    if (selectedMedia != null &&
+                        selectedMedia.every((m) =>
+                            validateFileFormat(m.storagePath, context))) {
+                      setState(() => _model.isDataUploading = true);
+                      var selectedUploadedFiles = <FFUploadedFile>[];
+
+                      var downloadUrls = <String>[];
+                      try {
+                        selectedUploadedFiles = selectedMedia
+                            .map((m) => FFUploadedFile(
+                                  name: m.storagePath.split('/').last,
+                                  bytes: m.bytes,
+                                  height: m.dimensions?.height,
+                                  width: m.dimensions?.width,
+                                  blurHash: m.blurHash,
+                                ))
+                            .toList();
+
+                        downloadUrls = (await Future.wait(
+                          selectedMedia.map(
+                            (m) async =>
+                                await uploadData(m.storagePath, m.bytes),
+                          ),
+                        ))
+                            .where((u) => u != null)
+                            .map((u) => u!)
+                            .toList();
+                      } finally {
+                        _model.isDataUploading = false;
+                      }
+                      if (selectedUploadedFiles.length ==
+                              selectedMedia.length &&
+                          downloadUrls.length == selectedMedia.length) {
+                        setState(() {
+                          _model.uploadedLocalFile =
+                              selectedUploadedFiles.first;
+                          _model.uploadedFileUrl = downloadUrls.first;
+                        });
+                      } else {
+                        setState(() {});
+                        return;
+                      }
+                    }
+                  }
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25.0),
+                  child: Image.network(
+                    widget.servicios!.imagenServicio,
+                    width: 200.0,
+                    height: 150.0,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
                 child: Padding(
@@ -116,7 +212,10 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyMedium,
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Open Sans',
+                          fontSize: 16.0,
+                        ),
                     validator: _model.txtNombreServicioControllerValidator
                         .asValidator(context),
                   ),
@@ -168,7 +267,10 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyMedium,
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Open Sans',
+                          fontSize: 16.0,
+                        ),
                     validator: _model.txtDetalleServicioControllerValidator
                         .asValidator(context),
                   ),
@@ -220,7 +322,10 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyMedium,
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Open Sans',
+                          fontSize: 16.0,
+                        ),
                     validator: _model.txtPrecioServicioControllerValidator
                         .asValidator(context),
                   ),
@@ -324,89 +429,34 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  final selectedMedia = await selectMediaWithSourceBottomSheet(
-                    context: context,
-                    allowPhoto: true,
-                  );
-                  if (selectedMedia != null &&
-                      selectedMedia.every(
-                          (m) => validateFileFormat(m.storagePath, context))) {
-                    setState(() => _model.isDataUploading = true);
-                    var selectedUploadedFiles = <FFUploadedFile>[];
-
-                    var downloadUrls = <String>[];
-                    try {
-                      selectedUploadedFiles = selectedMedia
-                          .map((m) => FFUploadedFile(
-                                name: m.storagePath.split('/').last,
-                                bytes: m.bytes,
-                                height: m.dimensions?.height,
-                                width: m.dimensions?.width,
-                                blurHash: m.blurHash,
-                              ))
-                          .toList();
-
-                      downloadUrls = (await Future.wait(
-                        selectedMedia.map(
-                          (m) async => await uploadData(m.storagePath, m.bytes),
-                        ),
-                      ))
-                          .where((u) => u != null)
-                          .map((u) => u!)
-                          .toList();
-                    } finally {
-                      _model.isDataUploading = false;
-                    }
-                    if (selectedUploadedFiles.length == selectedMedia.length &&
-                        downloadUrls.length == selectedMedia.length) {
-                      setState(() {
-                        _model.uploadedLocalFile = selectedUploadedFiles.first;
-                        _model.uploadedFileUrl = downloadUrls.first;
-                      });
-                    } else {
-                      setState(() {});
-                      return;
-                    }
-                  }
-                },
-                child: Container(
-                  width: 120.0,
-                  height: 120.0,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: Image.network(
-                    widget.servicios!.imagenServicio,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
               FFButtonWidget(
                 onPressed: () async {
-                  await widget.servicios!.reference
-                      .update(createServiciosRecordData(
-                    trabajador: _model.dpTrabajadorServicioValue,
-                    nombreServicio: _model.txtNombreServicioController.text,
-                    descripcionServicion:
-                        _model.txtDetalleServicioController.text,
-                    imagenServicio: _model.uploadedFileUrl,
-                    estadoServicio: _model.dpEstadoServicioValue,
-                    precioServicio: double.tryParse(
-                        _model.txtPrecioServicioController.text),
-                  ));
+                  if (_model.uploadedFileUrl == null ||
+                      _model.uploadedFileUrl == '') {
+                    await widget.servicios!.reference
+                        .update(createServiciosRecordData(
+                      trabajador: _model.dpTrabajadorServicioValue,
+                      nombreServicio: _model.txtNombreServicioController.text,
+                      descripcionServicion:
+                          _model.txtDetalleServicioController.text,
+                      precioServicio: double.tryParse(
+                          _model.txtPrecioServicioController.text),
+                      estadoServicio: _model.dpEstadoServicioValue,
+                    ));
+                  } else {
+                    await widget.servicios!.reference
+                        .update(createServiciosRecordData(
+                      trabajador: _model.dpTrabajadorServicioValue,
+                      nombreServicio: _model.txtNombreServicioController.text,
+                      descripcionServicion:
+                          _model.txtDetalleServicioController.text,
+                      precioServicio: double.tryParse(
+                          _model.txtPrecioServicioController.text),
+                      estadoServicio: _model.dpEstadoServicioValue,
+                      imagenServicio: _model.uploadedFileUrl,
+                    ));
+                  }
+
                   await showDialog(
                     context: context,
                     builder: (alertDialogContext) {

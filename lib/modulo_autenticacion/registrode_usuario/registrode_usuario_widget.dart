@@ -72,8 +72,8 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
 
     _model.txtNombreUsuarioController ??= TextEditingController();
     _model.txtNombreUsuarioFocusNode ??= FocusNode();
-    _model.txtApeliidosController ??= TextEditingController();
-    _model.txtApeliidosFocusNode ??= FocusNode();
+    _model.txtApellidosUsuarioController ??= TextEditingController();
+    _model.txtApellidosUsuarioFocusNode ??= FocusNode();
     _model.txtTelefonoController ??= TextEditingController();
     _model.txtTelefonoFocusNode ??= FocusNode();
     _model.txtCorreoElectronicoController ??= TextEditingController();
@@ -303,10 +303,10 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
                                         child: Container(
                                           width: double.infinity,
                                           child: TextFormField(
-                                            controller:
-                                                _model.txtApeliidosController,
-                                            focusNode:
-                                                _model.txtApeliidosFocusNode,
+                                            controller: _model
+                                                .txtApellidosUsuarioController,
+                                            focusNode: _model
+                                                .txtApellidosUsuarioFocusNode,
                                             autofocus: true,
                                             autofillHints: [AutofillHints.name],
                                             obscureText: false,
@@ -368,7 +368,7 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
                                                 ),
                                             keyboardType: TextInputType.name,
                                             validator: _model
-                                                .txtApeliidosControllerValidator
+                                                .txtApellidosUsuarioControllerValidator
                                                 .asValidator(context),
                                           ),
                                         ),
@@ -654,7 +654,6 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
                                             await UsersRecord.collection
                                                 .doc(user.uid)
                                                 .update(createUsersRecordData(
-                                                  uid: '',
                                                   email: _model
                                                       .txtCorreoElectronicoController
                                                       .text,
@@ -662,11 +661,12 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
                                                       .txtNombreUsuarioController
                                                       .text,
                                                   apellidos: _model
-                                                      .txtApeliidosController
+                                                      .txtApellidosUsuarioController
                                                       .text,
                                                   numeroTelefonico: _model
                                                       .txtTelefonoController
                                                       .text,
+                                                  tipoUsuario: 'Cliente',
                                                 ));
 
                                             await authManager

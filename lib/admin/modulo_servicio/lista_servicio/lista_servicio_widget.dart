@@ -355,7 +355,7 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                                                                           .sizeOf(
                                                                               context)
                                                                       .height *
-                                                                  1.0,
+                                                                  0.9,
                                                               child:
                                                                   EditarServicioWidget(
                                                                 servicios:
@@ -412,9 +412,9 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                                                                   (alertDialogContext) {
                                                                 return AlertDialog(
                                                                   title: Text(
-                                                                      'Eliminar'),
+                                                                      '¿Desea eliminar este Servicio?'),
                                                                   content: Text(
-                                                                      '¿Desea eliminar el Servicio seleccionado?'),
+                                                                      'Una vez elminado no se podra reestablecer'),
                                                                   actions: [
                                                                     TextButton(
                                                                       onPressed: () => Navigator.pop(
@@ -428,16 +428,18 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                                                                           alertDialogContext,
                                                                           true),
                                                                       child: Text(
-                                                                          'Sí'),
+                                                                          'Si'),
                                                                     ),
                                                                   ],
                                                                 );
                                                               },
                                                             ) ??
                                                             false;
-
-                                                    context.pushNamed(
-                                                        'ListaServicio');
+                                                    if (confirmDialogResponse) {
+                                                      await tablaServiciosServiciosRecord
+                                                          .reference
+                                                          .delete();
+                                                    }
                                                   },
                                                   text: 'Eliminar',
                                                   options: FFButtonOptions(
@@ -500,7 +502,7 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                                                               MediaQuery.sizeOf(
                                                                           context)
                                                                       .height *
-                                                                  1.0,
+                                                                  0.9,
                                                           child:
                                                               VisualizarServicioWidget(
                                                             informacionservicio:

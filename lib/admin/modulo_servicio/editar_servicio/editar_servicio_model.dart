@@ -18,6 +18,11 @@ import 'package:provider/provider.dart';
 class EditarServicioModel extends FlutterFlowModel<EditarServicioWidget> {
   ///  State fields for stateful widgets in this component.
 
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl = '';
+
   // State field(s) for txtNombreServicio widget.
   FocusNode? txtNombreServicioFocusNode;
   TextEditingController? txtNombreServicioController;
@@ -37,10 +42,6 @@ class EditarServicioModel extends FlutterFlowModel<EditarServicioWidget> {
   // State field(s) for dpEstadoServicio widget.
   String? dpEstadoServicioValue;
   FormFieldController<String>? dpEstadoServicioValueController;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
 
   /// Initialization and disposal methods.
 

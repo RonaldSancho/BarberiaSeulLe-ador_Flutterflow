@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,12 @@ import 'visualizar_detalle_servicio_model.dart';
 export 'visualizar_detalle_servicio_model.dart';
 
 class VisualizarDetalleServicioWidget extends StatefulWidget {
-  const VisualizarDetalleServicioWidget({Key? key}) : super(key: key);
+  const VisualizarDetalleServicioWidget({
+    Key? key,
+    required this.informacionServicio,
+  }) : super(key: key);
+
+  final ServiciosRecord? informacionServicio;
 
   @override
   _VisualizarDetalleServicioWidgetState createState() =>
@@ -66,7 +72,7 @@ class _VisualizarDetalleServicioWidgetState
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      'https://www.capilclinic.es/blog/wp-content/uploads/2022/05/cortar-pelo-despues-injerto-capilar.png',
+                      widget.informacionServicio!.imagenServicio,
                       width: 200.0,
                       height: 150.0,
                       fit: BoxFit.cover,
@@ -96,16 +102,25 @@ class _VisualizarDetalleServicioWidgetState
                 ],
               ),
               Text(
-                'Corte de Pelo',
+                valueOrDefault<String>(
+                  widget.informacionServicio?.nombreServicio,
+                  'Error de conexión',
+                ),
                 style: FlutterFlowTheme.of(context).bodyMedium,
               ),
               Text(
-                'Cortar el pelo de los hombres de todas las edades y estilos.',
+                valueOrDefault<String>(
+                  widget.informacionServicio?.descripcionServicion,
+                  'Error de conexión',
+                ),
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyMedium,
               ),
               Text(
-                '₡5000',
+                valueOrDefault<String>(
+                  widget.informacionServicio?.precioServicio?.toString(),
+                  'Error de conexión',
+                ),
                 style: FlutterFlowTheme.of(context).bodyMedium,
               ),
             ],

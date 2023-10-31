@@ -652,8 +652,7 @@ class _NuevoTrabajadorWidgetState extends State<NuevoTrabajadorWidget> {
                             );
                           },
                         );
-
-                        context.pushNamed('Trabajadores');
+                        context.safePop();
                       },
                       text: 'Guardar',
                       options: FFButtonOptions(

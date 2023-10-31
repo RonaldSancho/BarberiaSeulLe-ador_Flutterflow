@@ -451,6 +451,23 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                           );
                         },
                       );
+                      if (_model.txtCorreoElectronicoController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Email required!',
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
+                      await authManager.updateEmail(
+                        email: _model.txtCorreoElectronicoController.text,
+                        context: context,
+                      );
+                      setState(() {});
+
                       Navigator.pop(context);
                     },
                     text: 'Editar',

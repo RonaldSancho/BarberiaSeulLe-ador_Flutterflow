@@ -21,10 +21,11 @@ class RegistrodeUsuarioModel extends FlutterFlowModel<RegistrodeUsuarioWidget> {
   FocusNode? txtNombreUsuarioFocusNode;
   TextEditingController? txtNombreUsuarioController;
   String? Function(BuildContext, String?)? txtNombreUsuarioControllerValidator;
-  // State field(s) for txtApeliidos widget.
-  FocusNode? txtApeliidosFocusNode;
-  TextEditingController? txtApeliidosController;
-  String? Function(BuildContext, String?)? txtApeliidosControllerValidator;
+  // State field(s) for txtApellidosUsuario widget.
+  FocusNode? txtApellidosUsuarioFocusNode;
+  TextEditingController? txtApellidosUsuarioController;
+  String? Function(BuildContext, String?)?
+      txtApellidosUsuarioControllerValidator;
   // State field(s) for txtTelefono widget.
   FocusNode? txtTelefonoFocusNode;
   TextEditingController? txtTelefonoController;
@@ -51,8 +52,8 @@ class RegistrodeUsuarioModel extends FlutterFlowModel<RegistrodeUsuarioWidget> {
     txtNombreUsuarioFocusNode?.dispose();
     txtNombreUsuarioController?.dispose();
 
-    txtApeliidosFocusNode?.dispose();
-    txtApeliidosController?.dispose();
+    txtApellidosUsuarioFocusNode?.dispose();
+    txtApellidosUsuarioController?.dispose();
 
     txtTelefonoFocusNode?.dispose();
     txtTelefonoController?.dispose();

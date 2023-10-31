@@ -70,11 +70,26 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 20.0),
+        padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 20.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(25.0),
+                  child: Image.network(
+                    widget.informacionservicio!.imagenServicio,
+                    width: 200.0,
+                    height: 150.0,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            ),
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -97,7 +112,6 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                     child: TextFormField(
                       controller: _model.textController1,
                       focusNode: _model.textFieldFocusNode1,
-                      autofocus: true,
                       readOnly: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -105,7 +119,7 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
+                            color: Colors.black,
                             width: 2.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -162,7 +176,6 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                     child: TextFormField(
                       controller: _model.textController2,
                       focusNode: _model.textFieldFocusNode2,
-                      autofocus: true,
                       readOnly: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -170,7 +183,7 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
+                            color: Colors.black,
                             width: 2.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -227,7 +240,6 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                     child: TextFormField(
                       controller: _model.textController3,
                       focusNode: _model.textFieldFocusNode3,
-                      autofocus: true,
                       readOnly: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -235,7 +247,7 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
+                            color: Colors.black,
                             width: 2.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -292,7 +304,6 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                     child: TextFormField(
                       controller: _model.textController4,
                       focusNode: _model.textFieldFocusNode4,
-                      autofocus: true,
                       readOnly: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -300,7 +311,7 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
+                            color: Colors.black,
                             width: 2.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -357,7 +368,6 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                     child: TextFormField(
                       controller: _model.textController5,
                       focusNode: _model.textFieldFocusNode5,
-                      autofocus: true,
                       readOnly: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -365,7 +375,7 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
+                            color: Colors.black,
                             width: 2.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -396,24 +406,6 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
                       validator:
                           _model.textController5Validator.asValidator(context),
                     ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: 120.0,
-                  height: 120.0,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: Image.network(
-                    widget.informacionservicio!.imagenServicio,
-                    fit: BoxFit.cover,
                   ),
                 ),
               ],

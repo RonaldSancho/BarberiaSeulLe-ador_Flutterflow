@@ -520,13 +520,12 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                                 TextButton(
                                   onPressed: () =>
                                       Navigator.pop(alertDialogContext),
-                                  child: Text('Ok'),
+                                  child: Text('De acuerdo.'),
                                 ),
                               ],
                             );
                           },
                         );
-                        context.safePop();
                       },
                       text: 'Guardar',
                       options: FFButtonOptions(
