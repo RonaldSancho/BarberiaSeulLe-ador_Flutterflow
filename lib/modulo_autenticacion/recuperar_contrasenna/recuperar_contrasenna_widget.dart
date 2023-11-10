@@ -206,7 +206,9 @@ class _RecuperarContrasennaWidgetState extends State<RecuperarContrasennaWidget>
                                               .labelLarge
                                               .override(
                                                 fontFamily: 'Open Sans',
-                                                color: Color(0xFF57636C),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
@@ -235,13 +237,17 @@ class _RecuperarContrasennaWidgetState extends State<RecuperarContrasennaWidget>
                                                   .override(
                                                     fontFamily:
                                                         'Plus Jakarta Sans',
-                                                    color: Color(0xFF57636C),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
                                                     fontSize: 16.0,
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Color(0xFFF1F4F8),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:

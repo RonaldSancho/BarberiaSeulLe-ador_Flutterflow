@@ -137,9 +137,9 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 16.0,
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontWeight: FontWeight.w500,
                                   ),
                               enabledBorder: OutlineInputBorder(
@@ -214,7 +214,8 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                                   .labelLarge
                                   .override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF57636C),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -290,7 +291,8 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                                   .labelLarge
                                   .override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF57636C),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -367,7 +369,8 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                                   .labelLarge
                                   .override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF57636C),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -456,7 +459,8 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                                   .labelLarge
                                   .override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF57636C),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -526,7 +530,8 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                       textStyle:
                           FlutterFlowTheme.of(context).labelLarge.override(
                                 fontFamily: 'Open Sans',
-                                color: Color(0xFF101213),
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontWeight: FontWeight.w500,
                               ),
                       hintText: 'Tipo de Usuario',
                       icon: Icon(

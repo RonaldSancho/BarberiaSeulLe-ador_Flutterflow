@@ -115,7 +115,9 @@ class _ReenviarCorreoWidgetState extends State<ReenviarCorreoWidget> {
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Plus Jakarta Sans',
-                                              color: Color(0xFF57636C),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 14.0,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -150,7 +152,8 @@ class _ReenviarCorreoWidgetState extends State<ReenviarCorreoWidget> {
                                 .labelLarge
                                 .override(
                                   fontFamily: 'Plus Jakarta Sans',
-                                  color: Color(0xFF57636C),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w500,
                                 ),
