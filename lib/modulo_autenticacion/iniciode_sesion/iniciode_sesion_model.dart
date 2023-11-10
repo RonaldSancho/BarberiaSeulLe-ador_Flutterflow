@@ -30,7 +30,7 @@ class IniciodeSesionModel extends FlutterFlowModel<IniciodeSesionWidget> {
     }
 
     if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
-      return 'El correo electrónico es requerido.';
+      return 'El correo electrónico es inválido.';
     }
     return null;
   }
