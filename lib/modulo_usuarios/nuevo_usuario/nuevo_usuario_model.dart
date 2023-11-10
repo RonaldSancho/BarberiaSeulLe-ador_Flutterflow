@@ -1,6 +1,8 @@
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'nuevo_usuario_widget.dart' show NuevoUsuarioWidget;
@@ -37,6 +39,9 @@ class NuevoUsuarioModel extends FlutterFlowModel<NuevoUsuarioWidget> {
   FocusNode? txtTelefonoFocusNode;
   TextEditingController? txtTelefonoController;
   String? Function(BuildContext, String?)? txtTelefonoControllerValidator;
+  // State field(s) for ddTipoUsuario widget.
+  String? ddTipoUsuarioValue;
+  FormFieldController<String>? ddTipoUsuarioValueController;
 
   /// Initialization and disposal methods.
 

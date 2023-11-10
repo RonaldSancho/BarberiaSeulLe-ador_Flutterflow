@@ -1,6 +1,8 @@
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
@@ -190,7 +192,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -266,7 +268,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -343,7 +345,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -432,7 +434,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 70.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -508,6 +510,45 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                 ),
               ),
               Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 20.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FlutterFlowDropDown<String>(
+                      controller: _model.ddTipoUsuarioValueController ??=
+                          FormFieldController<String>(null),
+                      options: [' Administrador', 'Trabajador', 'Cliente'],
+                      onChanged: (val) =>
+                          setState(() => _model.ddTipoUsuarioValue = val),
+                      width: MediaQuery.sizeOf(context).width * 0.95,
+                      height: 50.0,
+                      textStyle:
+                          FlutterFlowTheme.of(context).labelLarge.override(
+                                fontFamily: 'Open Sans',
+                                color: Color(0xFF101213),
+                              ),
+                      hintText: 'Tipo de Usuario',
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        size: 24.0,
+                      ),
+                      fillColor: Color(0xE4F1F4F8),
+                      elevation: 2.0,
+                      borderColor: Color(0xCE000000),
+                      borderWidth: 2.0,
+                      borderRadius: 8.0,
+                      margin:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
+                      hidesUnderline: true,
+                      isSearchable: false,
+                      isMultiSelect: false,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
@@ -520,7 +561,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                           _model.txtNombreUsuarioController.text,
                           _model.txtApellidosUsuarioController.text,
                           _model.txtTelefonoController.text,
-                          '',
+                          _model.ddTipoUsuarioValue!,
                           random_data.randomString(
                             4,
                             8,
@@ -530,6 +571,25 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                           ),
                           _model.txtContrasennaController.text,
                         );
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Usuario creado.'),
+                              content: Text(
+                                  'El usuario ha sido creado exitosamente.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('De acuerdo.'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+
+                        context.pushNamed('ListaUsuarios');
                       },
                       text: 'Guardar',
                       options: FFButtonOptions(
