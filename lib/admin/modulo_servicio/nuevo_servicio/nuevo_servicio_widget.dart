@@ -35,8 +35,10 @@ class _NuevoServicioWidgetState extends State<NuevoServicioWidget> {
 
     _model.txtNombreServicioController ??= TextEditingController();
     _model.txtNombreServicioFocusNode ??= FocusNode();
+
     _model.txtDetalleServicioController ??= TextEditingController();
     _model.txtDetalleServicioFocusNode ??= FocusNode();
+
     _model.txtPrecioServicioController ??= TextEditingController();
     _model.txtPrecioServicioFocusNode ??= FocusNode();
   }

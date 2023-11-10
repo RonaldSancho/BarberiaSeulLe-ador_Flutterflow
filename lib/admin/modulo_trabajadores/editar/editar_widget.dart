@@ -45,15 +45,19 @@ class _EditarWidgetState extends State<EditarWidget> {
     _model.txtNombreController ??=
         TextEditingController(text: widget.trabajador?.nombre);
     _model.txtNombreFocusNode ??= FocusNode();
+
     _model.txtApellidosController ??=
         TextEditingController(text: widget.trabajador?.apellidos);
     _model.txtApellidosFocusNode ??= FocusNode();
+
     _model.txtCorreoController ??=
         TextEditingController(text: widget.trabajador?.correoElectronico);
     _model.txtCorreoFocusNode ??= FocusNode();
+
     _model.txtTelefonoController ??=
         TextEditingController(text: widget.trabajador?.numeroTelefonico);
     _model.txtTelefonoFocusNode ??= FocusNode();
+
     _model.txtDescripcionController ??=
         TextEditingController(text: widget.trabajador?.descripcionTrabajador);
     _model.txtDescripcionFocusNode ??= FocusNode();

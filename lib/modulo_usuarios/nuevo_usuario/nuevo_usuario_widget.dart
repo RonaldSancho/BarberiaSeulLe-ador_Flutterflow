@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -28,12 +30,16 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
 
     _model.txtNombreUsuarioController ??= TextEditingController();
     _model.txtNombreUsuarioFocusNode ??= FocusNode();
+
     _model.txtApellidosUsuarioController ??= TextEditingController();
     _model.txtApellidosUsuarioFocusNode ??= FocusNode();
+
     _model.txtCorreoElectronicoController ??= TextEditingController();
     _model.txtCorreoElectronicoFocusNode ??= FocusNode();
+
     _model.txtContrasennaController ??= TextEditingController();
     _model.txtContrasennaFocusNode ??= FocusNode();
+
     _model.txtTelefonoController ??= TextEditingController();
     _model.txtTelefonoFocusNode ??= FocusNode();
   }
@@ -509,22 +515,20 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('Usuario Registrado'),
-                              content: Text(
-                                  'Se ha registrado al usuario exitosamente.'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('De acuerdo.'),
-                                ),
-                              ],
-                            );
-                          },
+                        await actions.nuevoUsuarioAdmin(
+                          _model.txtCorreoElectronicoController.text,
+                          _model.txtNombreUsuarioController.text,
+                          _model.txtApellidosUsuarioController.text,
+                          _model.txtTelefonoController.text,
+                          '',
+                          random_data.randomString(
+                            4,
+                            8,
+                            true,
+                            false,
+                            false,
+                          ),
+                          _model.txtContrasennaController.text,
                         );
                       },
                       text: 'Guardar',

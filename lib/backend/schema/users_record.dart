@@ -26,11 +26,6 @@ class UsersRecord extends FirestoreRecord {
   DateTime? get createdTime => _createdTime;
   bool hasCreatedTime() => _createdTime != null;
 
-  // "email" field.
-  String? _email;
-  String get email => _email ?? '';
-  bool hasEmail() => _email != null;
-
   // "display_name" field.
   String? _displayName;
   String get displayName => _displayName ?? '';
@@ -40,11 +35,6 @@ class UsersRecord extends FirestoreRecord {
   String? _photoUrl;
   String get photoUrl => _photoUrl ?? '';
   bool hasPhotoUrl() => _photoUrl != null;
-
-  // "phone_number" field.
-  String? _phoneNumber;
-  String get phoneNumber => _phoneNumber ?? '';
-  bool hasPhoneNumber() => _phoneNumber != null;
 
   // "nombre" field.
   String? _nombre;
@@ -66,17 +56,33 @@ class UsersRecord extends FirestoreRecord {
   String get tipoUsuario => _tipoUsuario ?? '';
   bool hasTipoUsuario() => _tipoUsuario != null;
 
+  // "email" field.
+  String? _email;
+  String get email => _email ?? '';
+  bool hasEmail() => _email != null;
+
+  // "correoElctronico" field.
+  String? _correoElctronico;
+  String get correoElctronico => _correoElctronico ?? '';
+  bool hasCorreoElctronico() => _correoElctronico != null;
+
+  // "phone_number" field.
+  String? _phoneNumber;
+  String get phoneNumber => _phoneNumber ?? '';
+  bool hasPhoneNumber() => _phoneNumber != null;
+
   void _initializeFields() {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
-    _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
-    _phoneNumber = snapshotData['phone_number'] as String?;
     _nombre = snapshotData['nombre'] as String?;
     _apellidos = snapshotData['apellidos'] as String?;
     _numeroTelefonico = snapshotData['numeroTelefonico'] as String?;
     _tipoUsuario = snapshotData['tipoUsuario'] as String?;
+    _email = snapshotData['email'] as String?;
+    _correoElctronico = snapshotData['correoElctronico'] as String?;
+    _phoneNumber = snapshotData['phone_number'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -115,27 +121,29 @@ class UsersRecord extends FirestoreRecord {
 Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
-  String? email,
   String? displayName,
   String? photoUrl,
-  String? phoneNumber,
   String? nombre,
   String? apellidos,
   String? numeroTelefonico,
   String? tipoUsuario,
+  String? email,
+  String? correoElctronico,
+  String? phoneNumber,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'uid': uid,
       'created_time': createdTime,
-      'email': email,
       'display_name': displayName,
       'photo_url': photoUrl,
-      'phone_number': phoneNumber,
       'nombre': nombre,
       'apellidos': apellidos,
       'numeroTelefonico': numeroTelefonico,
       'tipoUsuario': tipoUsuario,
+      'email': email,
+      'correoElctronico': correoElctronico,
+      'phone_number': phoneNumber,
     }.withoutNulls,
   );
 
@@ -149,28 +157,30 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
   bool equals(UsersRecord? e1, UsersRecord? e2) {
     return e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
-        e1?.email == e2?.email &&
         e1?.displayName == e2?.displayName &&
         e1?.photoUrl == e2?.photoUrl &&
-        e1?.phoneNumber == e2?.phoneNumber &&
         e1?.nombre == e2?.nombre &&
         e1?.apellidos == e2?.apellidos &&
         e1?.numeroTelefonico == e2?.numeroTelefonico &&
-        e1?.tipoUsuario == e2?.tipoUsuario;
+        e1?.tipoUsuario == e2?.tipoUsuario &&
+        e1?.email == e2?.email &&
+        e1?.correoElctronico == e2?.correoElctronico &&
+        e1?.phoneNumber == e2?.phoneNumber;
   }
 
   @override
   int hash(UsersRecord? e) => const ListEquality().hash([
         e?.uid,
         e?.createdTime,
-        e?.email,
         e?.displayName,
         e?.photoUrl,
-        e?.phoneNumber,
         e?.nombre,
         e?.apellidos,
         e?.numeroTelefonico,
-        e?.tipoUsuario
+        e?.tipoUsuario,
+        e?.email,
+        e?.correoElctronico,
+        e?.phoneNumber
       ]);
 
   @override

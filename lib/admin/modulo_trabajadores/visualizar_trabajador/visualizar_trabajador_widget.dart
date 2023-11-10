@@ -41,18 +41,23 @@ class _VisualizarTrabajadorWidgetState
     _model.textController1 ??=
         TextEditingController(text: widget.informacionTrabajador?.nombre);
     _model.textFieldFocusNode1 ??= FocusNode();
+
     _model.textController2 ??=
         TextEditingController(text: widget.informacionTrabajador?.apellidos);
     _model.textFieldFocusNode2 ??= FocusNode();
+
     _model.textController3 ??= TextEditingController(
         text: widget.informacionTrabajador?.numeroTelefonico);
     _model.textFieldFocusNode3 ??= FocusNode();
+
     _model.textController4 ??=
         TextEditingController(text: widget.informacionTrabajador?.tipoUsuario);
     _model.textFieldFocusNode4 ??= FocusNode();
+
     _model.textController5 ??= TextEditingController(
         text: widget.informacionTrabajador?.descripcionTrabajador);
     _model.textFieldFocusNode5 ??= FocusNode();
+
     _model.textController6 ??=
         TextEditingController(text: widget.informacionTrabajador?.estado);
     _model.textFieldFocusNode6 ??= FocusNode();

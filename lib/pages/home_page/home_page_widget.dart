@@ -434,7 +434,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
 
-                  context.goNamedAuth('ListaUsuarios', context.mounted);
+                  context.goNamedAuth('IniciodeSesion', context.mounted);
                 },
                 child: Icon(
                   Icons.logout,

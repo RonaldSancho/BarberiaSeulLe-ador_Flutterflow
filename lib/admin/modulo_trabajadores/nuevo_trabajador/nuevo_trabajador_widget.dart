@@ -35,12 +35,16 @@ class _NuevoTrabajadorWidgetState extends State<NuevoTrabajadorWidget> {
 
     _model.txtNombreTrabajadorController ??= TextEditingController();
     _model.txtNombreTrabajadorFocusNode ??= FocusNode();
+
     _model.txtApellidosTrabajadorController ??= TextEditingController();
     _model.txtApellidosTrabajadorFocusNode ??= FocusNode();
+
     _model.txtCorreoElectronicoController ??= TextEditingController();
     _model.txtCorreoElectronicoFocusNode ??= FocusNode();
+
     _model.txtTelefonoController ??= TextEditingController();
     _model.txtTelefonoFocusNode ??= FocusNode();
+
     _model.txtDescripcionTrabajadorController ??= TextEditingController();
     _model.txtDescripcionTrabajadorFocusNode ??= FocusNode();
   }

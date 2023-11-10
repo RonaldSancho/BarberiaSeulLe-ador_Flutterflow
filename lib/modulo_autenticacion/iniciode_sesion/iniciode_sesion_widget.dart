@@ -71,6 +71,7 @@ class _IniciodeSesionWidgetState extends State<IniciodeSesionWidget>
 
     _model.txtCorreoElectronicoController ??= TextEditingController();
     _model.txtCorreoElectronicoFocusNode ??= FocusNode();
+
     _model.txtContrasennaController ??= TextEditingController();
     _model.txtContrasennaFocusNode ??= FocusNode();
   }

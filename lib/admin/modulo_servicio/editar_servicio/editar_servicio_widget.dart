@@ -45,9 +45,11 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
     _model.txtNombreServicioController ??=
         TextEditingController(text: widget.servicios?.nombreServicio);
     _model.txtNombreServicioFocusNode ??= FocusNode();
+
     _model.txtDetalleServicioController ??=
         TextEditingController(text: widget.servicios?.descripcionServicion);
     _model.txtDetalleServicioFocusNode ??= FocusNode();
+
     _model.txtPrecioServicioController ??= TextEditingController(
         text: widget.servicios?.precioServicio?.toString());
     _model.txtPrecioServicioFocusNode ??= FocusNode();

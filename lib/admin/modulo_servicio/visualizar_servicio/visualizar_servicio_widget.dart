@@ -40,15 +40,19 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
     _model.textController1 ??=
         TextEditingController(text: widget.informacionservicio?.trabajador);
     _model.textFieldFocusNode1 ??= FocusNode();
+
     _model.textController2 ??=
         TextEditingController(text: widget.informacionservicio?.nombreServicio);
     _model.textFieldFocusNode2 ??= FocusNode();
+
     _model.textController3 ??= TextEditingController(
         text: widget.informacionservicio?.descripcionServicion);
     _model.textFieldFocusNode3 ??= FocusNode();
+
     _model.textController4 ??= TextEditingController(
         text: widget.informacionservicio?.precioServicio?.toString());
     _model.textFieldFocusNode4 ??= FocusNode();
+
     _model.textController5 ??=
         TextEditingController(text: widget.informacionservicio?.estadoServicio);
     _model.textFieldFocusNode5 ??= FocusNode();

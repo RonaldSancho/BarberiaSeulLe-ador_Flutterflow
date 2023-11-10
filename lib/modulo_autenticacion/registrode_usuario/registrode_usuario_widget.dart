@@ -72,12 +72,16 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
 
     _model.txtNombreUsuarioController ??= TextEditingController();
     _model.txtNombreUsuarioFocusNode ??= FocusNode();
+
     _model.txtApellidosUsuarioController ??= TextEditingController();
     _model.txtApellidosUsuarioFocusNode ??= FocusNode();
+
     _model.txtTelefonoController ??= TextEditingController();
     _model.txtTelefonoFocusNode ??= FocusNode();
+
     _model.txtCorreoElectronicoController ??= TextEditingController();
     _model.txtCorreoElectronicoFocusNode ??= FocusNode();
+
     _model.txtContrasennaController ??= TextEditingController();
     _model.txtContrasennaFocusNode ??= FocusNode();
   }
@@ -654,9 +658,6 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
                                             await UsersRecord.collection
                                                 .doc(user.uid)
                                                 .update(createUsersRecordData(
-                                                  email: _model
-                                                      .txtCorreoElectronicoController
-                                                      .text,
                                                   nombre: _model
                                                       .txtNombreUsuarioController
                                                       .text,
@@ -667,6 +668,9 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
                                                       .txtTelefonoController
                                                       .text,
                                                   tipoUsuario: 'Cliente',
+                                                  correoElctronico: _model
+                                                      .txtCorreoElectronicoController
+                                                      .text,
                                                 ));
 
                                             await authManager

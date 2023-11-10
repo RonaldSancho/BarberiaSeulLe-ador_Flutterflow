@@ -43,12 +43,15 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
     _model.txtNombreUsuarioController ??=
         TextEditingController(text: widget.pUsuario?.nombre);
     _model.txtNombreUsuarioFocusNode ??= FocusNode();
+
     _model.txtApellidosUsuarioController ??=
         TextEditingController(text: widget.pUsuario?.apellidos);
     _model.txtApellidosUsuarioFocusNode ??= FocusNode();
+
     _model.txtCorreoElectronicoController ??=
         TextEditingController(text: widget.pUsuario?.email);
     _model.txtCorreoElectronicoFocusNode ??= FocusNode();
+
     _model.txtNumeroTelefonicoController ??=
         TextEditingController(text: widget.pUsuario?.numeroTelefonico);
     _model.txtNumeroTelefonicoFocusNode ??= FocusNode();
@@ -435,22 +438,6 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                             _model.txtNumeroTelefonicoController.text,
                         tipoUsuario: _model.ddTipoUsuarioValue,
                       ));
-                      await showDialog(
-                        context: context,
-                        builder: (alertDialogContext) {
-                          return AlertDialog(
-                            title: Text('¡Éxito!'),
-                            content: Text('Usuario modificado.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext),
-                                child: Text('De acuerdo.'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
                       if (_model.txtCorreoElectronicoController.text.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -468,6 +455,22 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                       );
                       setState(() {});
 
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('¡Éxito!'),
+                            content: Text('Usuario modificado.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: Text('De acuerdo.'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                       Navigator.pop(context);
                     },
                     text: 'Editar',
