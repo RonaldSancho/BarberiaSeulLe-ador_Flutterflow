@@ -348,8 +348,13 @@ class _NuevoServicioWidgetState extends State<NuevoServicioWidget> {
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
-                      child: StreamBuilder<List<TrabajadoresRecord>>(
-                        stream: queryTrabajadoresRecord(),
+                      child: StreamBuilder<List<UsersRecord>>(
+                        stream: queryUsersRecord(
+                          queryBuilder: (usersRecord) => usersRecord.where(
+                            'tipoUsuario',
+                            isEqualTo: 'Trabajador',
+                          ),
+                        ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
@@ -364,14 +369,14 @@ class _NuevoServicioWidgetState extends State<NuevoServicioWidget> {
                               ),
                             );
                           }
-                          List<TrabajadoresRecord>
-                              dpdTrabajadorServicioTrabajadoresRecordList =
+                          List<UsersRecord>
+                              dpdTrabajadorServicioUsersRecordList =
                               snapshot.data!;
                           return FlutterFlowDropDown<String>(
                             controller:
                                 _model.dpdTrabajadorServicioValueController ??=
                                     FormFieldController<String>(null),
-                            options: dpdTrabajadorServicioTrabajadoresRecordList
+                            options: dpdTrabajadorServicioUsersRecordList
                                 .map((e) => e.nombre)
                                 .toList(),
                             onChanged: (val) => setState(
@@ -418,6 +423,8 @@ class _NuevoServicioWidgetState extends State<NuevoServicioWidget> {
                         final selectedMedia =
                             await selectMediaWithSourceBottomSheet(
                           context: context,
+                          maxWidth: 460.00,
+                          maxHeight: 460.00,
                           allowPhoto: true,
                         );
                         if (selectedMedia != null &&

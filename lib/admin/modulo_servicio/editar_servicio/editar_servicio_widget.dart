@@ -113,6 +113,8 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                       final selectedMedia =
                           await selectMediaWithSourceBottomSheet(
                         context: context,
+                        maxWidth: 460.00,
+                        maxHeight: 460.00,
                         allowPhoto: true,
                       );
                       if (selectedMedia != null &&
@@ -379,8 +381,13 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                 Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
-                  child: StreamBuilder<List<TrabajadoresRecord>>(
-                    stream: queryTrabajadoresRecord(),
+                  child: StreamBuilder<List<UsersRecord>>(
+                    stream: queryUsersRecord(
+                      queryBuilder: (usersRecord) => usersRecord.where(
+                        'tipoUsuario',
+                        isEqualTo: 'Trabajador',
+                      ),
+                    ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -395,8 +402,7 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                           ),
                         );
                       }
-                      List<TrabajadoresRecord>
-                          dpTrabajadorServicioTrabajadoresRecordList =
+                      List<UsersRecord> dpTrabajadorServicioUsersRecordList =
                           snapshot.data!;
                       return FlutterFlowDropDown<String>(
                         controller:
@@ -405,7 +411,7 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                           _model.dpTrabajadorServicioValue ??=
                               widget.servicios?.trabajador,
                         ),
-                        options: dpTrabajadorServicioTrabajadoresRecordList
+                        options: dpTrabajadorServicioUsersRecordList
                             .map((e) => e.nombre)
                             .toList(),
                         onChanged: (val) => setState(

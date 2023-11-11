@@ -105,8 +105,12 @@ class _VisualizarServiciosClienteWidgetState
                       EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 10.0, 20.0),
                   child: StreamBuilder<List<ServiciosRecord>>(
                     stream: queryServiciosRecord(
-                      queryBuilder: (serviciosRecord) =>
-                          serviciosRecord.orderBy('nombreServicio'),
+                      queryBuilder: (serviciosRecord) => serviciosRecord
+                          .where(
+                            'estadoServicio',
+                            isEqualTo: 'Activo',
+                          )
+                          .orderBy('nombreServicio'),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -208,7 +212,6 @@ class _VisualizarServiciosClienteWidgetState
                                   text: 'Más',
                                   options: FFButtonOptions(
                                     width: 75.0,
-                                    height: 25.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(

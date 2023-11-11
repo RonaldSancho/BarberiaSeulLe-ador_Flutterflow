@@ -1,3 +1,18 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "servicios",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "estadoServicio",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nombreServicio",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
 }
