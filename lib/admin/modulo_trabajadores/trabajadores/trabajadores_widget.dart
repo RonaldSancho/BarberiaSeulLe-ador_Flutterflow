@@ -148,8 +148,13 @@ class _TrabajadoresWidgetState extends State<TrabajadoresWidget> {
                     Expanded(
                       child: Align(
                         alignment: AlignmentDirectional(0.00, 0.00),
-                        child: StreamBuilder<List<TrabajadoresRecord>>(
-                          stream: queryTrabajadoresRecord(),
+                        child: StreamBuilder<List<UsersRecord>>(
+                          stream: queryUsersRecord(
+                            queryBuilder: (usersRecord) => usersRecord.where(
+                              'tipoUsuario',
+                              isNotEqualTo: FFAppConstants.rolUsuario,
+                            ),
+                          ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -164,8 +169,7 @@ class _TrabajadoresWidgetState extends State<TrabajadoresWidget> {
                                 ),
                               );
                             }
-                            List<TrabajadoresRecord>
-                                tablaTrabajadoresTrabajadoresRecordList =
+                            List<UsersRecord> tablaTrabajadoresUsersRecordList =
                                 snapshot.data!;
                             return SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
@@ -280,33 +284,33 @@ class _TrabajadoresWidgetState extends State<TrabajadoresWidget> {
                                       ),
                                     ),
                                   ],
-                                  rows: tablaTrabajadoresTrabajadoresRecordList
+                                  rows: tablaTrabajadoresUsersRecordList
                                       .mapIndexed((tablaTrabajadoresIndex,
-                                              tablaTrabajadoresTrabajadoresRecord) =>
+                                              tablaTrabajadoresUsersRecord) =>
                                           [
                                             Text(
-                                              tablaTrabajadoresTrabajadoresRecord
+                                              tablaTrabajadoresUsersRecord
                                                   .tipoUsuario,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                             ),
                                             Text(
-                                              tablaTrabajadoresTrabajadoresRecord
+                                              tablaTrabajadoresUsersRecord
                                                   .nombre,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                             ),
                                             Text(
-                                              tablaTrabajadoresTrabajadoresRecord
-                                                  .correoElectronico,
+                                              tablaTrabajadoresUsersRecord
+                                                  .correoElctronico,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                             ),
                                             Text(
-                                              tablaTrabajadoresTrabajadoresRecord
+                                              tablaTrabajadoresUsersRecord
                                                   .numeroTelefonico,
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -344,7 +348,7 @@ class _TrabajadoresWidgetState extends State<TrabajadoresWidget> {
                                                                   0.9,
                                                           child: EditarWidget(
                                                             trabajador:
-                                                                tablaTrabajadoresTrabajadoresRecord,
+                                                                tablaTrabajadoresUsersRecord,
                                                           ),
                                                         ),
                                                       ),
@@ -416,7 +420,7 @@ class _TrabajadoresWidgetState extends State<TrabajadoresWidget> {
                                                         ) ??
                                                         false;
                                                 if (confirmDialogResponse) {
-                                                  await tablaTrabajadoresTrabajadoresRecord
+                                                  await tablaTrabajadoresUsersRecord
                                                       .reference
                                                       .delete();
                                                 }
@@ -486,7 +490,7 @@ class _TrabajadoresWidgetState extends State<TrabajadoresWidget> {
                                                               child:
                                                                   VisualizarTrabajadorWidget(
                                                                 informacionTrabajador:
-                                                                    tablaTrabajadoresTrabajadoresRecord,
+                                                                    tablaTrabajadoresUsersRecord,
                                                               ),
                                                             ),
                                                           ),

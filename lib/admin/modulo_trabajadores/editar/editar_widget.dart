@@ -22,7 +22,7 @@ class EditarWidget extends StatefulWidget {
     required this.trabajador,
   }) : super(key: key);
 
-  final TrabajadoresRecord? trabajador;
+  final UsersRecord? trabajador;
 
   @override
   _EditarWidgetState createState() => _EditarWidgetState();
@@ -51,7 +51,7 @@ class _EditarWidgetState extends State<EditarWidget> {
     _model.txtApellidosFocusNode ??= FocusNode();
 
     _model.txtCorreoController ??=
-        TextEditingController(text: widget.trabajador?.correoElectronico);
+        TextEditingController(text: widget.trabajador?.correoElctronico);
     _model.txtCorreoFocusNode ??= FocusNode();
 
     _model.txtTelefonoController ??=
@@ -59,7 +59,7 @@ class _EditarWidgetState extends State<EditarWidget> {
     _model.txtTelefonoFocusNode ??= FocusNode();
 
     _model.txtDescripcionController ??=
-        TextEditingController(text: widget.trabajador?.descripcionTrabajador);
+        TextEditingController(text: widget.trabajador?.descripcion);
     _model.txtDescripcionFocusNode ??= FocusNode();
   }
 
@@ -148,7 +148,7 @@ class _EditarWidgetState extends State<EditarWidget> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(25.0),
                       child: Image.network(
-                        widget.trabajador!.imagen,
+                        widget.trabajador!.photoUrl,
                         width: 200.0,
                         height: 150.0,
                         fit: BoxFit.cover,
@@ -529,46 +529,6 @@ class _EditarWidgetState extends State<EditarWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FlutterFlowDropDown<String>(
-                    controller: _model.ddEstadoValueController ??=
-                        FormFieldController<String>(
-                      _model.ddEstadoValue ??= widget.trabajador?.estado,
-                    ),
-                    options: ['Activo', 'Inactivo'],
-                    onChanged: (val) =>
-                        setState(() => _model.ddEstadoValue = val),
-                    width: 300.0,
-                    height: 50.0,
-                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Open Sans',
-                          color: Color(0xFF57636C),
-                        ),
-                    hintText: 'Estado del Trabajador',
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 24.0,
-                    ),
-                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                    elevation: 2.0,
-                    borderColor: FlutterFlowTheme.of(context).alternate,
-                    borderWidth: 2.0,
-                    borderRadius: 8.0,
-                    margin:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
-                    hidesUnderline: true,
-                    isSearchable: false,
-                    isMultiSelect: false,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
               padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
@@ -577,16 +537,12 @@ class _EditarWidgetState extends State<EditarWidget> {
                   FFButtonWidget(
                     onPressed: () async {
                       await widget.trabajador!.reference
-                          .update(createTrabajadoresRecordData(
+                          .update(createUsersRecordData(
                         nombre: _model.txtNombreController.text,
                         apellidos: _model.txtApellidosController.text,
                         numeroTelefonico: _model.txtTelefonoController.text,
                         tipoUsuario: _model.ddTipoUsuarioValue,
-                        descripcionTrabajador:
-                            _model.txtDescripcionController.text,
-                        correoElectronico: _model.txtCorreoController.text,
-                        estado: _model.ddEstadoValue,
-                        imagen: _model.uploadedFileUrl,
+                        photoUrl: _model.uploadedFileUrl,
                       ));
                       await showDialog(
                         context: context,

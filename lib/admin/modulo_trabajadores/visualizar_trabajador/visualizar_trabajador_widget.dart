@@ -16,7 +16,7 @@ class VisualizarTrabajadorWidget extends StatefulWidget {
     required this.informacionTrabajador,
   }) : super(key: key);
 
-  final TrabajadoresRecord? informacionTrabajador;
+  final UsersRecord? informacionTrabajador;
 
   @override
   _VisualizarTrabajadorWidgetState createState() =>
@@ -54,13 +54,9 @@ class _VisualizarTrabajadorWidgetState
         TextEditingController(text: widget.informacionTrabajador?.tipoUsuario);
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    _model.textController5 ??= TextEditingController(
-        text: widget.informacionTrabajador?.descripcionTrabajador);
+    _model.textController5 ??=
+        TextEditingController(text: widget.informacionTrabajador?.descripcion);
     _model.textFieldFocusNode5 ??= FocusNode();
-
-    _model.textController6 ??=
-        TextEditingController(text: widget.informacionTrabajador?.estado);
-    _model.textFieldFocusNode6 ??= FocusNode();
   }
 
   @override
@@ -93,7 +89,7 @@ class _VisualizarTrabajadorWidgetState
                   ClipRRect(
                     borderRadius: BorderRadius.circular(25.0),
                     child: Image.network(
-                      widget.informacionTrabajador!.imagen,
+                      widget.informacionTrabajador!.photoUrl,
                       width: 200.0,
                       height: 150.0,
                       fit: BoxFit.cover,
@@ -435,72 +431,6 @@ class _VisualizarTrabajadorWidgetState
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       validator:
                           _model.textController5Validator.asValidator(context),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
-                  child: Text(
-                    'Estado del Trabajador',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Open Sans',
-                          fontSize: 25.0,
-                        ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                    child: TextFormField(
-                      controller: _model.textController6,
-                      focusNode: _model.textFieldFocusNode6,
-                      readOnly: true,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      validator:
-                          _model.textController6Validator.asValidator(context),
                     ),
                   ),
                 ),

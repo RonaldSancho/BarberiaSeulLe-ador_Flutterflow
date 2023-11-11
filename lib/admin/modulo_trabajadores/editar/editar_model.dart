@@ -46,9 +46,6 @@ class EditarModel extends FlutterFlowModel<EditarWidget> {
   // State field(s) for ddTipoUsuario widget.
   String? ddTipoUsuarioValue;
   FormFieldController<String>? ddTipoUsuarioValueController;
-  // State field(s) for ddEstado widget.
-  String? ddEstadoValue;
-  FormFieldController<String>? ddEstadoValueController;
 
   /// Initialization and disposal methods.
 
