@@ -190,34 +190,36 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                                 fontWeight: FontWeight.w500,
                               ),
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                      enabledBorder: UnderlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
+                          color: FlutterFlowTheme.of(context).primaryText,
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: Color(0xFF2B5DA5),
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      errorBorder: UnderlineInputBorder(
+                      errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
+                          color: FlutterFlowTheme.of(context).lineColor,
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      focusedErrorBorder: UnderlineInputBorder(
+                      focusedErrorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
+                          color: FlutterFlowTheme.of(context).lineColor,
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
+                      filled: true,
+                      fillColor: Color(0xFFF1F4F8),
                     ),
                     style: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily: 'Open Sans',
@@ -245,34 +247,36 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                       labelText: 'Detalle del Servicio',
                       labelStyle: FlutterFlowTheme.of(context).labelMedium,
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                      enabledBorder: UnderlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
+                          color: FlutterFlowTheme.of(context).primaryText,
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: Color(0xFF2B5DA5),
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      errorBorder: UnderlineInputBorder(
+                      errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
+                          color: FlutterFlowTheme.of(context).lineColor,
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      focusedErrorBorder: UnderlineInputBorder(
+                      focusedErrorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
+                          color: FlutterFlowTheme.of(context).lineColor,
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
+                      filled: true,
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Open Sans',
@@ -300,34 +304,36 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                       labelText: 'Precio del Servicio',
                       labelStyle: FlutterFlowTheme.of(context).labelMedium,
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                      enabledBorder: UnderlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
+                          color: FlutterFlowTheme.of(context).primaryText,
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: Color(0xFF2B5DA5),
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      errorBorder: UnderlineInputBorder(
+                      errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
+                          color: FlutterFlowTheme.of(context).lineColor,
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      focusedErrorBorder: UnderlineInputBorder(
+                      focusedErrorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
+                          color: FlutterFlowTheme.of(context).lineColor,
                           width: 2.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
+                      filled: true,
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Open Sans',
@@ -376,22 +382,25 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                         setState(() => _model.dpTrabajadorServicioValue = val),
                     width: 315.0,
                     height: 50.0,
+                    searchHintTextStyle:
+                        FlutterFlowTheme.of(context).labelMedium,
                     textStyle: FlutterFlowTheme.of(context).bodyMedium,
                     hintText: 'Seleccione un trabajador',
+                    searchHintText: 'Busque  un trabajador',
                     icon: Icon(
                       Icons.keyboard_arrow_down_rounded,
                       color: FlutterFlowTheme.of(context).secondaryText,
                       size: 24.0,
                     ),
-                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    fillColor: FlutterFlowTheme.of(context).primaryBackground,
                     elevation: 2.0,
-                    borderColor: FlutterFlowTheme.of(context).alternate,
+                    borderColor: FlutterFlowTheme.of(context).primaryText,
                     borderWidth: 2.0,
-                    borderRadius: 8.0,
+                    borderRadius: 12.0,
                     margin:
                         EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
                     hidesUnderline: true,
-                    isSearchable: false,
+                    isSearchable: true,
                     isMultiSelect: false,
                   );
                 },
@@ -420,11 +429,11 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                   color: FlutterFlowTheme.of(context).secondaryText,
                   size: 24.0,
                 ),
-                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                fillColor: FlutterFlowTheme.of(context).primaryBackground,
                 elevation: 2.0,
-                borderColor: FlutterFlowTheme.of(context).alternate,
+                borderColor: FlutterFlowTheme.of(context).primaryText,
                 borderWidth: 2.0,
-                borderRadius: 8.0,
+                borderRadius: 12.0,
                 margin: EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
                 hidesUnderline: true,
                 isSearchable: false,
