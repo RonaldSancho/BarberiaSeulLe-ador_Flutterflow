@@ -79,15 +79,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? ListaUsuariosWidget()
-          : IniciodeSesionWidget(),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? HomePageWidget() : IniciodeSesionWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? ListaUsuariosWidget()
+              ? HomePageWidget()
               : IniciodeSesionWidget(),
         ),
         FFRoute(

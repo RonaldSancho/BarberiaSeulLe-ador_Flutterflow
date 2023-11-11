@@ -410,8 +410,7 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                                       .deleteUser(context);
                                                 }
 
-                                                context.goNamedAuth(
-                                                    'ListaUsuarios',
+                                                context.goNamedAuth('HomePage',
                                                     context.mounted);
                                               },
                                               text: 'Eliminar',

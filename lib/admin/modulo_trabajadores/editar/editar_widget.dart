@@ -177,6 +177,7 @@ class _EditarWidgetState extends State<EditarWidget> {
                           labelStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Open Sans',
+                                    color: Color(0xFF57636C),
                                     fontSize: 20.0,
                                   ),
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -240,9 +241,14 @@ class _EditarWidgetState extends State<EditarWidget> {
                           labelStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Open Sans',
+                                    color: Color(0xFF57636C),
                                     fontSize: 20.0,
                                   ),
-                          hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Open Sans',
+                                    color: Color(0xFF57636C),
+                                  ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context).alternate,
@@ -303,9 +309,14 @@ class _EditarWidgetState extends State<EditarWidget> {
                           labelStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Open Sans',
+                                    color: Color(0xFF57636C),
                                     fontSize: 20.0,
                                   ),
-                          hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Open Sans',
+                                    color: Color(0xFF57636C),
+                                  ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context).alternate,
@@ -366,6 +377,7 @@ class _EditarWidgetState extends State<EditarWidget> {
                           labelStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Open Sans',
+                                    color: Color(0xFF57636C),
                                     fontSize: 20.0,
                                   ),
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -429,6 +441,7 @@ class _EditarWidgetState extends State<EditarWidget> {
                           labelStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Open Sans',
+                                    color: Color(0xFF57636C),
                                     fontSize: 20.0,
                                   ),
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -492,6 +505,7 @@ class _EditarWidgetState extends State<EditarWidget> {
                     height: 50.0,
                     textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Open Sans',
+                          color: Color(0xFF57636C),
                           fontSize: 16.0,
                         ),
                     hintText: 'Tipo de Usuario',
@@ -530,7 +544,10 @@ class _EditarWidgetState extends State<EditarWidget> {
                         setState(() => _model.ddEstadoValue = val),
                     width: 300.0,
                     height: 50.0,
-                    textStyle: FlutterFlowTheme.of(context).bodyMedium,
+                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Open Sans',
+                          color: Color(0xFF57636C),
+                        ),
                     hintText: 'Estado del Trabajador',
                     icon: Icon(
                       Icons.keyboard_arrow_down_rounded,

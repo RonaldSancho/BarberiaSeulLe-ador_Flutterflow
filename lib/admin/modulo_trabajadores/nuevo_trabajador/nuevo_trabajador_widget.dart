@@ -439,7 +439,7 @@ class _NuevoTrabajadorWidgetState extends State<NuevoTrabajadorWidget> {
                       textStyle:
                           FlutterFlowTheme.of(context).labelLarge.override(
                                 fontFamily: 'Open Sans',
-                                color: Color(0xFF101213),
+                                color: Color(0xFF57636C),
                               ),
                       hintText: 'Tipo de Usuario',
                       icon: Icon(
@@ -484,7 +484,7 @@ class _NuevoTrabajadorWidgetState extends State<NuevoTrabajadorWidget> {
                                   .labelMedium
                                   .override(
                                     fontFamily: 'Open Sans',
-                                    color: Color(0xFF101213),
+                                    color: Color(0xFF57636C),
                                     fontSize: 16.0,
                                   ),
                               hintStyle:
