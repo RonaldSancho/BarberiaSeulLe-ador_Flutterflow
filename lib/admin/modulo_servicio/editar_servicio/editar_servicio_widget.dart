@@ -219,9 +219,9 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    style: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily: 'Open Sans',
-                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
                         ),
                     validator: _model.txtNombreServicioControllerValidator
                         .asValidator(context),
