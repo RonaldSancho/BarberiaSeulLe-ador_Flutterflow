@@ -72,335 +72,406 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  var confirmDialogResponse = await showDialog<bool>(
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    var confirmDialogResponse = await showDialog<bool>(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('¿Cambiar la imagen?'),
+                              content: Text(
+                                  'Esta seguro que quiere cambiar la imagen'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, false),
+                                  child: Text('No'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('Si'),
+                                ),
+                              ],
+                            );
+                          },
+                        ) ??
+                        false;
+                    if (confirmDialogResponse) {
+                      final selectedMedia =
+                          await selectMediaWithSourceBottomSheet(
                         context: context,
-                        builder: (alertDialogContext) {
-                          return AlertDialog(
-                            title: Text('¿Cambiar la imagen?'),
-                            content: Text(
-                                'Esta seguro que quiere cambiar la imagen'),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext, false),
-                                child: Text('No'),
-                              ),
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext, true),
-                                child: Text('Si'),
-                              ),
-                            ],
-                          );
-                        },
-                      ) ??
-                      false;
-                  if (confirmDialogResponse) {
-                    final selectedMedia =
-                        await selectMediaWithSourceBottomSheet(
-                      context: context,
-                      allowPhoto: true,
-                    );
-                    if (selectedMedia != null &&
-                        selectedMedia.every((m) =>
-                            validateFileFormat(m.storagePath, context))) {
-                      setState(() => _model.isDataUploading = true);
-                      var selectedUploadedFiles = <FFUploadedFile>[];
+                        allowPhoto: true,
+                      );
+                      if (selectedMedia != null &&
+                          selectedMedia.every((m) =>
+                              validateFileFormat(m.storagePath, context))) {
+                        setState(() => _model.isDataUploading = true);
+                        var selectedUploadedFiles = <FFUploadedFile>[];
 
-                      var downloadUrls = <String>[];
-                      try {
-                        selectedUploadedFiles = selectedMedia
-                            .map((m) => FFUploadedFile(
-                                  name: m.storagePath.split('/').last,
-                                  bytes: m.bytes,
-                                  height: m.dimensions?.height,
-                                  width: m.dimensions?.width,
-                                  blurHash: m.blurHash,
-                                ))
-                            .toList();
+                        var downloadUrls = <String>[];
+                        try {
+                          selectedUploadedFiles = selectedMedia
+                              .map((m) => FFUploadedFile(
+                                    name: m.storagePath.split('/').last,
+                                    bytes: m.bytes,
+                                    height: m.dimensions?.height,
+                                    width: m.dimensions?.width,
+                                    blurHash: m.blurHash,
+                                  ))
+                              .toList();
 
-                        downloadUrls = (await Future.wait(
-                          selectedMedia.map(
-                            (m) async =>
-                                await uploadData(m.storagePath, m.bytes),
-                          ),
-                        ))
-                            .where((u) => u != null)
-                            .map((u) => u!)
-                            .toList();
-                      } finally {
-                        _model.isDataUploading = false;
-                      }
-                      if (selectedUploadedFiles.length ==
-                              selectedMedia.length &&
-                          downloadUrls.length == selectedMedia.length) {
-                        setState(() {
-                          _model.uploadedLocalFile =
-                              selectedUploadedFiles.first;
-                          _model.uploadedFileUrl = downloadUrls.first;
-                        });
-                      } else {
-                        setState(() {});
-                        return;
+                          downloadUrls = (await Future.wait(
+                            selectedMedia.map(
+                              (m) async =>
+                                  await uploadData(m.storagePath, m.bytes),
+                            ),
+                          ))
+                              .where((u) => u != null)
+                              .map((u) => u!)
+                              .toList();
+                        } finally {
+                          _model.isDataUploading = false;
+                        }
+                        if (selectedUploadedFiles.length ==
+                                selectedMedia.length &&
+                            downloadUrls.length == selectedMedia.length) {
+                          setState(() {
+                            _model.uploadedLocalFile =
+                                selectedUploadedFiles.first;
+                            _model.uploadedFileUrl = downloadUrls.first;
+                          });
+                        } else {
+                          setState(() {});
+                          return;
+                        }
                       }
                     }
-                  }
-                },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25.0),
-                  child: Image.network(
-                    widget.servicios!.imagenServicio,
-                    width: 200.0,
-                    height: 150.0,
-                    fit: BoxFit.cover,
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25.0),
+                    child: Image.network(
+                      widget.servicios!.imagenServicio,
+                      width: 200.0,
+                      height: 150.0,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Padding(
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
+                    child: TextFormField(
+                      controller: _model.txtNombreServicioController,
+                      focusNode: _model.txtNombreServicioFocusNode,
+                      autofocus: true,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        labelText: 'Nombre del Servicio',
+                        labelStyle:
+                            FlutterFlowTheme.of(context).labelLarge.override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF2B5DA5),
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).lineColor,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).lineColor,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        filled: true,
+                        fillColor: Color(0xFFF1F4F8),
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyLarge.override(
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w500,
+                          ),
+                      validator: _model.txtNombreServicioControllerValidator
+                          .asValidator(context),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
+                    child: TextFormField(
+                      controller: _model.txtDetalleServicioController,
+                      focusNode: _model.txtDetalleServicioFocusNode,
+                      autofocus: true,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        labelText: 'Detalle del Servicio',
+                        labelStyle:
+                            FlutterFlowTheme.of(context).labelLarge.override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF2B5DA5),
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).lineColor,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).lineColor,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Open Sans',
+                            fontSize: 16.0,
+                          ),
+                      validator: _model.txtDetalleServicioControllerValidator
+                          .asValidator(context),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
+                    child: TextFormField(
+                      controller: _model.txtPrecioServicioController,
+                      focusNode: _model.txtPrecioServicioFocusNode,
+                      autofocus: true,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        labelText: 'Precio del Servicio',
+                        labelStyle:
+                            FlutterFlowTheme.of(context).labelLarge.override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF2B5DA5),
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).lineColor,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).lineColor,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Open Sans',
+                            fontSize: 16.0,
+                          ),
+                      validator: _model.txtPrecioServicioControllerValidator
+                          .asValidator(context),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
-                  child: TextFormField(
-                    controller: _model.txtNombreServicioController,
-                    focusNode: _model.txtNombreServicioFocusNode,
-                    autofocus: true,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      labelText: 'Nombre del Servicio',
-                      labelStyle:
-                          FlutterFlowTheme.of(context).labelLarge.override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                fontWeight: FontWeight.w500,
-                              ),
-                      hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          width: 2.0,
+                  child: StreamBuilder<List<TrabajadoresRecord>>(
+                    stream: queryTrabajadoresRecord(),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: SpinKitCircle(
+                              color: Color(0xFF929090),
+                              size: 50.0,
+                            ),
+                          ),
+                        );
+                      }
+                      List<TrabajadoresRecord>
+                          dpTrabajadorServicioTrabajadoresRecordList =
+                          snapshot.data!;
+                      return FlutterFlowDropDown<String>(
+                        controller:
+                            _model.dpTrabajadorServicioValueController ??=
+                                FormFieldController<String>(
+                          _model.dpTrabajadorServicioValue ??=
+                              widget.servicios?.trabajador,
                         ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFF2B5DA5),
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).lineColor,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).lineColor,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      filled: true,
-                      fillColor: Color(0xFFF1F4F8),
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Open Sans',
-                          fontWeight: FontWeight.w500,
-                        ),
-                    validator: _model.txtNombreServicioControllerValidator
-                        .asValidator(context),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                  child: TextFormField(
-                    controller: _model.txtDetalleServicioController,
-                    focusNode: _model.txtDetalleServicioFocusNode,
-                    autofocus: true,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      labelText: 'Detalle del Servicio',
-                      labelStyle:
-                          FlutterFlowTheme.of(context).labelLarge.override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                fontWeight: FontWeight.w500,
-                              ),
-                      hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFF2B5DA5),
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).lineColor,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).lineColor,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Open Sans',
-                          fontSize: 16.0,
-                        ),
-                    validator: _model.txtDetalleServicioControllerValidator
-                        .asValidator(context),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                  child: TextFormField(
-                    controller: _model.txtPrecioServicioController,
-                    focusNode: _model.txtPrecioServicioFocusNode,
-                    autofocus: true,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      labelText: 'Precio del Servicio',
-                      labelStyle:
-                          FlutterFlowTheme.of(context).labelLarge.override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                fontWeight: FontWeight.w500,
-                              ),
-                      hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFF2B5DA5),
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).lineColor,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).lineColor,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Open Sans',
-                          fontSize: 16.0,
-                        ),
-                    validator: _model.txtPrecioServicioControllerValidator
-                        .asValidator(context),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              StreamBuilder<List<TrabajadoresRecord>>(
-                stream: queryTrabajadoresRecord(),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50.0,
+                        options: dpTrabajadorServicioTrabajadoresRecordList
+                            .map((e) => e.nombre)
+                            .toList(),
+                        onChanged: (val) => setState(
+                            () => _model.dpTrabajadorServicioValue = val),
+                        width: 315.0,
                         height: 50.0,
-                        child: SpinKitCircle(
-                          color: Color(0xFF929090),
-                          size: 50.0,
+                        searchHintTextStyle:
+                            FlutterFlowTheme.of(context).labelLarge.override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                        textStyle:
+                            FlutterFlowTheme.of(context).bodyLarge.override(
+                                  fontFamily: 'Open Sans',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                        hintText: 'Seleccione un trabajador',
+                        searchHintText: 'Busque  un trabajador',
+                        icon: Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 24.0,
                         ),
-                      ),
-                    );
-                  }
-                  List<TrabajadoresRecord>
-                      dpTrabajadorServicioTrabajadoresRecordList =
-                      snapshot.data!;
-                  return FlutterFlowDropDown<String>(
-                    controller: _model.dpTrabajadorServicioValueController ??=
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        elevation: 2.0,
+                        borderColor: FlutterFlowTheme.of(context).primaryText,
+                        borderWidth: 2.0,
+                        borderRadius: 12.0,
+                        margin: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 4.0, 16.0, 4.0),
+                        hidesUnderline: true,
+                        isSearchable: true,
+                        isMultiSelect: false,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
+                  child: FlutterFlowDropDown<String>(
+                    controller: _model.dpEstadoServicioValueController ??=
                         FormFieldController<String>(
-                      _model.dpTrabajadorServicioValue ??=
-                          widget.servicios?.trabajador,
+                      _model.dpEstadoServicioValue ??=
+                          widget.servicios?.estadoServicio,
                     ),
-                    options: dpTrabajadorServicioTrabajadoresRecordList
-                        .map((e) => e.nombre)
-                        .toList(),
+                    options: ['Activo', 'Inactivo'],
                     onChanged: (val) =>
-                        setState(() => _model.dpTrabajadorServicioValue = val),
+                        setState(() => _model.dpEstadoServicioValue = val),
                     width: 315.0,
                     height: 50.0,
-                    searchHintTextStyle:
-                        FlutterFlowTheme.of(context).labelLarge.override(
-                              fontFamily: 'Plus Jakarta Sans',
-                              fontWeight: FontWeight.w500,
-                            ),
                     textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily: 'Open Sans',
                           fontWeight: FontWeight.w500,
                         ),
-                    hintText: 'Seleccione un trabajador',
-                    searchHintText: 'Busque  un trabajador',
+                    hintText: 'Seleccione un estado',
                     icon: Icon(
                       Icons.keyboard_arrow_down_rounded,
                       color: FlutterFlowTheme.of(context).secondaryText,
@@ -414,142 +485,111 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                     margin:
                         EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
                     hidesUnderline: true,
-                    isSearchable: true,
+                    isSearchable: false,
                     isMultiSelect: false,
-                  );
-                },
-              ),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FlutterFlowDropDown<String>(
-                controller: _model.dpEstadoServicioValueController ??=
-                    FormFieldController<String>(
-                  _model.dpEstadoServicioValue ??=
-                      widget.servicios?.estadoServicio,
+                  ),
                 ),
-                options: ['Activo', 'Inactivo'],
-                onChanged: (val) =>
-                    setState(() => _model.dpEstadoServicioValue = val),
-                width: 315.0,
-                height: 50.0,
-                textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                      fontFamily: 'Open Sans',
-                      fontWeight: FontWeight.w500,
-                    ),
-                hintText: 'Seleccione un estado',
-                icon: Icon(
-                  Icons.keyboard_arrow_down_rounded,
-                  color: FlutterFlowTheme.of(context).secondaryText,
-                  size: 24.0,
-                ),
-                fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                elevation: 2.0,
-                borderColor: FlutterFlowTheme.of(context).primaryText,
-                borderWidth: 2.0,
-                borderRadius: 12.0,
-                margin: EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
-                hidesUnderline: true,
-                isSearchable: false,
-                isMultiSelect: false,
-              ),
-            ],
+              ],
+            ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              FFButtonWidget(
-                onPressed: () async {
-                  if (_model.uploadedFileUrl == null ||
-                      _model.uploadedFileUrl == '') {
-                    await widget.servicios!.reference
-                        .update(createServiciosRecordData(
-                      trabajador: _model.dpTrabajadorServicioValue,
-                      nombreServicio: _model.txtNombreServicioController.text,
-                      descripcionServicion:
-                          _model.txtDetalleServicioController.text,
-                      precioServicio: double.tryParse(
-                          _model.txtPrecioServicioController.text),
-                      estadoServicio: _model.dpEstadoServicioValue,
-                    ));
-                  } else {
-                    await widget.servicios!.reference
-                        .update(createServiciosRecordData(
-                      trabajador: _model.dpTrabajadorServicioValue,
-                      nombreServicio: _model.txtNombreServicioController.text,
-                      descripcionServicion:
-                          _model.txtDetalleServicioController.text,
-                      precioServicio: double.tryParse(
-                          _model.txtPrecioServicioController.text),
-                      estadoServicio: _model.dpEstadoServicioValue,
-                      imagenServicio: _model.uploadedFileUrl,
-                    ));
-                  }
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(8.0, 50.0, 8.0, 8.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FFButtonWidget(
+                  onPressed: () async {
+                    if (_model.uploadedFileUrl == null ||
+                        _model.uploadedFileUrl == '') {
+                      await widget.servicios!.reference
+                          .update(createServiciosRecordData(
+                        trabajador: _model.dpTrabajadorServicioValue,
+                        nombreServicio: _model.txtNombreServicioController.text,
+                        descripcionServicion:
+                            _model.txtDetalleServicioController.text,
+                        precioServicio: double.tryParse(
+                            _model.txtPrecioServicioController.text),
+                        estadoServicio: _model.dpEstadoServicioValue,
+                      ));
+                    } else {
+                      await widget.servicios!.reference
+                          .update(createServiciosRecordData(
+                        trabajador: _model.dpTrabajadorServicioValue,
+                        nombreServicio: _model.txtNombreServicioController.text,
+                        descripcionServicion:
+                            _model.txtDetalleServicioController.text,
+                        precioServicio: double.tryParse(
+                            _model.txtPrecioServicioController.text),
+                        estadoServicio: _model.dpEstadoServicioValue,
+                        imagenServicio: _model.uploadedFileUrl,
+                      ));
+                    }
 
-                  await showDialog(
-                    context: context,
-                    builder: (alertDialogContext) {
-                      return AlertDialog(
-                        title: Text('¡Éxito!'),
-                        content: Text('Servicio editado'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(alertDialogContext),
-                            child: Text('Ok'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                  Navigator.pop(context);
-                },
-                text: 'Editar',
-                options: FFButtonOptions(
-                  height: 40.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                  iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Color(0xFF3D9B9F),
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Open Sans',
-                        color: Colors.white,
-                      ),
-                  elevation: 3.0,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('¡Éxito!'),
+                          content: Text('Servicio editado'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    Navigator.pop(context);
+                  },
+                  text: 'Editar',
+                  options: FFButtonOptions(
+                    height: 40.0,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: Color(0xFF3D9B9F),
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Open Sans',
+                          color: Colors.white,
+                        ),
+                    elevation: 3.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
-                  borderRadius: BorderRadius.circular(8.0),
                 ),
-              ),
-              FFButtonWidget(
-                onPressed: () async {
-                  Navigator.pop(context);
-                },
-                text: 'Cancelar',
-                options: FFButtonOptions(
-                  height: 40.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                  iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Color(0xFF585D62),
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Open Sans',
-                        color: Colors.white,
-                      ),
-                  elevation: 3.0,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
+                FFButtonWidget(
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  },
+                  text: 'Cancelar',
+                  options: FFButtonOptions(
+                    height: 40.0,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: Color(0xFF585D62),
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Open Sans',
+                          color: Colors.white,
+                        ),
+                    elevation: 3.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
-                  borderRadius: BorderRadius.circular(8.0),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
