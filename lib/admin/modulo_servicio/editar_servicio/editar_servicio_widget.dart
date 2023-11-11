@@ -245,7 +245,11 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Detalle del Servicio',
-                      labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                      labelStyle:
+                          FlutterFlowTheme.of(context).labelLarge.override(
+                                fontFamily: 'Plus Jakarta Sans',
+                                fontWeight: FontWeight.w500,
+                              ),
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -302,7 +306,11 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Precio del Servicio',
-                      labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                      labelStyle:
+                          FlutterFlowTheme.of(context).labelLarge.override(
+                                fontFamily: 'Plus Jakarta Sans',
+                                fontWeight: FontWeight.w500,
+                              ),
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -383,8 +391,14 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                     width: 315.0,
                     height: 50.0,
                     searchHintTextStyle:
-                        FlutterFlowTheme.of(context).labelMedium,
-                    textStyle: FlutterFlowTheme.of(context).bodyMedium,
+                        FlutterFlowTheme.of(context).labelLarge.override(
+                              fontFamily: 'Plus Jakarta Sans',
+                              fontWeight: FontWeight.w500,
+                            ),
+                    textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
+                          fontFamily: 'Open Sans',
+                          fontWeight: FontWeight.w500,
+                        ),
                     hintText: 'Seleccione un trabajador',
                     searchHintText: 'Busque  un trabajador',
                     icon: Icon(
@@ -422,7 +436,10 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                     setState(() => _model.dpEstadoServicioValue = val),
                 width: 315.0,
                 height: 50.0,
-                textStyle: FlutterFlowTheme.of(context).bodyMedium,
+                textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
+                      fontFamily: 'Open Sans',
+                      fontWeight: FontWeight.w500,
+                    ),
                 hintText: 'Seleccione un estado',
                 icon: Icon(
                   Icons.keyboard_arrow_down_rounded,
