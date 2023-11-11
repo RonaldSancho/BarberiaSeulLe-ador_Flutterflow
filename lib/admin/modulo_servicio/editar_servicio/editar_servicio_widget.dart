@@ -410,7 +410,7 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                             .toList(),
                         onChanged: (val) => setState(
                             () => _model.dpTrabajadorServicioValue = val),
-                        width: 315.0,
+                        width: MediaQuery.sizeOf(context).width * 0.95,
                         height: 50.0,
                         searchHintTextStyle:
                             FlutterFlowTheme.of(context).labelLarge.override(
@@ -465,7 +465,7 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                     options: ['Activo', 'Inactivo'],
                     onChanged: (val) =>
                         setState(() => _model.dpEstadoServicioValue = val),
-                    width: 315.0,
+                    width: MediaQuery.sizeOf(context).width * 0.95,
                     height: 50.0,
                     textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily: 'Open Sans',

@@ -225,6 +225,8 @@ class _IniciodeSesionWidgetState extends State<IniciodeSesionWidget>
                                               autofillHints: [
                                                 AutofillHints.email
                                               ],
+                                              textCapitalization:
+                                                  TextCapitalization.none,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Correo Electrónico',

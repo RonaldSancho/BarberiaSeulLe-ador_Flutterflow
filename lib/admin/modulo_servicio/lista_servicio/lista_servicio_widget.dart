@@ -355,7 +355,7 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                                                                           .sizeOf(
                                                                               context)
                                                                       .height *
-                                                                  0.9,
+                                                                  0.8,
                                                               child:
                                                                   EditarServicioWidget(
                                                                 servicios:
@@ -502,7 +502,7 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                                                               MediaQuery.sizeOf(
                                                                           context)
                                                                       .height *
-                                                                  0.9,
+                                                                  0.8,
                                                           child:
                                                               VisualizarServicioWidget(
                                                             informacionservicio:
