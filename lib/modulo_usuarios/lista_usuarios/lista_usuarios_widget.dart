@@ -169,7 +169,7 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                             return SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Container(
-                                width: 910.0,
+                                width: 1110.0,
                                 height: MediaQuery.sizeOf(context).height * 0.6,
                                 child: DataTable2(
                                   columns: [
@@ -245,7 +245,8 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                       label: DefaultTextStyle.merge(
                                         softWrap: true,
                                         child: Text(
-                                          ' ',
+                                          'Rol de usuario',
+                                          textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .labelLarge
                                               .override(
@@ -255,6 +256,16 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                                         .primaryBtnText,
                                                 fontWeight: FontWeight.w600,
                                               ),
+                                        ),
+                                      ),
+                                    ),
+                                    DataColumn2(
+                                      label: DefaultTextStyle.merge(
+                                        softWrap: true,
+                                        child: Text(
+                                          ' ',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge,
                                         ),
                                       ),
                                     ),
@@ -295,6 +306,13 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                             Text(
                                               tablaUsuariosUsersRecord
                                                   .numeroTelefonico,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                            Text(
+                                              tablaUsuariosUsersRecord
+                                                  .tipoUsuario,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
