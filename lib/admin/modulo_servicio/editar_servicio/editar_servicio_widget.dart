@@ -183,7 +183,11 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Nombre del Servicio',
-                      labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                      labelStyle:
+                          FlutterFlowTheme.of(context).labelLarge.override(
+                                fontFamily: 'Plus Jakarta Sans',
+                                fontWeight: FontWeight.w500,
+                              ),
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
