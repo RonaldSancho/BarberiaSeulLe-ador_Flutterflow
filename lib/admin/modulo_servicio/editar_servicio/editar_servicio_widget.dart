@@ -175,7 +175,8 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
                   child: TextFormField(
                     controller: _model.txtNombreServicioController,
                     focusNode: _model.txtNombreServicioFocusNode,
