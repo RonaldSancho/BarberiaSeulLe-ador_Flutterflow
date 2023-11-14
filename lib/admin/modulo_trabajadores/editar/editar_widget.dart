@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +52,7 @@ class _EditarWidgetState extends State<EditarWidget> {
     _model.txtApellidosFocusNode ??= FocusNode();
 
     _model.txtCorreoController ??=
-        TextEditingController(text: widget.trabajador?.correoElctronico);
+        TextEditingController(text: widget.trabajador?.email);
     _model.txtCorreoFocusNode ??= FocusNode();
 
     _model.txtTelefonoController ??=
@@ -96,61 +97,91 @@ class _EditarWidgetState extends State<EditarWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      final selectedMedia =
-                          await selectMediaWithSourceBottomSheet(
-                        context: context,
-                        allowPhoto: true,
-                      );
-                      if (selectedMedia != null &&
-                          selectedMedia.every((m) =>
-                              validateFileFormat(m.storagePath, context))) {
-                        setState(() => _model.isDataUploading = true);
-                        var selectedUploadedFiles = <FFUploadedFile>[];
+                      var confirmDialogResponse = await showDialog<bool>(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Cambiar Imagen'),
+                                content: Text('Desea Cambiar imagen'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(
+                                        alertDialogContext, false),
+                                    child: Text('No'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext, true),
+                                    child: Text('Sí'),
+                                  ),
+                                ],
+                              );
+                            },
+                          ) ??
+                          false;
+                      if (confirmDialogResponse) {
+                        final selectedMedia =
+                            await selectMediaWithSourceBottomSheet(
+                          context: context,
+                          allowPhoto: true,
+                        );
+                        if (selectedMedia != null &&
+                            selectedMedia.every((m) =>
+                                validateFileFormat(m.storagePath, context))) {
+                          setState(() => _model.isDataUploading = true);
+                          var selectedUploadedFiles = <FFUploadedFile>[];
 
-                        var downloadUrls = <String>[];
-                        try {
-                          selectedUploadedFiles = selectedMedia
-                              .map((m) => FFUploadedFile(
-                                    name: m.storagePath.split('/').last,
-                                    bytes: m.bytes,
-                                    height: m.dimensions?.height,
-                                    width: m.dimensions?.width,
-                                    blurHash: m.blurHash,
-                                  ))
-                              .toList();
+                          var downloadUrls = <String>[];
+                          try {
+                            selectedUploadedFiles = selectedMedia
+                                .map((m) => FFUploadedFile(
+                                      name: m.storagePath.split('/').last,
+                                      bytes: m.bytes,
+                                      height: m.dimensions?.height,
+                                      width: m.dimensions?.width,
+                                      blurHash: m.blurHash,
+                                    ))
+                                .toList();
 
-                          downloadUrls = (await Future.wait(
-                            selectedMedia.map(
-                              (m) async =>
-                                  await uploadData(m.storagePath, m.bytes),
-                            ),
-                          ))
-                              .where((u) => u != null)
-                              .map((u) => u!)
-                              .toList();
-                        } finally {
-                          _model.isDataUploading = false;
-                        }
-                        if (selectedUploadedFiles.length ==
-                                selectedMedia.length &&
-                            downloadUrls.length == selectedMedia.length) {
-                          setState(() {
-                            _model.uploadedLocalFile =
-                                selectedUploadedFiles.first;
-                            _model.uploadedFileUrl = downloadUrls.first;
-                          });
-                        } else {
-                          setState(() {});
-                          return;
+                            downloadUrls = (await Future.wait(
+                              selectedMedia.map(
+                                (m) async =>
+                                    await uploadData(m.storagePath, m.bytes),
+                              ),
+                            ))
+                                .where((u) => u != null)
+                                .map((u) => u!)
+                                .toList();
+                          } finally {
+                            _model.isDataUploading = false;
+                          }
+                          if (selectedUploadedFiles.length ==
+                                  selectedMedia.length &&
+                              downloadUrls.length == selectedMedia.length) {
+                            setState(() {
+                              _model.uploadedLocalFile =
+                                  selectedUploadedFiles.first;
+                              _model.uploadedFileUrl = downloadUrls.first;
+                            });
+                          } else {
+                            setState(() {});
+                            return;
+                          }
                         }
                       }
                     },
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25.0),
+                      borderRadius: BorderRadius.circular(8.0),
                       child: Image.network(
-                        widget.trabajador!.photoUrl,
-                        width: 200.0,
-                        height: 150.0,
+                        widget.trabajador?.photoUrl == null ||
+                                widget.trabajador?.photoUrl == ''
+                            ? random_data.randomImageUrl(
+                                0,
+                                0,
+                              )
+                            : widget.trabajador!.photoUrl,
+                        width: 300.0,
+                        height: 200.0,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -536,20 +567,35 @@ class _EditarWidgetState extends State<EditarWidget> {
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
-                      await widget.trabajador!.reference
-                          .update(createUsersRecordData(
-                        nombre: _model.txtNombreController.text,
-                        apellidos: _model.txtApellidosController.text,
-                        numeroTelefonico: _model.txtTelefonoController.text,
-                        tipoUsuario: _model.ddTipoUsuarioValue,
-                        photoUrl: _model.uploadedFileUrl,
-                      ));
+                      if (_model.uploadedFileUrl == null ||
+                          _model.uploadedFileUrl == '') {
+                        await widget.trabajador!.reference
+                            .update(createUsersRecordData(
+                          nombre: _model.txtNombreController.text,
+                          apellidos: _model.txtApellidosController.text,
+                          numeroTelefonico: _model.txtTelefonoController.text,
+                          tipoUsuario: _model.ddTipoUsuarioValue,
+                          descripcion: _model.txtDescripcionController.text,
+                        ));
+                      } else {
+                        await widget.trabajador!.reference
+                            .update(createUsersRecordData(
+                          photoUrl: _model.uploadedFileUrl,
+                          nombre: _model.txtNombreController.text,
+                          apellidos: _model.txtApellidosController.text,
+                          numeroTelefonico: _model.txtTelefonoController.text,
+                          tipoUsuario: _model.ddTipoUsuarioValue,
+                          descripcion: _model.txtDescripcionController.text,
+                        ));
+                      }
+
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
                           return AlertDialog(
-                            title: Text('¡Éxito!'),
-                            content: Text('Trabajador modificado.'),
+                            title: Text('¡Éxito Trabajador Editado!'),
+                            content: Text(
+                                'Se ha modificado el trabajador de forma exitosa.'),
                             actions: [
                               TextButton(
                                 onPressed: () =>

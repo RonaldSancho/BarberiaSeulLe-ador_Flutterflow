@@ -146,8 +146,13 @@ class _ListaReservasWidgetState extends State<ListaReservasWidget> {
                     Expanded(
                       child: Align(
                         alignment: AlignmentDirectional(0.00, 0.00),
-                        child: StreamBuilder<List<TrabajadoresRecord>>(
-                          stream: queryTrabajadoresRecord(),
+                        child: StreamBuilder<List<UsersRecord>>(
+                          stream: queryUsersRecord(
+                            queryBuilder: (usersRecord) => usersRecord.where(
+                              'tipoUsuario',
+                              isEqualTo: 'Trabajador',
+                            ),
+                          ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -162,8 +167,7 @@ class _ListaReservasWidgetState extends State<ListaReservasWidget> {
                                 ),
                               );
                             }
-                            List<TrabajadoresRecord>
-                                tablaReservasTrabajadoresRecordList =
+                            List<UsersRecord> tablaReservasUsersRecordList =
                                 snapshot.data!;
                             return SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
@@ -310,9 +314,9 @@ class _ListaReservasWidgetState extends State<ListaReservasWidget> {
                                       ),
                                     ),
                                   ],
-                                  rows: tablaReservasTrabajadoresRecordList
+                                  rows: tablaReservasUsersRecordList
                                       .mapIndexed((tablaReservasIndex,
-                                              tablaReservasTrabajadoresRecord) =>
+                                              tablaReservasUsersRecord) =>
                                           [
                                             Text(
                                               '1',

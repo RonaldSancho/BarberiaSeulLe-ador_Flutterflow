@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,12 @@ import 'visualizar_detalle_trabajador_model.dart';
 export 'visualizar_detalle_trabajador_model.dart';
 
 class VisualizarDetalleTrabajadorWidget extends StatefulWidget {
-  const VisualizarDetalleTrabajadorWidget({Key? key}) : super(key: key);
+  const VisualizarDetalleTrabajadorWidget({
+    Key? key,
+    required this.datosTrabajador,
+  }) : super(key: key);
+
+  final UsersRecord? datosTrabajador;
 
   @override
   _VisualizarDetalleTrabajadorWidgetState createState() =>
@@ -66,7 +72,7 @@ class _VisualizarDetalleTrabajadorWidgetState
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      'https://png.pngtree.com/thumb_back/fw800/background/20220209/pngtree-male-hairstylist-posing-with-a-journal-in-the-salon-photo-image_29259018.jpg',
+                      widget.datosTrabajador!.photoUrl,
                       width: 200.0,
                       height: 150.0,
                       fit: BoxFit.cover,
@@ -97,11 +103,17 @@ class _VisualizarDetalleTrabajadorWidgetState
                 ],
               ),
               Text(
-                'Julian Alvarez Rojas',
+                valueOrDefault<String>(
+                  widget.datosTrabajador?.nombre,
+                  'null',
+                ),
                 style: FlutterFlowTheme.of(context).bodyMedium,
               ),
               Text(
-                '5 años de experiencia en afeitados tradicionales.',
+                valueOrDefault<String>(
+                  widget.datosTrabajador?.descripcion,
+                  'null',
+                ),
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyMedium,
               ),

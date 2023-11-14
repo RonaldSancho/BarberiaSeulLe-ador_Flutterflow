@@ -23,11 +23,9 @@ export '/modulo_reserva/nueva_reserva/nueva_reserva_widget.dart'
     show NuevaReservaWidget;
 export '/modulo_reserva/editar_reserva/editar_reserva_widget.dart'
     show EditarReservaWidget;
-export '/admin/modulo_trabajadores/nuevo_trabajador/nuevo_trabajador_widget.dart'
-    show NuevoTrabajadorWidget;
 export '/admin/modulo_trabajadores/trabajadores/trabajadores_widget.dart'
     show TrabajadoresWidget;
 export '/cliente/modulo_servicio/visualizar_servicios_cliente/visualizar_servicios_cliente_widget.dart'
     show VisualizarServiciosClienteWidget;
-export '/cliente/modulo_trabajador_cliente/visualizar_trabajadores_cliente/visualizar_trabajadores_cliente_widget.dart'
+export '/cliente/visualizar_trabajadores_cliente/visualizar_trabajadores_cliente_widget.dart'
     show VisualizarTrabajadoresClienteWidget;

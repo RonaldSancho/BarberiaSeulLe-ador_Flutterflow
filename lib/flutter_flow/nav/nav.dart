@@ -155,11 +155,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => EditarReservaWidget(),
         ),
         FFRoute(
-          name: 'NuevoTrabajador',
-          path: '/nuevoTrabajador',
-          builder: (context, params) => NuevoTrabajadorWidget(),
-        ),
-        FFRoute(
           name: 'Trabajadores',
           path: '/trabajadores',
           builder: (context, params) => TrabajadoresWidget(),

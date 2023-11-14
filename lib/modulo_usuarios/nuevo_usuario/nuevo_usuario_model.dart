@@ -98,6 +98,10 @@ class NuevoUsuarioModel extends FlutterFlowModel<NuevoUsuarioWidget> {
   // State field(s) for ddTipoUsuario widget.
   String? ddTipoUsuarioValue;
   FormFieldController<String>? ddTipoUsuarioValueController;
+  // State field(s) for txtDescripcion widget.
+  FocusNode? txtDescripcionFocusNode;
+  TextEditingController? txtDescripcionController;
+  String? Function(BuildContext, String?)? txtDescripcionControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -128,6 +132,9 @@ class NuevoUsuarioModel extends FlutterFlowModel<NuevoUsuarioWidget> {
 
     txtTelefonoFocusNode?.dispose();
     txtTelefonoController?.dispose();
+
+    txtDescripcionFocusNode?.dispose();
+    txtDescripcionController?.dispose();
   }
 
   /// Action blocks are added here.

@@ -743,7 +743,7 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
                                                         .txtTelefonoController
                                                         .text,
                                                     tipoUsuario: 'Cliente',
-                                                    correoElctronico: _model
+                                                    email: _model
                                                         .txtCorreoElectronicoController
                                                         .text,
                                                   ));

@@ -6,7 +6,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/util/firestore_util.dart';
 
 import 'schema/users_record.dart';
-import 'schema/trabajadores_record.dart';
 import 'schema/bitacora_record.dart';
 import 'schema/errores_record.dart';
 import 'schema/servicios_record.dart';
@@ -18,7 +17,6 @@ export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
 export 'schema/users_record.dart';
-export 'schema/trabajadores_record.dart';
 export 'schema/bitacora_record.dart';
 export 'schema/errores_record.dart';
 export 'schema/servicios_record.dart';
@@ -55,43 +53,6 @@ Future<List<UsersRecord>> queryUsersRecordOnce({
     queryCollectionOnce(
       UsersRecord.collection,
       UsersRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query TrabajadoresRecords (as a Stream and as a Future).
-Future<int> queryTrabajadoresRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      TrabajadoresRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<TrabajadoresRecord>> queryTrabajadoresRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      TrabajadoresRecord.collection,
-      TrabajadoresRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<TrabajadoresRecord>> queryTrabajadoresRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      TrabajadoresRecord.collection,
-      TrabajadoresRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

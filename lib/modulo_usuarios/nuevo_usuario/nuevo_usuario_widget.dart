@@ -44,6 +44,9 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
 
     _model.txtTelefonoController ??= TextEditingController();
     _model.txtTelefonoFocusNode ??= FocusNode();
+
+    _model.txtDescripcionController ??= TextEditingController();
+    _model.txtDescripcionFocusNode ??= FocusNode();
   }
 
   @override
@@ -196,7 +199,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -274,7 +277,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -353,7 +356,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -445,7 +448,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -523,7 +526,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 20.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 20.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -564,6 +567,83 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                   ),
                 ),
                 Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 10.0, 0.0),
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            child: TextFormField(
+                              controller: _model.txtDescripcionController,
+                              focusNode: _model.txtDescripcionFocusNode,
+                              autofocus: true,
+                              autofillHints: [AutofillHints.name],
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Descripcion Trabajador',
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelLarge
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF2B5DA5),
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFFE0E3E7),
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFFE0E3E7),
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                filled: true,
+                                fillColor: Color(0xFFF1F4F8),
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: Color(0xFF101213),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                              validator: _model
+                                  .txtDescripcionControllerValidator
+                                  .asValidator(context),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -585,6 +665,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                               false,
                             ),
                             _model.txtContrasennaController.text,
+                            _model.txtDescripcionController.text,
                           );
                           await showDialog(
                             context: context,
@@ -603,8 +684,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                               );
                             },
                           );
-
-                          context.pushNamed('ListaUsuarios');
+                          context.safePop();
                         },
                         text: 'Guardar',
                         options: FFButtonOptions(

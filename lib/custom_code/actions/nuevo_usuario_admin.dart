@@ -18,6 +18,7 @@ Future<DocumentReference> nuevoUsuarioAdmin(
   String tipoUsuario,
   String randomDocGebn,
   String contrasenna,
+  String? descripcionTrabajador,
 ) async {
   DateTime createdTime = DateTime.now();
 
@@ -39,7 +40,8 @@ Future<DocumentReference> nuevoUsuarioAdmin(
     'nombre': nombreUsuario,
     'apellidos': apellidosUsuario,
     'numeroTelefonico': numeroTelefonico,
-    'tipoUsuario': tipoUsuario
+    'tipoUsuario': tipoUsuario,
+    'descripcion': descripcionTrabajador,
   });
 
   final firestore = FirebaseFirestore.instance;

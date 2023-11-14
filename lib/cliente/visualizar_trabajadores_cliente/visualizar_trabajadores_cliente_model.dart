@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/cliente/modulo_trabajador_cliente/visualizar_detalle_trabajador/visualizar_detalle_trabajador_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
