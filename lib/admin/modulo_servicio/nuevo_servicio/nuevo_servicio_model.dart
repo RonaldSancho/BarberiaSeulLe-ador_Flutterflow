@@ -19,19 +19,59 @@ class NuevoServicioModel extends FlutterFlowModel<NuevoServicioWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  final formKey = GlobalKey<FormState>();
   // State field(s) for txtNombreServicio widget.
   FocusNode? txtNombreServicioFocusNode;
   TextEditingController? txtNombreServicioController;
   String? Function(BuildContext, String?)? txtNombreServicioControllerValidator;
+  String? _txtNombreServicioControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Este campo es requerido';
+    }
+
+    if (val.length < 5) {
+      return 'El nombre debe tener más de 5 caracteres.';
+    }
+
+    return null;
+  }
+
   // State field(s) for txtDetalleServicio widget.
   FocusNode? txtDetalleServicioFocusNode;
   TextEditingController? txtDetalleServicioController;
   String? Function(BuildContext, String?)?
       txtDetalleServicioControllerValidator;
+  String? _txtDetalleServicioControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Este campo es requerido';
+    }
+
+    if (val.length < 10) {
+      return 'La descripción debe tener más de 10 caracteres.';
+    }
+
+    return null;
+  }
+
   // State field(s) for txtPrecioServicio widget.
   FocusNode? txtPrecioServicioFocusNode;
   TextEditingController? txtPrecioServicioController;
   String? Function(BuildContext, String?)? txtPrecioServicioControllerValidator;
+  String? _txtPrecioServicioControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Este campo es requerido';
+    }
+
+    if (val.length > 6) {
+      return 'El precio no debe tener más de 6 dígitos.';
+    }
+
+    return null;
+  }
+
   // State field(s) for dpdTrabajadorServicio widget.
   String? dpdTrabajadorServicioValue;
   FormFieldController<String>? dpdTrabajadorServicioValueController;
@@ -42,7 +82,14 @@ class NuevoServicioModel extends FlutterFlowModel<NuevoServicioWidget> {
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    txtNombreServicioControllerValidator =
+        _txtNombreServicioControllerValidator;
+    txtDetalleServicioControllerValidator =
+        _txtDetalleServicioControllerValidator;
+    txtPrecioServicioControllerValidator =
+        _txtPrecioServicioControllerValidator;
+  }
 
   void dispose() {
     unfocusNode.dispose();

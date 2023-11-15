@@ -42,6 +42,7 @@ Future<DocumentReference> nuevoUsuarioAdmin(
     'numeroTelefonico': numeroTelefonico,
     'tipoUsuario': tipoUsuario,
     'descripcion': descripcionTrabajador,
+    'nombreCompleto': nombreUsuario + ' ' + apellidosUsuario,
   });
 
   final firestore = FirebaseFirestore.instance;

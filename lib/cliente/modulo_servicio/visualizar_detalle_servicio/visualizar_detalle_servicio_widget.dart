@@ -123,6 +123,13 @@ class _VisualizarDetalleServicioWidgetState
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium,
               ),
+              Text(
+                valueOrDefault<String>(
+                  widget.informacionServicio?.trabajador,
+                  'Error de conexión',
+                ),
+                style: FlutterFlowTheme.of(context).bodyMedium,
+              ),
             ],
           ),
         ),

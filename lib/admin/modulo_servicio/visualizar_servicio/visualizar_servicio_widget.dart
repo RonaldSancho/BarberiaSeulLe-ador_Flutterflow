@@ -418,7 +418,7 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
               ],
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(8.0, 50.0, 8.0, 8.0),
+              padding: EdgeInsetsDirectional.fromSTEB(8.0, 40.0, 8.0, 8.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,

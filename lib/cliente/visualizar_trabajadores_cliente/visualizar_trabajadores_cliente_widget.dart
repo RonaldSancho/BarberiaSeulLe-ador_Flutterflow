@@ -151,8 +151,8 @@ class _VisualizarTrabajadoresClienteWidgetState
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Container(
-                                  width: 100.0,
-                                  height: 100.0,
+                                  width: 90.0,
+                                  height: 90.0,
                                   clipBehavior: Clip.antiAlias,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
@@ -209,7 +209,6 @@ class _VisualizarTrabajadoresClienteWidgetState
                                   text: 'Más',
                                   options: FFButtonOptions(
                                     width: 75.0,
-                                    height: 25.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(

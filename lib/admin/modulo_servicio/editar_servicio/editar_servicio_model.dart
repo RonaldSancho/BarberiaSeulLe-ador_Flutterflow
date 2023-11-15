@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 class EditarServicioModel extends FlutterFlowModel<EditarServicioWidget> {
   ///  State fields for stateful widgets in this component.
 
+  final formKey = GlobalKey<FormState>();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -27,15 +28,54 @@ class EditarServicioModel extends FlutterFlowModel<EditarServicioWidget> {
   FocusNode? txtNombreServicioFocusNode;
   TextEditingController? txtNombreServicioController;
   String? Function(BuildContext, String?)? txtNombreServicioControllerValidator;
+  String? _txtNombreServicioControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Este campo es requerido';
+    }
+
+    if (val.length < 5) {
+      return 'El nombre debe tener más de 5 caracteres.';
+    }
+
+    return null;
+  }
+
   // State field(s) for txtDetalleServicio widget.
   FocusNode? txtDetalleServicioFocusNode;
   TextEditingController? txtDetalleServicioController;
   String? Function(BuildContext, String?)?
       txtDetalleServicioControllerValidator;
+  String? _txtDetalleServicioControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Este campo es requerido';
+    }
+
+    if (val.length < 10) {
+      return 'La descripción debe tener más de 10 caracteres.';
+    }
+
+    return null;
+  }
+
   // State field(s) for txtPrecioServicio widget.
   FocusNode? txtPrecioServicioFocusNode;
   TextEditingController? txtPrecioServicioController;
   String? Function(BuildContext, String?)? txtPrecioServicioControllerValidator;
+  String? _txtPrecioServicioControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Este campo es requerido';
+    }
+
+    if (val.length > 6) {
+      return 'El precio no debe tener más de 6 dígitos.';
+    }
+
+    return null;
+  }
+
   // State field(s) for dpTrabajadorServicio widget.
   String? dpTrabajadorServicioValue;
   FormFieldController<String>? dpTrabajadorServicioValueController;
@@ -45,7 +85,14 @@ class EditarServicioModel extends FlutterFlowModel<EditarServicioWidget> {
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    txtNombreServicioControllerValidator =
+        _txtNombreServicioControllerValidator;
+    txtDetalleServicioControllerValidator =
+        _txtDetalleServicioControllerValidator;
+    txtPrecioServicioControllerValidator =
+        _txtPrecioServicioControllerValidator;
+  }
 
   void dispose() {
     txtNombreServicioFocusNode?.dispose();

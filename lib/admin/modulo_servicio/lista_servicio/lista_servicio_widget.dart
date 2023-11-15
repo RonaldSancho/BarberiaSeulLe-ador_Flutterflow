@@ -308,9 +308,13 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                                                       .bodyMedium,
                                             ),
                                             Text(
-                                              tablaServiciosServiciosRecord
-                                                  .precioServicio
-                                                  .toString(),
+                                              formatNumber(
+                                                tablaServiciosServiciosRecord
+                                                    .precioServicio,
+                                                formatType: FormatType.custom,
+                                                format: '₡',
+                                                locale: '',
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,

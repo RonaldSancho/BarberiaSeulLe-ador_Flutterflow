@@ -170,8 +170,12 @@ class _VisualizarServiciosClienteWidgetState
                                       FlutterFlowTheme.of(context).bodyMedium,
                                 ),
                                 Text(
-                                  gridViewServiciosRecord.precioServicio
-                                      .toString(),
+                                  formatNumber(
+                                    gridViewServiciosRecord.precioServicio,
+                                    formatType: FormatType.custom,
+                                    format: '₡',
+                                    locale: '',
+                                  ),
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
                                 ),
