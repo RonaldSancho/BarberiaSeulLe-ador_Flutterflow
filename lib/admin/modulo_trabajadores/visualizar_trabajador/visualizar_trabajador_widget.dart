@@ -38,12 +38,12 @@ class _VisualizarTrabajadorWidgetState
     super.initState();
     _model = createModel(context, () => VisualizarTrabajadorModel());
 
-    _model.textController1 ??=
-        TextEditingController(text: widget.informacionTrabajador?.nombre);
+    _model.textController1 ??= TextEditingController(
+        text: widget.informacionTrabajador?.nombreCompleto);
     _model.textFieldFocusNode1 ??= FocusNode();
 
     _model.textController2 ??=
-        TextEditingController(text: widget.informacionTrabajador?.apellidos);
+        TextEditingController(text: widget.informacionTrabajador?.email);
     _model.textFieldFocusNode2 ??= FocusNode();
 
     _model.textController3 ??= TextEditingController(
