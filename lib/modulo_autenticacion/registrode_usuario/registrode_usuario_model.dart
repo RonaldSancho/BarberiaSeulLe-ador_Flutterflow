@@ -31,20 +31,6 @@ class RegistrodeUsuarioModel extends FlutterFlowModel<RegistrodeUsuarioWidget> {
     return null;
   }
 
-  // State field(s) for txtApellidosUsuario widget.
-  FocusNode? txtApellidosUsuarioFocusNode;
-  TextEditingController? txtApellidosUsuarioController;
-  String? Function(BuildContext, String?)?
-      txtApellidosUsuarioControllerValidator;
-  String? _txtApellidosUsuarioControllerValidator(
-      BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Al menos un apellido es requerido.';
-    }
-
-    return null;
-  }
-
   // State field(s) for txtTelefono widget.
   FocusNode? txtTelefonoFocusNode;
   TextEditingController? txtTelefonoController;
@@ -100,8 +86,6 @@ class RegistrodeUsuarioModel extends FlutterFlowModel<RegistrodeUsuarioWidget> {
 
   void initState(BuildContext context) {
     txtNombreUsuarioControllerValidator = _txtNombreUsuarioControllerValidator;
-    txtApellidosUsuarioControllerValidator =
-        _txtApellidosUsuarioControllerValidator;
     txtTelefonoControllerValidator = _txtTelefonoControllerValidator;
     txtCorreoElectronicoControllerValidator =
         _txtCorreoElectronicoControllerValidator;
@@ -113,9 +97,6 @@ class RegistrodeUsuarioModel extends FlutterFlowModel<RegistrodeUsuarioWidget> {
     unfocusNode.dispose();
     txtNombreUsuarioFocusNode?.dispose();
     txtNombreUsuarioController?.dispose();
-
-    txtApellidosUsuarioFocusNode?.dispose();
-    txtApellidosUsuarioController?.dispose();
 
     txtTelefonoFocusNode?.dispose();
     txtTelefonoController?.dispose();

@@ -73,9 +73,6 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
     _model.txtNombreUsuarioController ??= TextEditingController();
     _model.txtNombreUsuarioFocusNode ??= FocusNode();
 
-    _model.txtApellidosUsuarioController ??= TextEditingController();
-    _model.txtApellidosUsuarioFocusNode ??= FocusNode();
-
     _model.txtTelefonoController ??= TextEditingController();
     _model.txtTelefonoFocusNode ??= FocusNode();
 
@@ -247,7 +244,7 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
                                               ],
                                               obscureText: false,
                                               decoration: InputDecoration(
-                                                labelText: 'Nombre',
+                                                labelText: 'Nombre Completo',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .labelLarge
@@ -324,98 +321,7 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: Container(
-                                            width: double.infinity,
-                                            child: TextFormField(
-                                              controller: _model
-                                                  .txtApellidosUsuarioController,
-                                              focusNode: _model
-                                                  .txtApellidosUsuarioFocusNode,
-                                              autofocus: true,
-                                              autofillHints: [
-                                                AutofillHints.name
-                                              ],
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Apellidos',
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Plus Jakarta Sans',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0xFF4B39EF),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0xFFE0E3E7),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0xFFE0E3E7),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                filled: true,
-                                                fillColor: Color(0xFFF1F4F8),
-                                              ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyLarge
-                                                  .override(
-                                                    fontFamily: 'Open Sans',
-                                                    color: Color(0xFF101213),
-                                                    fontSize: 16.0,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                              keyboardType: TextInputType.name,
-                                              validator: _model
-                                                  .txtApellidosUsuarioControllerValidator
-                                                  .asValidator(context),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
+                                                  0.0, 0.0, 0.0, 10.0),
                                           child: Container(
                                             width: double.infinity,
                                             child: TextFormField(
@@ -733,18 +639,15 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
                                               await UsersRecord.collection
                                                   .doc(user.uid)
                                                   .update(createUsersRecordData(
-                                                    nombre: _model
-                                                        .txtNombreUsuarioController
-                                                        .text,
-                                                    apellidos: _model
-                                                        .txtApellidosUsuarioController
-                                                        .text,
                                                     numeroTelefonico: _model
                                                         .txtTelefonoController
                                                         .text,
                                                     tipoUsuario: 'Cliente',
                                                     email: _model
                                                         .txtCorreoElectronicoController
+                                                        .text,
+                                                    nombreCompleto: _model
+                                                        .txtNombreUsuarioController
                                                         .text,
                                                   ));
 

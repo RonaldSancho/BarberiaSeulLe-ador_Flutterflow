@@ -177,24 +177,7 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                       label: DefaultTextStyle.merge(
                                         softWrap: true,
                                         child: Text(
-                                          'Nombre',
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                fontFamily: 'Open Sans',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBtnText,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataColumn2(
-                                      label: DefaultTextStyle.merge(
-                                        softWrap: true,
-                                        child: Text(
-                                          'Apellidos',
+                                          'Nombre Completo',
                                           style: FlutterFlowTheme.of(context)
                                               .labelLarge
                                               .override(
@@ -228,7 +211,7 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                       label: DefaultTextStyle.merge(
                                         softWrap: true,
                                         child: Text(
-                                          ' Teléfono',
+                                          'Teléfono',
                                           style: FlutterFlowTheme.of(context)
                                               .labelLarge
                                               .override(
@@ -245,7 +228,24 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                       label: DefaultTextStyle.merge(
                                         softWrap: true,
                                         child: Text(
-                                          'Rol de usuario',
+                                          'Rol Usuario',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBtnText,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                    DataColumn2(
+                                      label: DefaultTextStyle.merge(
+                                        softWrap: true,
+                                        child: Text(
+                                          ' ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .labelLarge
@@ -269,30 +269,14 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                         ),
                                       ),
                                     ),
-                                    DataColumn2(
-                                      label: DefaultTextStyle.merge(
-                                        softWrap: true,
-                                        child: Text(
-                                          ' ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge,
-                                        ),
-                                      ),
-                                    ),
                                   ],
                                   rows: tablaUsuariosUsersRecordList
                                       .mapIndexed((tablaUsuariosIndex,
                                               tablaUsuariosUsersRecord) =>
                                           [
                                             Text(
-                                              tablaUsuariosUsersRecord.nombre,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                            ),
-                                            Text(
                                               tablaUsuariosUsersRecord
-                                                  .apellidos,
+                                                  .nombreCompleto,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,

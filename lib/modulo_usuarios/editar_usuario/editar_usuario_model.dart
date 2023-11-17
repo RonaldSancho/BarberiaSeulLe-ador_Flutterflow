@@ -20,11 +20,6 @@ class EditarUsuarioModel extends FlutterFlowModel<EditarUsuarioWidget> {
   FocusNode? txtNombreUsuarioFocusNode;
   TextEditingController? txtNombreUsuarioController;
   String? Function(BuildContext, String?)? txtNombreUsuarioControllerValidator;
-  // State field(s) for txtApellidosUsuario widget.
-  FocusNode? txtApellidosUsuarioFocusNode;
-  TextEditingController? txtApellidosUsuarioController;
-  String? Function(BuildContext, String?)?
-      txtApellidosUsuarioControllerValidator;
   // State field(s) for txtCorreoElectronico widget.
   FocusNode? txtCorreoElectronicoFocusNode;
   TextEditingController? txtCorreoElectronicoController;
@@ -46,9 +41,6 @@ class EditarUsuarioModel extends FlutterFlowModel<EditarUsuarioWidget> {
   void dispose() {
     txtNombreUsuarioFocusNode?.dispose();
     txtNombreUsuarioController?.dispose();
-
-    txtApellidosUsuarioFocusNode?.dispose();
-    txtApellidosUsuarioController?.dispose();
 
     txtCorreoElectronicoFocusNode?.dispose();
     txtCorreoElectronicoController?.dispose();

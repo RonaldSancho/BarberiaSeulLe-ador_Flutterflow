@@ -41,12 +41,8 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
     _model = createModel(context, () => EditarUsuarioModel());
 
     _model.txtNombreUsuarioController ??=
-        TextEditingController(text: widget.pUsuario?.nombre);
+        TextEditingController(text: widget.pUsuario?.nombreCompleto);
     _model.txtNombreUsuarioFocusNode ??= FocusNode();
-
-    _model.txtApellidosUsuarioController ??=
-        TextEditingController(text: widget.pUsuario?.apellidos);
-    _model.txtApellidosUsuarioFocusNode ??= FocusNode();
 
     _model.txtCorreoElectronicoController ??=
         TextEditingController(text: widget.pUsuario?.email);
@@ -96,7 +92,7 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                           autofillHints: [AutofillHints.name],
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Nombre de Usuario',
+                            labelText: 'Nombre Completo',
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelLarge
                                 .override(
@@ -144,81 +140,6 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                                     fontWeight: FontWeight.w500,
                                   ),
                           validator: _model.txtNombreUsuarioControllerValidator
-                              .asValidator(context),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        child: TextFormField(
-                          controller: _model.txtApellidosUsuarioController,
-                          focusNode: _model.txtApellidosUsuarioFocusNode,
-                          autofocus: true,
-                          autofillHints: [AutofillHints.name],
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Apellidos del Usuario',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelLarge
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Color(0xFF57636C),
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF2B5DA5),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            filled: true,
-                            fillColor: Color(0xFFF1F4F8),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Open Sans',
-                                    color: Color(0xFF101213),
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                          validator: _model
-                              .txtApellidosUsuarioControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -432,11 +353,10 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                       await widget.pUsuario!.reference
                           .update(createUsersRecordData(
                         email: _model.txtCorreoElectronicoController.text,
-                        nombre: _model.txtNombreUsuarioController.text,
-                        apellidos: _model.txtApellidosUsuarioController.text,
                         numeroTelefonico:
                             _model.txtNumeroTelefonicoController.text,
                         tipoUsuario: _model.ddTipoUsuarioValue,
+                        nombreCompleto: _model.txtNombreUsuarioController.text,
                       ));
                       if (_model.txtCorreoElectronicoController.text.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
