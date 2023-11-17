@@ -264,7 +264,7 @@ class _TrabajadoresWidgetState extends State<TrabajadoresWidget> {
                                             ),
                                             Text(
                                               tablaTrabajadoresUsersRecord
-                                                  .nombre,
+                                                  .nombreCompleto,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,

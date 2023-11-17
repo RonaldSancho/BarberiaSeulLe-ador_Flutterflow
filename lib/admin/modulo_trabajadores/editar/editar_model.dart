@@ -28,10 +28,6 @@ class EditarModel extends FlutterFlowModel<EditarWidget> {
   FocusNode? txtNombreFocusNode;
   TextEditingController? txtNombreController;
   String? Function(BuildContext, String?)? txtNombreControllerValidator;
-  // State field(s) for txtApellidos widget.
-  FocusNode? txtApellidosFocusNode;
-  TextEditingController? txtApellidosController;
-  String? Function(BuildContext, String?)? txtApellidosControllerValidator;
   // State field(s) for txtCorreo widget.
   FocusNode? txtCorreoFocusNode;
   TextEditingController? txtCorreoController;
@@ -55,9 +51,6 @@ class EditarModel extends FlutterFlowModel<EditarWidget> {
   void dispose() {
     txtNombreFocusNode?.dispose();
     txtNombreController?.dispose();
-
-    txtApellidosFocusNode?.dispose();
-    txtApellidosController?.dispose();
 
     txtCorreoFocusNode?.dispose();
     txtCorreoController?.dispose();

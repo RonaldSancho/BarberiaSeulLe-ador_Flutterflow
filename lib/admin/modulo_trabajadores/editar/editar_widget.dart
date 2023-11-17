@@ -44,12 +44,8 @@ class _EditarWidgetState extends State<EditarWidget> {
     _model = createModel(context, () => EditarModel());
 
     _model.txtNombreController ??=
-        TextEditingController(text: widget.trabajador?.nombre);
+        TextEditingController(text: widget.trabajador?.nombreCompleto);
     _model.txtNombreFocusNode ??= FocusNode();
-
-    _model.txtApellidosController ??=
-        TextEditingController(text: widget.trabajador?.apellidos);
-    _model.txtApellidosFocusNode ??= FocusNode();
 
     _model.txtCorreoController ??=
         TextEditingController(text: widget.trabajador?.email);
@@ -246,74 +242,6 @@ class _EditarWidgetState extends State<EditarWidget> {
                               fontSize: 16.0,
                             ),
                         validator: _model.txtNombreControllerValidator
-                            .asValidator(context),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                      child: TextFormField(
-                        controller: _model.txtApellidosController,
-                        focusNode: _model.txtApellidosFocusNode,
-                        autofocus: true,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: 'Apellidos del Trabajador',
-                          labelStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Open Sans',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 20.0,
-                                  ),
-                          hintStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Open Sans',
-                                    color: Color(0xFF57636C),
-                                  ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedErrorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Open Sans',
-                              fontSize: 16.0,
-                            ),
-                        validator: _model.txtApellidosControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -572,7 +500,6 @@ class _EditarWidgetState extends State<EditarWidget> {
                         await widget.trabajador!.reference
                             .update(createUsersRecordData(
                           nombre: _model.txtNombreController.text,
-                          apellidos: _model.txtApellidosController.text,
                           numeroTelefonico: _model.txtTelefonoController.text,
                           tipoUsuario: _model.ddTipoUsuarioValue,
                           descripcion: _model.txtDescripcionController.text,
@@ -582,7 +509,6 @@ class _EditarWidgetState extends State<EditarWidget> {
                             .update(createUsersRecordData(
                           photoUrl: _model.uploadedFileUrl,
                           nombre: _model.txtNombreController.text,
-                          apellidos: _model.txtApellidosController.text,
                           numeroTelefonico: _model.txtTelefonoController.text,
                           tipoUsuario: _model.ddTipoUsuarioValue,
                           descripcion: _model.txtDescripcionController.text,
