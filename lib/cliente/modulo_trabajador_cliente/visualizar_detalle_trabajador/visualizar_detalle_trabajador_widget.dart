@@ -104,7 +104,7 @@ class _VisualizarDetalleTrabajadorWidgetState
               ),
               Text(
                 valueOrDefault<String>(
-                  widget.datosTrabajador?.nombre,
+                  widget.datosTrabajador?.nombreCompleto,
                   'null',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium,

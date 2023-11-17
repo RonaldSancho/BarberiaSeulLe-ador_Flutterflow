@@ -163,7 +163,7 @@ class _VisualizarTrabajadoresClienteWidgetState
                                   ),
                                 ),
                                 Text(
-                                  gridViewUsersRecord.nombre,
+                                  gridViewUsersRecord.nombreCompleto,
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
                                 ),
