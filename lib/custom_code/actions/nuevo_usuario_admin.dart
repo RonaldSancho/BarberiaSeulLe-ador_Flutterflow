@@ -12,8 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 Future<DocumentReference> nuevoUsuarioAdmin(
   String correoElectronico,
-  String nombreUsuario,
-  String apellidosUsuario,
+  String nombreCompleto,
   String numeroTelefonico,
   String tipoUsuario,
   String randomDocGebn,
@@ -37,12 +36,10 @@ Future<DocumentReference> nuevoUsuarioAdmin(
   usuarios.doc(uid).set({
     'uid': uid,
     'email': correoElectronico,
-    'nombre': nombreUsuario,
-    'apellidos': apellidosUsuario,
     'numeroTelefonico': numeroTelefonico,
     'tipoUsuario': tipoUsuario,
     'descripcion': descripcionTrabajador,
-    'nombreCompleto': nombreUsuario + ' ' + apellidosUsuario,
+    'nombreCompleto': nombreCompleto,
   });
 
   final firestore = FirebaseFirestore.instance;

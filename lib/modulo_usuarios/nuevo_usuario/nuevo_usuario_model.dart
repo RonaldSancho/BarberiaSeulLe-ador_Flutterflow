@@ -30,20 +30,6 @@ class NuevoUsuarioModel extends FlutterFlowModel<NuevoUsuarioWidget> {
     return null;
   }
 
-  // State field(s) for txtApellidosUsuario widget.
-  FocusNode? txtApellidosUsuarioFocusNode;
-  TextEditingController? txtApellidosUsuarioController;
-  String? Function(BuildContext, String?)?
-      txtApellidosUsuarioControllerValidator;
-  String? _txtApellidosUsuarioControllerValidator(
-      BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Al menos un apellido es requerido.';
-    }
-
-    return null;
-  }
-
   // State field(s) for txtCorreoElectronico widget.
   FocusNode? txtCorreoElectronicoFocusNode;
   TextEditingController? txtCorreoElectronicoController;
@@ -107,8 +93,6 @@ class NuevoUsuarioModel extends FlutterFlowModel<NuevoUsuarioWidget> {
 
   void initState(BuildContext context) {
     txtNombreUsuarioControllerValidator = _txtNombreUsuarioControllerValidator;
-    txtApellidosUsuarioControllerValidator =
-        _txtApellidosUsuarioControllerValidator;
     txtCorreoElectronicoControllerValidator =
         _txtCorreoElectronicoControllerValidator;
     txtContrasennaVisibility = false;
@@ -120,9 +104,6 @@ class NuevoUsuarioModel extends FlutterFlowModel<NuevoUsuarioWidget> {
     unfocusNode.dispose();
     txtNombreUsuarioFocusNode?.dispose();
     txtNombreUsuarioController?.dispose();
-
-    txtApellidosUsuarioFocusNode?.dispose();
-    txtApellidosUsuarioController?.dispose();
 
     txtCorreoElectronicoFocusNode?.dispose();
     txtCorreoElectronicoController?.dispose();
