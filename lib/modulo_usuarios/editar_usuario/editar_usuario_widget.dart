@@ -1,11 +1,10 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -44,9 +43,9 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
         TextEditingController(text: widget.pUsuario?.nombreCompleto);
     _model.txtNombreUsuarioFocusNode ??= FocusNode();
 
-    _model.txtCorreoElectronicoController ??=
+    _model.txtCorreoElectronicoNuevoController ??=
         TextEditingController(text: widget.pUsuario?.email);
-    _model.txtCorreoElectronicoFocusNode ??= FocusNode();
+    _model.txtCorreoElectronicoNuevoFocusNode ??= FocusNode();
 
     _model.txtNumeroTelefonicoController ??=
         TextEditingController(text: widget.pUsuario?.numeroTelefonico);
@@ -160,8 +159,9 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         child: TextFormField(
-                          controller: _model.txtCorreoElectronicoController,
-                          focusNode: _model.txtCorreoElectronicoFocusNode,
+                          controller:
+                              _model.txtCorreoElectronicoNuevoController,
+                          focusNode: _model.txtCorreoElectronicoNuevoFocusNode,
                           autofocus: true,
                           autofillHints: [AutofillHints.email],
                           obscureText: false,
@@ -215,7 +215,7 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                                   ),
                           keyboardType: TextInputType.emailAddress,
                           validator: _model
-                              .txtCorreoElectronicoControllerValidator
+                              .txtCorreoElectronicoNuevoControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -350,46 +350,8 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
-                      await widget.pUsuario!.reference
-                          .update(createUsersRecordData(
-                        email: _model.txtCorreoElectronicoController.text,
-                        numeroTelefonico:
-                            _model.txtNumeroTelefonicoController.text,
-                        tipoUsuario: _model.ddTipoUsuarioValue,
-                        nombreCompleto: _model.txtNombreUsuarioController.text,
-                      ));
-                      if (_model.txtCorreoElectronicoController.text.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Email required!',
-                            ),
-                          ),
-                        );
-                        return;
-                      }
-
-                      await authManager.updateEmail(
-                        email: _model.txtCorreoElectronicoController.text,
-                        context: context,
-                      );
-                      setState(() {});
-
-                      await showDialog(
-                        context: context,
-                        builder: (alertDialogContext) {
-                          return AlertDialog(
-                            title: Text('¡Éxito!'),
-                            content: Text('Usuario modificado.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext),
-                                child: Text('De acuerdo.'),
-                              ),
-                            ],
-                          );
-                        },
+                      await actions.actualizarCorreoElectronico(
+                        _model.txtCorreoElectronicoNuevoController.text,
                       );
                       Navigator.pop(context);
                     },

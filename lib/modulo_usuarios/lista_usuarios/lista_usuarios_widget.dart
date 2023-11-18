@@ -147,6 +147,46 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                      child: StreamBuilder<List<UsersRecord>>(
+                        stream: queryUsersRecord(),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: SpinKitCircle(
+                                  color: Color(0xFF929090),
+                                  size: 50.0,
+                                ),
+                              ),
+                            );
+                          }
+                          List<UsersRecord> iconButtonUsersRecordList =
+                              snapshot.data!;
+                          return FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 0.0,
+                            borderWidth: 1.0,
+                            buttonSize: 45.0,
+                            icon: FaIcon(
+                              FontAwesomeIcons.solidFileExcel,
+                              color: Color(0xFF007236),
+                              size: 30.0,
+                            ),
+                            onPressed: () async {
+                              await actions.usuarioAExcel(
+                                iconButtonUsersRecordList.toList(),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
                     FlutterFlowIconButton(
                       borderColor: Colors.transparent,
                       borderRadius: 0.0,
@@ -438,7 +478,7 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                                 }
 
                                                 context.goNamedAuth(
-                                                    'ListaServicio',
+                                                    'ListaUsuarios',
                                                     context.mounted);
                                               },
                                               text: 'Eliminar',
