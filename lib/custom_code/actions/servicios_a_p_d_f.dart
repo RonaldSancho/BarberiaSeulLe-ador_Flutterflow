@@ -51,8 +51,7 @@ Future serviciosAPDF() async {
                     style: const pw.TextStyle(fontSize: 16)),
                 pw.Text('Descripción: ${servicio['descripcionServicion']}',
                     style: const pw.TextStyle(fontSize: 16)),
-                pw.Text(
-                    'Precio del Servicio: \u20A1${servicio['precioServicio']}',
+                pw.Text('Precio del Servicio: ${servicio['precioServicio']}',
                     style: const pw.TextStyle(fontSize: 16)),
                 pw.Text('Trabajador encargado: ${servicio['trabajador']}',
                     style: const pw.TextStyle(fontSize: 16)),
