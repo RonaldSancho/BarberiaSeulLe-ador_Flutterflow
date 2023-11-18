@@ -208,8 +208,8 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                         color: Color(0xFFB20B01),
                         size: 30.0,
                       ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
+                      onPressed: () async {
+                        await actions.serviciosAPDF();
                       },
                     ),
                     StreamBuilder<List<ServiciosRecord>>(

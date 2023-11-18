@@ -37,7 +37,7 @@ Future serviciosAPDF() async {
     pageFormat: PdfPageFormat.a4,
     build: (pw.Context context) {
       return pw.Column(children: [
-        pw.Text("Lista de usuarios",
+        pw.Text("Lista de servicios",
             style: const pw.TextStyle(
                 fontSize: 40, fontWeight: pw.FontWeight.bold)),
         pw.SizedBox(height: 20),
@@ -47,15 +47,13 @@ Future serviciosAPDF() async {
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                pw.Text('Nombre del Usuario: ${servicio['nombreCompleto']}',
+                pw.Text('Nombre del Servicio: ${servicio['nombreServicio']}',
                     style: const pw.TextStyle(fontSize: 16)),
-                pw.Text('Correo Electrónico: ${servicio['email']}',
+                pw.Text('Descripción: ${servicio['descripcionServicio']}',
                     style: const pw.TextStyle(fontSize: 16)),
-                pw.Text('Número de teléfono: ${servicio['numeroTelefonico']}',
+                pw.Text('Precio del Servicio: ${servicio['precioServicio']}',
                     style: const pw.TextStyle(fontSize: 16)),
-                pw.Text('Descripción del Usuario: ${servicio['descripcion']}',
-                    style: const pw.TextStyle(fontSize: 16)),
-                pw.Text('Rol del Usuario: ${servicio['tipoUsuario']}',
+                pw.Text('Trabajador encargado: ${servicio['trabajador']}',
                     style: const pw.TextStyle(fontSize: 16)),
                 pw.Divider(thickness: 2),
               ],

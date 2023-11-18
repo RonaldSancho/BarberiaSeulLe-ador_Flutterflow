@@ -438,7 +438,7 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                                 }
 
                                                 context.goNamedAuth(
-                                                    'ListaUsuarios',
+                                                    'ListaServicio',
                                                     context.mounted);
                                               },
                                               text: 'Eliminar',
