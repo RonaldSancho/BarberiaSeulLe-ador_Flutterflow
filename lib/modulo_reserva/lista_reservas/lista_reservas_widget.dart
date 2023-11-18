@@ -146,13 +146,8 @@ class _ListaReservasWidgetState extends State<ListaReservasWidget> {
                     Expanded(
                       child: Align(
                         alignment: AlignmentDirectional(0.00, 0.00),
-                        child: StreamBuilder<List<UsersRecord>>(
-                          stream: queryUsersRecord(
-                            queryBuilder: (usersRecord) => usersRecord.where(
-                              'tipoUsuario',
-                              isEqualTo: 'Trabajador',
-                            ),
-                          ),
+                        child: StreamBuilder<List<ReservasRecord>>(
+                          stream: queryReservasRecord(),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -167,7 +162,8 @@ class _ListaReservasWidgetState extends State<ListaReservasWidget> {
                                 ),
                               );
                             }
-                            List<UsersRecord> tablaReservasUsersRecordList =
+                            List<ReservasRecord>
+                                tablaReservasReservasRecordList =
                                 snapshot.data!;
                             return SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
@@ -248,42 +244,7 @@ class _ListaReservasWidgetState extends State<ListaReservasWidget> {
                                       label: DefaultTextStyle.merge(
                                         softWrap: true,
                                         child: Text(
-                                          ' Teléfono',
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                fontFamily: 'Open Sans',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBtnText,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataColumn2(
-                                      label: DefaultTextStyle.merge(
-                                        softWrap: true,
-                                        child: Text(
-                                          'Trabajador',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Open Sans',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBtnText,
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataColumn2(
-                                      label: DefaultTextStyle.merge(
-                                        softWrap: true,
-                                        child: Text(
-                                          ' ',
+                                          'Hora',
                                           style: FlutterFlowTheme.of(context)
                                               .labelLarge
                                               .override(
@@ -314,18 +275,22 @@ class _ListaReservasWidgetState extends State<ListaReservasWidget> {
                                       ),
                                     ),
                                   ],
-                                  rows: tablaReservasUsersRecordList
+                                  rows: tablaReservasReservasRecordList
                                       .mapIndexed((tablaReservasIndex,
-                                              tablaReservasUsersRecord) =>
+                                              tablaReservasReservasRecord) =>
                                           [
                                             Text(
-                                              '1',
+                                              tablaReservasReservasRecord
+                                                  .reference.id,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                             ),
                                             Text(
-                                              '25/09/2023',
+                                              dateTimeFormat(
+                                                  'd/M',
+                                                  tablaReservasReservasRecord
+                                                      .dia!),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
@@ -337,27 +302,25 @@ class _ListaReservasWidgetState extends State<ListaReservasWidget> {
                                                       .bodyMedium,
                                             ),
                                             Text(
-                                              'Luis Valle',
+                                              tablaReservasReservasRecord
+                                                  .cliente,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                             ),
                                             Text(
-                                              '84278434',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                            ),
-                                            Text(
-                                              'Carlos Padilla',
+                                              dateTimeFormat(
+                                                  'jm',
+                                                  tablaReservasReservasRecord
+                                                      .hora!),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                             ),
                                             FFButtonWidget(
-                                              onPressed: () async {
-                                                context
-                                                    .pushNamed('EditarReserva');
+                                              onPressed: () {
+                                                print(
+                                                    'btnEditarReserva pressed ...');
                                               },
                                               text: 'Editar',
                                               options: FFButtonOptions(
@@ -370,73 +333,6 @@ class _ListaReservasWidgetState extends State<ListaReservasWidget> {
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color: Color(0xFF3D9B9F),
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          color: Colors.white,
-                                                        ),
-                                                elevation: 3.0,
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                            ),
-                                            FFButtonWidget(
-                                              onPressed: () async {
-                                                var confirmDialogResponse =
-                                                    await showDialog<bool>(
-                                                          context: context,
-                                                          builder:
-                                                              (alertDialogContext) {
-                                                            return AlertDialog(
-                                                              title: Text(
-                                                                  'Eliminar Reserva'),
-                                                              content: Text(
-                                                                  '¿Desea eliminar esta reserva?'),
-                                                              actions: [
-                                                                TextButton(
-                                                                  onPressed: () =>
-                                                                      Navigator.pop(
-                                                                          alertDialogContext,
-                                                                          false),
-                                                                  child: Text(
-                                                                      'No'),
-                                                                ),
-                                                                TextButton(
-                                                                  onPressed: () =>
-                                                                      Navigator.pop(
-                                                                          alertDialogContext,
-                                                                          true),
-                                                                  child: Text(
-                                                                      'Si'),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          },
-                                                        ) ??
-                                                        false;
-                                                if (confirmDialogResponse) {
-                                                  context.pushNamed(
-                                                      'ListaReservas');
-                                                }
-                                              },
-                                              text: 'Eliminar',
-                                              options: FFButtonOptions(
-                                                height: 40.0,
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        24.0, 0.0, 24.0, 0.0),
-                                                iconPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
-                                                color: Color(0xFFD04C55),
                                                 textStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall

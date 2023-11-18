@@ -1,13 +1,16 @@
 import '/admin/modulo_servicio/editar_servicio/editar_servicio_widget.dart';
 import '/admin/modulo_servicio/visualizar_servicio/visualizar_servicio_widget.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'lista_servicio_model.dart';
@@ -149,7 +152,161 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 30.0, 0.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                      child: StreamBuilder<List<ServiciosRecord>>(
+                        stream: queryServiciosRecord(
+                          queryBuilder: (serviciosRecord) =>
+                              serviciosRecord.orderBy('estadoServicio'),
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: SpinKitCircle(
+                                  color: Color(0xFF929090),
+                                  size: 50.0,
+                                ),
+                              ),
+                            );
+                          }
+                          List<ServiciosRecord> iconButtonServiciosRecordList =
+                              snapshot.data!;
+                          return FlutterFlowIconButton(
+                            borderRadius: 0.0,
+                            borderWidth: 1.0,
+                            buttonSize: 45.0,
+                            icon: FaIcon(
+                              FontAwesomeIcons.solidFileExcel,
+                              color: Color(0xFF007236),
+                              size: 30.0,
+                            ),
+                            onPressed: () async {
+                              await actions.serviciosAExcel(
+                                iconButtonServiciosRecordList.toList(),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    FlutterFlowIconButton(
+                      borderRadius: 0.0,
+                      borderWidth: 1.0,
+                      buttonSize: 45.0,
+                      icon: FaIcon(
+                        FontAwesomeIcons.solidFilePdf,
+                        color: Color(0xFFB20B01),
+                        size: 30.0,
+                      ),
+                      onPressed: () {
+                        print('IconButton pressed ...');
+                      },
+                    ),
+                    StreamBuilder<List<ServiciosRecord>>(
+                      stream: queryServiciosRecord(
+                        queryBuilder: (serviciosRecord) =>
+                            serviciosRecord.orderBy('estadoServicio'),
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: SpinKitCircle(
+                                color: Color(0xFF929090),
+                                size: 50.0,
+                              ),
+                            ),
+                          );
+                        }
+                        List<ServiciosRecord> buttonServiciosRecordList =
+                            snapshot.data!;
+                        return FFButtonWidget(
+                          onPressed: () async {
+                            await actions.serviciosAExcel(
+                              buttonServiciosRecordList.toList(),
+                            );
+                          },
+                          text: 'Descargar Excel',
+                          icon: FaIcon(
+                            FontAwesomeIcons.fileExcel,
+                            color: Color(0xFF007236),
+                            size: 30.0,
+                          ),
+                          options: FFButtonOptions(
+                            width: 170.0,
+                            height: 50.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: Color(0xE4F1F4F8),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                            elevation: 3.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        );
+                      },
+                    ),
+                    FFButtonWidget(
+                      onPressed: () {
+                        print('Button pressed ...');
+                      },
+                      text: 'Descargar PDF',
+                      icon: FaIcon(
+                        FontAwesomeIcons.filePdf,
+                        color: Color(0xFFB20B01),
+                        size: 30.0,
+                      ),
+                      options: FFButtonOptions(
+                        width: 166.0,
+                        height: 50.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).alternate,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .titleSmall
+                            .override(
+                              fontFamily: 'Open Sans',
+                              color: FlutterFlowTheme.of(context).primaryText,
+                            ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,

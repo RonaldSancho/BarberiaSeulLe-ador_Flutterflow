@@ -1,13 +1,16 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/modulo_usuarios/editar_usuario/editar_usuario_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'lista_usuarios_model.dart';
@@ -140,7 +143,29 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 30.0, 0.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    FlutterFlowIconButton(
+                      borderColor: Colors.transparent,
+                      borderRadius: 0.0,
+                      borderWidth: 1.0,
+                      buttonSize: 45.0,
+                      icon: FaIcon(
+                        FontAwesomeIcons.solidFilePdf,
+                        color: Color(0xFFB20B01),
+                        size: 30.0,
+                      ),
+                      onPressed: () async {
+                        await actions.usuarioAPDF();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -412,7 +437,8 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                                       .deleteUser(context);
                                                 }
 
-                                                context.goNamedAuth('HomePage',
+                                                context.goNamedAuth(
+                                                    'ListaUsuarios',
                                                     context.mounted);
                                               },
                                               text: 'Eliminar',

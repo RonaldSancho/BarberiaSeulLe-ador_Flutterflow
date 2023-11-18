@@ -9,6 +9,7 @@ import 'schema/users_record.dart';
 import 'schema/bitacora_record.dart';
 import 'schema/errores_record.dart';
 import 'schema/servicios_record.dart';
+import 'schema/reservas_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,6 +21,7 @@ export 'schema/users_record.dart';
 export 'schema/bitacora_record.dart';
 export 'schema/errores_record.dart';
 export 'schema/servicios_record.dart';
+export 'schema/reservas_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -164,6 +166,43 @@ Future<List<ServiciosRecord>> queryServiciosRecordOnce({
     queryCollectionOnce(
       ServiciosRecord.collection,
       ServiciosRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ReservasRecords (as a Stream and as a Future).
+Future<int> queryReservasRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ReservasRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ReservasRecord>> queryReservasRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ReservasRecord.collection,
+      ReservasRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ReservasRecord>> queryReservasRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ReservasRecord.collection,
+      ReservasRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
