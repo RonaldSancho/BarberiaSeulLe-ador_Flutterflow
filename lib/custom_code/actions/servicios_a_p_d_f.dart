@@ -38,8 +38,7 @@ Future serviciosAPDF() async {
     build: (pw.Context context) {
       return pw.Column(children: [
         pw.Text("Lista de servicios",
-            style: const pw.TextStyle(
-                fontSize: 40, fontWeight: pw.FontWeight.bold)),
+            style: pw.TextStyle(fontSize: 40, fontWeight: pw.FontWeight.bold)),
         pw.SizedBox(height: 20),
         for (var servicio in servicios)
           pw.Container(
@@ -48,13 +47,13 @@ Future serviciosAPDF() async {
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
                 pw.Text('Nombre del Servicio: ${servicio['nombreServicio']}',
-                    style: const pw.TextStyle(fontSize: 16)),
+                    style: pw.TextStyle(fontSize: 16)),
                 pw.Text('Descripción: ${servicio['descripcionServicion']}',
-                    style: const pw.TextStyle(fontSize: 16)),
+                    style: pw.TextStyle(fontSize: 16)),
                 pw.Text('Precio del Servicio: ${servicio['precioServicio']}',
-                    style: const pw.TextStyle(fontSize: 16)),
+                    style: pw.TextStyle(fontSize: 16)),
                 pw.Text('Trabajador encargado: ${servicio['trabajador']}',
-                    style: const pw.TextStyle(fontSize: 16)),
+                    style: pw.TextStyle(fontSize: 16)),
                 pw.Divider(thickness: 2),
               ],
             ),

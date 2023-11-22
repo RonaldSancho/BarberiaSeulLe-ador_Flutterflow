@@ -181,6 +181,9 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                             onPressed: () async {
                               await actions.usuarioAExcel(
                                 iconButtonUsersRecordList.toList(),
+                                currentUserReference!,
+                                valueOrDefault(
+                                    currentUserDocument?.nombreCompleto, ''),
                               );
                             },
                           );
