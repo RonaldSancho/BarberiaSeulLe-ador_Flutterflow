@@ -36,12 +36,18 @@ class ErroresRecord extends FirestoreRecord {
   DocumentReference? get identificacionUsuario => _identificacionUsuario;
   bool hasIdentificacionUsuario() => _identificacionUsuario != null;
 
+  // "nombreUsuario" field.
+  String? _nombreUsuario;
+  String get nombreUsuario => _nombreUsuario ?? '';
+  bool hasNombreUsuario() => _nombreUsuario != null;
+
   void _initializeFields() {
     _origenError = snapshotData['origenError'] as String?;
     _descripcion = snapshotData['descripcion'] as String?;
     _fecha = snapshotData['fecha'] as DateTime?;
     _identificacionUsuario =
         snapshotData['identificacionUsuario'] as DocumentReference?;
+    _nombreUsuario = snapshotData['nombreUsuario'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -83,6 +89,7 @@ Map<String, dynamic> createErroresRecordData({
   String? descripcion,
   DateTime? fecha,
   DocumentReference? identificacionUsuario,
+  String? nombreUsuario,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -90,6 +97,7 @@ Map<String, dynamic> createErroresRecordData({
       'descripcion': descripcion,
       'fecha': fecha,
       'identificacionUsuario': identificacionUsuario,
+      'nombreUsuario': nombreUsuario,
     }.withoutNulls,
   );
 
@@ -104,12 +112,18 @@ class ErroresRecordDocumentEquality implements Equality<ErroresRecord> {
     return e1?.origenError == e2?.origenError &&
         e1?.descripcion == e2?.descripcion &&
         e1?.fecha == e2?.fecha &&
-        e1?.identificacionUsuario == e2?.identificacionUsuario;
+        e1?.identificacionUsuario == e2?.identificacionUsuario &&
+        e1?.nombreUsuario == e2?.nombreUsuario;
   }
 
   @override
-  int hash(ErroresRecord? e) => const ListEquality().hash(
-      [e?.origenError, e?.descripcion, e?.fecha, e?.identificacionUsuario]);
+  int hash(ErroresRecord? e) => const ListEquality().hash([
+        e?.origenError,
+        e?.descripcion,
+        e?.fecha,
+        e?.identificacionUsuario,
+        e?.nombreUsuario
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is ErroresRecord;

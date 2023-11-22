@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -5,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/random_data_util.dart' as random_data;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -570,7 +572,8 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          await actions.nuevoUsuarioAdmin(
+                          _model.retornoUsuario =
+                              await actions.nuevoUsuarioAdmin(
                             _model.txtCorreoElectronicoController.text,
                             _model.txtNombreUsuarioController.text,
                             _model.txtTelefonoController.text,
@@ -584,25 +587,50 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                             ),
                             _model.txtContrasennaController.text,
                             _model.txtDescripcionController.text,
+                            currentUserReference!,
+                            valueOrDefault(
+                                currentUserDocument?.nombreCompleto, ''),
                           );
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('Usuario creado.'),
-                                content: Text(
-                                    'El usuario ha sido creado exitosamente.'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('De acuerdo.'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                          context.safePop();
+                          if (_model.retornoUsuario?.id != null &&
+                              _model.retornoUsuario?.id != '') {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Usuario creado.'),
+                                  content: Text(
+                                      'El usuario ha sido creado exitosamente.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('De acuerdo.'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            context.safePop();
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Error'),
+                                  content: Text('Error al ingresar usuario'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+
+                          setState(() {});
                         },
                         text: 'Guardar',
                         options: FFButtonOptions(

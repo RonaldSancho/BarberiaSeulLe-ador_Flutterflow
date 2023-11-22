@@ -1,5 +1,6 @@
 import '/admin/modulo_servicio/editar_servicio/editar_servicio_widget.dart';
 import '/admin/modulo_servicio/visualizar_servicio/visualizar_servicio_widget.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -193,6 +194,9 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                             onPressed: () async {
                               await actions.serviciosAExcel(
                                 iconButtonServiciosRecordList.toList(),
+                                currentUserReference!,
+                                valueOrDefault(
+                                    currentUserDocument?.nombreCompleto, ''),
                               );
                             },
                           );
@@ -237,6 +241,9 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                           onPressed: () async {
                             await actions.serviciosAExcel(
                               buttonServiciosRecordList.toList(),
+                              currentUserReference!,
+                              valueOrDefault(
+                                  currentUserDocument?.nombreCompleto, ''),
                             );
                           },
                           text: 'Descargar Excel',

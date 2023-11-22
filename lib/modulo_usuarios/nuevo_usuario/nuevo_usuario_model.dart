@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -6,6 +7,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'nuevo_usuario_widget.dart' show NuevoUsuarioWidget;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -88,6 +90,8 @@ class NuevoUsuarioModel extends FlutterFlowModel<NuevoUsuarioWidget> {
   FocusNode? txtDescripcionFocusNode;
   TextEditingController? txtDescripcionController;
   String? Function(BuildContext, String?)? txtDescripcionControllerValidator;
+  // Stores action output result for [Custom Action - nuevoUsuarioAdmin] action in btnCrear widget.
+  DocumentReference? retornoUsuario;
 
   /// Initialization and disposal methods.
 

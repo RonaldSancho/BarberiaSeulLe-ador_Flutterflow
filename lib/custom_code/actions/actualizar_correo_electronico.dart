@@ -10,27 +10,25 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-Future<bool> actualizarCorreoElectronico(String nuevoCorreoElectronico) async {
+Future<bool> actualizarCorreoElectronico(
+  String nuevoCorreoElectronico,
+) async {
+  // Add your function code here!
   bool success = false;
 
-  try {
-    var user = FirebaseAuth.instance.currentUser;
+  var user = await FirebaseAuth.instance.currentUser!;
 
-    if (user != null) {
-      // Actualiza el correo electrónico en Firebase Auth
-      await user.updateEmail(nuevoCorreoElectronico);
-
-      // Actualiza el correo electrónico en la colección 'users' de Firestore
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .update({'email': nuevoCorreoElectronico});
-
+  final cred =
+      await EmailAuthProvider.credential(email: user.email!, password: '');
+  await user.reauthenticateWithCredential(cred).then((value) async {
+    await user.updateEmail(nuevoCorreoElectronico).then((_) {
       success = true;
-    }
-  } catch (error) {
-    print('Error al actualizar el correo electrónico: $error');
-  }
+    }).catchError((error) {
+      print(error);
+    });
+  }).catchError((err) {
+    print(err);
+  });
 
   return success;
 }
