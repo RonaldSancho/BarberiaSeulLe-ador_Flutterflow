@@ -1,3 +1,4 @@
+import '/admin/modulo_bitacoras/errores_componente/errores_componente_widget.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -128,17 +129,7 @@ class _ErroresWidgetState extends State<ErroresWidget> {
                                 label: DefaultTextStyle.merge(
                                   softWrap: true,
                                   child: Text(
-                                    'Número Usuario',
-                                    style:
-                                        FlutterFlowTheme.of(context).labelLarge,
-                                  ),
-                                ),
-                              ),
-                              DataColumn2(
-                                label: DefaultTextStyle.merge(
-                                  softWrap: true,
-                                  child: Text(
-                                    'Número Error',
+                                    'Nombre Usuario',
                                     style:
                                         FlutterFlowTheme.of(context).labelLarge,
                                   ),
@@ -158,7 +149,7 @@ class _ErroresWidgetState extends State<ErroresWidget> {
                                 label: DefaultTextStyle.merge(
                                   softWrap: true,
                                   child: Text(
-                                    'Descripción',
+                                    'Fecha',
                                     style:
                                         FlutterFlowTheme.of(context).labelLarge,
                                   ),
@@ -168,7 +159,7 @@ class _ErroresWidgetState extends State<ErroresWidget> {
                                 label: DefaultTextStyle.merge(
                                   softWrap: true,
                                   child: Text(
-                                    'Fecha',
+                                    ' ',
                                     style:
                                         FlutterFlowTheme.of(context).labelLarge,
                                   ),
@@ -181,15 +172,9 @@ class _ErroresWidgetState extends State<ErroresWidget> {
                                     [
                                       Text(
                                         valueOrDefault<String>(
-                                          dataTableErroresRecord
-                                              .identificacionUsuario?.id,
-                                          '0',
+                                          dataTableErroresRecord.nombreUsuario,
+                                          'No hay datos que mostrar',
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                      Text(
-                                        dataTableErroresRecord.reference.id,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
@@ -198,21 +183,80 @@ class _ErroresWidgetState extends State<ErroresWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            dataTableErroresRecord.descripcion,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
-                                          ),
-                                        ],
-                                      ),
                                       Text(
                                         dateTimeFormat('d/M h:mm a',
                                             dataTableErroresRecord.fecha!),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () => _model
+                                                            .unfocusNode
+                                                            .canRequestFocus
+                                                        ? FocusScope.of(context)
+                                                            .requestFocus(_model
+                                                                .unfocusNode)
+                                                        : FocusScope.of(context)
+                                                            .unfocus(),
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: Container(
+                                                        height:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .height *
+                                                                0.6,
+                                                        child:
+                                                            ErroresComponenteWidget(
+                                                          error:
+                                                              dataTableErroresRecord,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                            text: 'Visualizar',
+                                            options: FFButtonOptions(
+                                              height: 40.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      24.0, 0.0, 24.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color: Color(0xFF3E5385),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Open Sans',
+                                                        color: Colors.white,
+                                                      ),
+                                              elevation: 3.0,
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ].map((c) => DataCell(c)).toList())
                                 .map((e) => DataRow(cells: e))

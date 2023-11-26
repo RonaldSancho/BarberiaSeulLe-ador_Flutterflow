@@ -1,3 +1,4 @@
+import '/admin/modulo_bitacoras/errores_componente/errores_componente_widget.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

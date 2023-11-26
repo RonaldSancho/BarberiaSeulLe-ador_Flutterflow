@@ -1,10 +1,10 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -350,9 +350,25 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
-                      await actions.actualizarCorreoElectronico(
-                        _model.txtCorreoElectronicoNuevoController.text,
+                      if (_model
+                          .txtCorreoElectronicoNuevoController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Email required!',
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
+                      await authManager.updateEmail(
+                        email: _model.txtCorreoElectronicoNuevoController.text,
+                        context: context,
                       );
+                      setState(() {});
+
+                      await authManager.sendEmailVerification();
                       Navigator.pop(context);
                     },
                     text: 'Editar',
