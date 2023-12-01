@@ -79,14 +79,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : IniciodeSesionWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? PerfilDeUsuarioWidget()
+          : IniciodeSesionWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? HomePageWidget()
+              ? PerfilDeUsuarioWidget()
               : IniciodeSesionWidget(),
         ),
         FFRoute(
@@ -168,6 +169,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'VisualizarTrabajadoresCliente',
           path: '/visualizarTrabajadoresCliente',
           builder: (context, params) => VisualizarTrabajadoresClienteWidget(),
+        ),
+        FFRoute(
+          name: 'PerfilDeUsuario',
+          path: '/perfilDeUsuario',
+          builder: (context, params) => PerfilDeUsuarioWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

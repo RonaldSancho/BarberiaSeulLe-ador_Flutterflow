@@ -41,6 +41,8 @@ class _NuevoServicioWidgetState extends State<NuevoServicioWidget> {
 
     _model.txtPrecioServicioController ??= TextEditingController();
     _model.txtPrecioServicioFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

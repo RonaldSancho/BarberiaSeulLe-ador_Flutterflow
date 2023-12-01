@@ -33,6 +33,8 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ListaServicioModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -215,99 +217,6 @@ class _ListaServicioWidgetState extends State<ListaServicioWidget> {
                       onPressed: () async {
                         await actions.serviciosAPDF();
                       },
-                    ),
-                    StreamBuilder<List<ServiciosRecord>>(
-                      stream: queryServiciosRecord(
-                        queryBuilder: (serviciosRecord) =>
-                            serviciosRecord.orderBy('estadoServicio'),
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: SpinKitCircle(
-                                color: Color(0xFF929090),
-                                size: 50.0,
-                              ),
-                            ),
-                          );
-                        }
-                        List<ServiciosRecord> buttonServiciosRecordList =
-                            snapshot.data!;
-                        return FFButtonWidget(
-                          onPressed: () async {
-                            await actions.serviciosAExcel(
-                              buttonServiciosRecordList.toList(),
-                              currentUserReference!,
-                              valueOrDefault(
-                                  currentUserDocument?.nombreCompleto, ''),
-                            );
-                          },
-                          text: 'Descargar Excel',
-                          icon: FaIcon(
-                            FontAwesomeIcons.fileExcel,
-                            color: Color(0xFF007236),
-                            size: 30.0,
-                          ),
-                          options: FFButtonOptions(
-                            width: 170.0,
-                            height: 50.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: Color(0xE4F1F4F8),
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Open Sans',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        );
-                      },
-                    ),
-                    FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
-                      },
-                      text: 'Descargar PDF',
-                      icon: FaIcon(
-                        FontAwesomeIcons.filePdf,
-                        color: Color(0xFFB20B01),
-                        size: 30.0,
-                      ),
-                      options: FFButtonOptions(
-                        width: 166.0,
-                        height: 50.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).alternate,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .titleSmall
-                            .override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.of(context).primaryText,
-                            ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
                     ),
                   ],
                 ),

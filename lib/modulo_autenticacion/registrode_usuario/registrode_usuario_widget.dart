@@ -81,6 +81,8 @@ class _RegistrodeUsuarioWidgetState extends State<RegistrodeUsuarioWidget>
 
     _model.txtContrasennaController ??= TextEditingController();
     _model.txtContrasennaFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -32,6 +32,8 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ListaUsuariosModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -480,7 +482,8 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                                       .deleteUser(context);
                                                 }
 
-                                                context.goNamedAuth('HomePage',
+                                                context.goNamedAuth(
+                                                    'PerfilDeUsuario',
                                                     context.mounted);
                                               },
                                               text: 'Eliminar',

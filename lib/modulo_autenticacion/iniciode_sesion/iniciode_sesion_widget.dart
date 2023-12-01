@@ -74,6 +74,8 @@ class _IniciodeSesionWidgetState extends State<IniciodeSesionWidget>
 
     _model.txtContrasennaController ??= TextEditingController();
     _model.txtContrasennaFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -451,6 +453,7 @@ class _IniciodeSesionWidgetState extends State<IniciodeSesionWidget>
                                                   0.0, 0.0, 0.0, 16.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
+                                              await authManager.refreshUser();
                                               GoRouter.of(context)
                                                   .prepareAuthEvent();
 

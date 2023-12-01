@@ -27,6 +27,8 @@ class _ListaReservasWidgetState extends State<ListaReservasWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ListaReservasModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

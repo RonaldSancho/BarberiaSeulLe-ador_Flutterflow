@@ -71,6 +71,8 @@ class _RecuperarContrasennaWidgetState extends State<RecuperarContrasennaWidget>
 
     _model.txtRecuperarCorreoElectronicoController ??= TextEditingController();
     _model.txtRecuperarCorreoElectronicoFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

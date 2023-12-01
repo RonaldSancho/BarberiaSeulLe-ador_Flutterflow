@@ -32,6 +32,8 @@ class _ReenviarCorreoWidgetState extends State<ReenviarCorreoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ReenviarCorreoModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

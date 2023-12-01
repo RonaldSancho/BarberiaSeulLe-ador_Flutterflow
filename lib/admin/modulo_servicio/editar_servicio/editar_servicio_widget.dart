@@ -53,6 +53,8 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget> {
     _model.txtPrecioServicioController ??= TextEditingController(
         text: widget.servicios?.precioServicio?.toString());
     _model.txtPrecioServicioFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

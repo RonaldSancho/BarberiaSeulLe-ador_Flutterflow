@@ -57,6 +57,8 @@ class _VisualizarTrabajadorWidgetState
     _model.textController5 ??=
         TextEditingController(text: widget.informacionTrabajador?.descripcion);
     _model.textFieldFocusNode5 ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

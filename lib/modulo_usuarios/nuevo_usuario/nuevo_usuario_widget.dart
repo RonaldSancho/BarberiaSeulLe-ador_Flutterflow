@@ -46,6 +46,8 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
 
     _model.txtDescripcionController ??= TextEditingController();
     _model.txtDescripcionFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

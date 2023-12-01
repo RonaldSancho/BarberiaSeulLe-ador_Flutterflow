@@ -58,6 +58,8 @@ class _EditarWidgetState extends State<EditarWidget> {
     _model.txtDescripcionController ??=
         TextEditingController(text: widget.trabajador?.descripcion);
     _model.txtDescripcionFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -29,6 +29,8 @@ class _TrabajadoresWidgetState extends State<TrabajadoresWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TrabajadoresModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

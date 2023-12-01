@@ -1,32 +1,31 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'editar_usuario_model.dart';
-export 'editar_usuario_model.dart';
+import 'editar_perfil_model.dart';
+export 'editar_perfil_model.dart';
 
-class EditarUsuarioWidget extends StatefulWidget {
-  const EditarUsuarioWidget({
+class EditarPerfilWidget extends StatefulWidget {
+  const EditarPerfilWidget({
     Key? key,
-    required this.pUsuario,
+    required this.pPerfil,
   }) : super(key: key);
 
-  final UsersRecord? pUsuario;
+  final UsersRecord? pPerfil;
 
   @override
-  _EditarUsuarioWidgetState createState() => _EditarUsuarioWidgetState();
+  _EditarPerfilWidgetState createState() => _EditarPerfilWidgetState();
 }
 
-class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
-  late EditarUsuarioModel _model;
+class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
+  late EditarPerfilModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -37,18 +36,18 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EditarUsuarioModel());
+    _model = createModel(context, () => EditarPerfilModel());
 
-    _model.txtNombreUsuarioController ??=
-        TextEditingController(text: widget.pUsuario?.nombreCompleto);
+    _model.txtNombreUsuarioController ??= TextEditingController(
+        text: valueOrDefault(currentUserDocument?.nombreCompleto, ''));
     _model.txtNombreUsuarioFocusNode ??= FocusNode();
 
     _model.txtCorreoElectronicoNuevoController ??=
-        TextEditingController(text: widget.pUsuario?.email);
+        TextEditingController(text: currentUserEmail);
     _model.txtCorreoElectronicoNuevoFocusNode ??= FocusNode();
 
-    _model.txtNumeroTelefonicoController ??=
-        TextEditingController(text: widget.pUsuario?.numeroTelefonico);
+    _model.txtNumeroTelefonicoController ??= TextEditingController(
+        text: valueOrDefault(currentUserDocument?.numeroTelefonico, ''));
     _model.txtNumeroTelefonicoFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -84,64 +83,68 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        child: TextFormField(
-                          controller: _model.txtNombreUsuarioController,
-                          focusNode: _model.txtNombreUsuarioFocusNode,
-                          autofocus: true,
-                          autofillHints: [AutofillHints.name],
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Nombre Completo',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelLarge
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Color(0xFF57636C),
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF2B5DA5),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            filled: true,
-                            fillColor: Color(0xFFF1F4F8),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Open Sans',
-                                    color: Color(0xFF101213),
+                      child: AuthUserStreamWidget(
+                        builder: (context) => Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          child: TextFormField(
+                            controller: _model.txtNombreUsuarioController,
+                            focusNode: _model.txtNombreUsuarioFocusNode,
+                            autofocus: true,
+                            autofillHints: [AutofillHints.name],
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Nombre Completo',
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: Color(0xFF57636C),
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
-                          validator: _model.txtNombreUsuarioControllerValidator
-                              .asValidator(context),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF2B5DA5),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFE0E3E7),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFE0E3E7),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              filled: true,
+                              fillColor: Color(0xFFF1F4F8),
+                            ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyLarge.override(
+                                      fontFamily: 'Open Sans',
+                                      color: Color(0xFF101213),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                            validator: _model
+                                .txtNombreUsuarioControllerValidator
+                                .asValidator(context),
+                          ),
                         ),
                       ),
                     ),
@@ -235,110 +238,72 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        child: TextFormField(
-                          controller: _model.txtNumeroTelefonicoController,
-                          focusNode: _model.txtNumeroTelefonicoFocusNode,
-                          autofocus: true,
-                          autofillHints: [AutofillHints.telephoneNumber],
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Número Telefónico',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelLarge
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Color(0xFF57636C),
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF2B5DA5),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            filled: true,
-                            fillColor: Color(0xFFF1F4F8),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Open Sans',
-                                    color: Color(0xFF101213),
+                      child: AuthUserStreamWidget(
+                        builder: (context) => Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          child: TextFormField(
+                            controller: _model.txtNumeroTelefonicoController,
+                            focusNode: _model.txtNumeroTelefonicoFocusNode,
+                            autofocus: true,
+                            autofillHints: [AutofillHints.telephoneNumber],
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Número Telefónico',
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: Color(0xFF57636C),
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
-                          keyboardType: TextInputType.phone,
-                          validator: _model
-                              .txtNumeroTelefonicoControllerValidator
-                              .asValidator(context),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF2B5DA5),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFE0E3E7),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFE0E3E7),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              filled: true,
+                              fillColor: Color(0xFFF1F4F8),
+                            ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyLarge.override(
+                                      fontFamily: 'Open Sans',
+                                      color: Color(0xFF101213),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                            keyboardType: TextInputType.phone,
+                            validator: _model
+                                .txtNumeroTelefonicoControllerValidator
+                                .asValidator(context),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FlutterFlowDropDown<String>(
-                    controller: _model.ddTipoUsuarioValueController ??=
-                        FormFieldController<String>(
-                      _model.ddTipoUsuarioValue ??=
-                          widget.pUsuario?.tipoUsuario,
-                    ),
-                    options: ['Admistrador', 'Trabajador', 'Cliente'],
-                    onChanged: (val) =>
-                        setState(() => _model.ddTipoUsuarioValue = val),
-                    width: 300.0,
-                    height: 50.0,
-                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Open Sans',
-                          fontSize: 16.0,
-                        ),
-                    hintText: 'Tipo de Usuario',
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 24.0,
-                    ),
-                    fillColor: Color(0xFFF1F4F8),
-                    elevation: 2.0,
-                    borderColor: FlutterFlowTheme.of(context).primaryText,
-                    borderWidth: 2.0,
-                    borderRadius: 8.0,
-                    margin:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
-                    hidesUnderline: true,
-                    isSearchable: false,
-                    isMultiSelect: false,
                   ),
                 ],
               ),
@@ -370,6 +335,12 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                       );
                       setState(() {});
 
+                      await currentUserReference!.update(createUsersRecordData(
+                        nombreCompleto: _model.txtNombreUsuarioController.text,
+                        numeroTelefonico:
+                            _model.txtNumeroTelefonicoController.text,
+                        email: _model.txtCorreoElectronicoNuevoController.text,
+                      ));
                       await authManager.sendEmailVerification();
                       Navigator.pop(context);
                     },

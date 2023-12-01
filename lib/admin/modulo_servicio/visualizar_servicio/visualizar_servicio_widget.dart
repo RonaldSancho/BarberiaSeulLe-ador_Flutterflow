@@ -56,6 +56,8 @@ class _VisualizarServicioWidgetState extends State<VisualizarServicioWidget> {
     _model.textController5 ??=
         TextEditingController(text: widget.informacionservicio?.estadoServicio);
     _model.textFieldFocusNode5 ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

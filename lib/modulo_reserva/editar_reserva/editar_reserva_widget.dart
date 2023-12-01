@@ -37,6 +37,8 @@ class _EditarReservaWidgetState extends State<EditarReservaWidget> {
 
     _model.txtCorreoElectronicoController ??= TextEditingController();
     _model.txtCorreoElectronicoFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

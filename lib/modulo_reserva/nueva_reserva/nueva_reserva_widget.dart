@@ -37,6 +37,8 @@ class _NuevaReservaWidgetState extends State<NuevaReservaWidget> {
 
     _model.txtClienteController ??= TextEditingController();
     _model.txtClienteFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

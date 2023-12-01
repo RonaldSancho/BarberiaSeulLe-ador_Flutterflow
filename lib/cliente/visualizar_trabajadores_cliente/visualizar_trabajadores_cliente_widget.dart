@@ -29,6 +29,8 @@ class _VisualizarTrabajadoresClienteWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => VisualizarTrabajadoresClienteModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

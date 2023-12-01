@@ -27,6 +27,8 @@ class _BitacorasWidgetState extends State<BitacorasWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BitacorasModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

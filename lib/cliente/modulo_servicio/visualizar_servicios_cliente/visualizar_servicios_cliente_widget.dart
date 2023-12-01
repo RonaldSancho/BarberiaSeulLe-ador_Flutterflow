@@ -29,6 +29,8 @@ class _VisualizarServiciosClienteWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => VisualizarServiciosClienteModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

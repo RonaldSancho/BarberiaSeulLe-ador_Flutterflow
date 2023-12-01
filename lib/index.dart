@@ -29,3 +29,5 @@ export '/cliente/modulo_servicio/visualizar_servicios_cliente/visualizar_servici
     show VisualizarServiciosClienteWidget;
 export '/cliente/visualizar_trabajadores_cliente/visualizar_trabajadores_cliente_widget.dart'
     show VisualizarTrabajadoresClienteWidget;
+export '/modulo_usuarios/perfil_de_usuario/perfil_de_usuario_widget.dart'
+    show PerfilDeUsuarioWidget;
