@@ -36,16 +36,6 @@ class UsersRecord extends FirestoreRecord {
   String get photoUrl => _photoUrl ?? '';
   bool hasPhotoUrl() => _photoUrl != null;
 
-  // "nombre" field.
-  String? _nombre;
-  String get nombre => _nombre ?? '';
-  bool hasNombre() => _nombre != null;
-
-  // "apellidos" field.
-  String? _apellidos;
-  String get apellidos => _apellidos ?? '';
-  bool hasApellidos() => _apellidos != null;
-
   // "numeroTelefonico" field.
   String? _numeroTelefonico;
   String get numeroTelefonico => _numeroTelefonico ?? '';
@@ -81,8 +71,6 @@ class UsersRecord extends FirestoreRecord {
     _createdTime = snapshotData['created_time'] as DateTime?;
     _displayName = snapshotData['display_name'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
-    _nombre = snapshotData['nombre'] as String?;
-    _apellidos = snapshotData['apellidos'] as String?;
     _numeroTelefonico = snapshotData['numeroTelefonico'] as String?;
     _tipoUsuario = snapshotData['tipoUsuario'] as String?;
     _email = snapshotData['email'] as String?;
@@ -129,8 +117,6 @@ Map<String, dynamic> createUsersRecordData({
   DateTime? createdTime,
   String? displayName,
   String? photoUrl,
-  String? nombre,
-  String? apellidos,
   String? numeroTelefonico,
   String? tipoUsuario,
   String? email,
@@ -144,8 +130,6 @@ Map<String, dynamic> createUsersRecordData({
       'created_time': createdTime,
       'display_name': displayName,
       'photo_url': photoUrl,
-      'nombre': nombre,
-      'apellidos': apellidos,
       'numeroTelefonico': numeroTelefonico,
       'tipoUsuario': tipoUsuario,
       'email': email,
@@ -167,8 +151,6 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.createdTime == e2?.createdTime &&
         e1?.displayName == e2?.displayName &&
         e1?.photoUrl == e2?.photoUrl &&
-        e1?.nombre == e2?.nombre &&
-        e1?.apellidos == e2?.apellidos &&
         e1?.numeroTelefonico == e2?.numeroTelefonico &&
         e1?.tipoUsuario == e2?.tipoUsuario &&
         e1?.email == e2?.email &&
@@ -183,8 +165,6 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.createdTime,
         e?.displayName,
         e?.photoUrl,
-        e?.nombre,
-        e?.apellidos,
         e?.numeroTelefonico,
         e?.tipoUsuario,
         e?.email,

@@ -1,9 +1,11 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -315,8 +317,15 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      await widget.pUsuario!.reference
+                          .update(createUsersRecordData(
+                        nombreCompleto: _model.txtNombreUsuarioController.text,
+                        numeroTelefonico:
+                            _model.txtNumeroTelefonicoController.text,
+                        tipoUsuario: _model.ddTipoUsuarioValue,
+                      ));
+                      Navigator.pop(context);
                     },
                     text: 'Editar',
                     options: FFButtonOptions(

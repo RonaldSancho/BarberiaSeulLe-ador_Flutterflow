@@ -52,7 +52,7 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF1F4F8),
+      backgroundColor: Color(0xE4F1F4F8),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -60,7 +60,7 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
             width: MediaQuery.sizeOf(context).width * 1.0,
             height: 160.0,
             decoration: BoxDecoration(
-              color: Color(0xFF4B39EF),
+              color: Color(0xFF2B5DA5),
             ),
             child: Padding(
               padding: EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 0.0),
@@ -196,14 +196,14 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Edit Profile',
+                              'Editar Perfil',
                               style: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
                                     fontFamily: 'Plus Jakarta Sans',
                                     color: Color(0xFF14181B),
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.normal,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w500,
                                   ),
                             ),
                           ],
@@ -248,12 +248,12 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Change Password',
+                        'Cambiar Contraseña',
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
                               fontFamily: 'Plus Jakarta Sans',
                               color: Color(0xFF14181B),
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.normal,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w500,
                             ),
                       ),
                     ],
@@ -263,7 +263,7 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 40.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
             child: FFButtonWidget(
               onPressed: () async {
                 GoRouter.of(context).prepareAuthEvent();
@@ -274,20 +274,17 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
               },
               text: 'Cerrar Sesión',
               options: FFButtonOptions(
-                width: 110.0,
-                height: 50.0,
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                height: 40.0,
+                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                 iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                color: Colors.white,
-                textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                      fontFamily: 'Plus Jakarta Sans',
-                      color: Color(0xFF14181B),
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.normal,
+                color: Color(0xFF585D62),
+                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                      fontFamily: 'Open Sans',
+                      color: Colors.white,
                     ),
                 elevation: 3.0,
                 borderSide: BorderSide(
-                  color: Colors.white,
+                  color: Colors.transparent,
                   width: 1.0,
                 ),
                 borderRadius: BorderRadius.circular(8.0),
