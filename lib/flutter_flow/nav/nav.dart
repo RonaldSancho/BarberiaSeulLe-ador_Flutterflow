@@ -169,6 +169,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'PerfilDeUsuario',
           path: '/perfilDeUsuario',
           builder: (context, params) => PerfilDeUsuarioWidget(),
+        ),
+        FFRoute(
+          name: 'CambiarContrasenna',
+          path: '/cambiarContrasenna',
+          builder: (context, params) => CambiarContrasennaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

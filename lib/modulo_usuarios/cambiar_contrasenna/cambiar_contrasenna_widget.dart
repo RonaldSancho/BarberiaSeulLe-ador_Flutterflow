@@ -10,20 +10,20 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'recuperar_contrasenna_model.dart';
-export 'recuperar_contrasenna_model.dart';
+import 'cambiar_contrasenna_model.dart';
+export 'cambiar_contrasenna_model.dart';
 
-class RecuperarContrasennaWidget extends StatefulWidget {
-  const RecuperarContrasennaWidget({Key? key}) : super(key: key);
+class CambiarContrasennaWidget extends StatefulWidget {
+  const CambiarContrasennaWidget({Key? key}) : super(key: key);
 
   @override
-  _RecuperarContrasennaWidgetState createState() =>
-      _RecuperarContrasennaWidgetState();
+  _CambiarContrasennaWidgetState createState() =>
+      _CambiarContrasennaWidgetState();
 }
 
-class _RecuperarContrasennaWidgetState extends State<RecuperarContrasennaWidget>
+class _CambiarContrasennaWidgetState extends State<CambiarContrasennaWidget>
     with TickerProviderStateMixin {
-  late RecuperarContrasennaModel _model;
+  late CambiarContrasennaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -67,7 +67,7 @@ class _RecuperarContrasennaWidgetState extends State<RecuperarContrasennaWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => RecuperarContrasennaModel());
+    _model = createModel(context, () => CambiarContrasennaModel());
 
     _model.txtRecuperarCorreoElectronicoController ??= TextEditingController();
     _model.txtRecuperarCorreoElectronicoFocusNode ??= FocusNode();
@@ -185,7 +185,7 @@ class _RecuperarContrasennaWidgetState extends State<RecuperarContrasennaWidget>
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 20.0),
                                         child: Text(
-                                          'Recuperar  Contraseña',
+                                          'Cambiar  Contraseña',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
@@ -202,7 +202,7 @@ class _RecuperarContrasennaWidgetState extends State<RecuperarContrasennaWidget>
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 12.0, 0.0, 24.0),
                                         child: Text(
-                                          'Enviaremos a su correo electrónico un enlace para restablacer su contraseña. Ingrese el correo electrónico que esté vinculado a su cuenta.',
+                                          'Enviaremos a su correo electrónico un enlace para cambiar su contraseña. Ingrese el correo electrónico que esté vinculado a su cuenta.',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .labelLarge
@@ -344,7 +344,8 @@ class _RecuperarContrasennaWidgetState extends State<RecuperarContrasennaWidget>
                                               },
                                             );
 
-                                            context.pushNamed('IniciodeSesion');
+                                            context
+                                                .pushNamed('PerfilDeUsuario');
                                           },
                                           text: 'Enviar',
                                           options: FFButtonOptions(

@@ -29,3 +29,5 @@ export '/cliente/modulo_trabajador_cliente/visualizar_trabajadores_cliente/visua
     show VisualizarTrabajadoresClienteWidget;
 export '/modulo_usuarios/perfil_de_usuario/perfil_de_usuario_widget.dart'
     show PerfilDeUsuarioWidget;
+export '/modulo_usuarios/cambiar_contrasenna/cambiar_contrasenna_widget.dart'
+    show CambiarContrasennaWidget;
