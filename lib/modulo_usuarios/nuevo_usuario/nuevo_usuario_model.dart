@@ -76,6 +76,9 @@ class NuevoUsuarioModel extends FlutterFlowModel<NuevoUsuarioWidget> {
       return 'El número de teléfono es requerido.';
     }
 
+    if (val.length < 8) {
+      return 'El número telefónico debe tener 8 dígitos.';
+    }
     if (val.length > 8) {
       return 'El número de teléfono no debe tener más de 8 dígitos.';
     }
