@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -43,10 +42,6 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
         TextEditingController(text: widget.pUsuario?.nombreCompleto);
     _model.txtNombreUsuarioFocusNode ??= FocusNode();
 
-    _model.txtCorreoElectronicoNuevoController ??=
-        TextEditingController(text: widget.pUsuario?.email);
-    _model.txtCorreoElectronicoNuevoFocusNode ??= FocusNode();
-
     _model.txtNumeroTelefonicoController ??=
         TextEditingController(text: widget.pUsuario?.numeroTelefonico);
     _model.txtNumeroTelefonicoFocusNode ??= FocusNode();
@@ -75,8 +70,49 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  width: MediaQuery.sizeOf(context).width * 0.952,
+                  height: 92.0,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF2B5DA5),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0),
+                      topLeft: Radius.circular(15.0),
+                      topRight: Radius.circular(15.0),
+                    ),
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 20.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Editar Usuario',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: 'Open Sans',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 5.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -141,83 +177,6 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                                     fontWeight: FontWeight.w500,
                                   ),
                           validator: _model.txtNombreUsuarioControllerValidator
-                              .asValidator(context),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 16.0),
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        child: TextFormField(
-                          controller:
-                              _model.txtCorreoElectronicoNuevoController,
-                          focusNode: _model.txtCorreoElectronicoNuevoFocusNode,
-                          autofocus: true,
-                          autofillHints: [AutofillHints.email],
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Correo Electrónico',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelLarge
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Color(0xFF57636C),
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF2B5DA5),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            filled: true,
-                            fillColor: Color(0xFFF1F4F8),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Open Sans',
-                                    color: Color(0xFF101213),
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                          keyboardType: TextInputType.emailAddress,
-                          validator: _model
-                              .txtCorreoElectronicoNuevoControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -308,37 +267,42 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FlutterFlowDropDown<String>(
-                    controller: _model.ddTipoUsuarioValueController ??=
-                        FormFieldController<String>(
-                      _model.ddTipoUsuarioValue ??=
-                          widget.pUsuario?.tipoUsuario,
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                    child: FlutterFlowDropDown<String>(
+                      controller: _model.ddTipoUsuarioValueController ??=
+                          FormFieldController<String>(
+                        _model.ddTipoUsuarioValue ??=
+                            widget.pUsuario?.tipoUsuario,
+                      ),
+                      options: ['Admistrador', 'Trabajador', 'Cliente'],
+                      onChanged: (val) =>
+                          setState(() => _model.ddTipoUsuarioValue = val),
+                      width: 300.0,
+                      height: 50.0,
+                      textStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily: 'Open Sans',
+                                fontSize: 16.0,
+                              ),
+                      hintText: 'Tipo de Usuario',
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        size: 24.0,
+                      ),
+                      fillColor: Color(0xFFF1F4F8),
+                      elevation: 2.0,
+                      borderColor: FlutterFlowTheme.of(context).primaryText,
+                      borderWidth: 2.0,
+                      borderRadius: 8.0,
+                      margin:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
+                      hidesUnderline: true,
+                      isSearchable: false,
+                      isMultiSelect: false,
                     ),
-                    options: ['Admistrador', 'Trabajador', 'Cliente'],
-                    onChanged: (val) =>
-                        setState(() => _model.ddTipoUsuarioValue = val),
-                    width: 300.0,
-                    height: 50.0,
-                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Open Sans',
-                          fontSize: 16.0,
-                        ),
-                    hintText: 'Tipo de Usuario',
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 24.0,
-                    ),
-                    fillColor: Color(0xFFF1F4F8),
-                    elevation: 2.0,
-                    borderColor: FlutterFlowTheme.of(context).primaryText,
-                    borderWidth: 2.0,
-                    borderRadius: 8.0,
-                    margin:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
-                    hidesUnderline: true,
-                    isSearchable: false,
-                    isMultiSelect: false,
                   ),
                 ],
               ),
@@ -351,27 +315,8 @@ class _EditarUsuarioWidgetState extends State<EditarUsuarioWidget> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   FFButtonWidget(
-                    onPressed: () async {
-                      if (_model
-                          .txtCorreoElectronicoNuevoController.text.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Email required!',
-                            ),
-                          ),
-                        );
-                        return;
-                      }
-
-                      await authManager.updateEmail(
-                        email: _model.txtCorreoElectronicoNuevoController.text,
-                        context: context,
-                      );
-                      setState(() {});
-
-                      await authManager.sendEmailVerification();
-                      Navigator.pop(context);
+                    onPressed: () {
+                      print('Button pressed ...');
                     },
                     text: 'Editar',
                     options: FFButtonOptions(

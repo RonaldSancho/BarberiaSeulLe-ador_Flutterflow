@@ -74,8 +74,49 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  width: MediaQuery.sizeOf(context).width * 0.955,
+                  height: 92.0,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF2B5DA5),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0),
+                      topLeft: Radius.circular(16.0),
+                      topRight: Radius.circular(16.0),
+                    ),
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 20.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Editar Perfil',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: 'Open Sans',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 5.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -342,7 +383,11 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                         email: _model.txtCorreoElectronicoNuevoController.text,
                       ));
                       await authManager.sendEmailVerification();
-                      Navigator.pop(context);
+                      GoRouter.of(context).prepareAuthEvent();
+                      await authManager.signOut();
+                      GoRouter.of(context).clearRedirectLocation();
+
+                      context.goNamedAuth('IniciodeSesion', context.mounted);
                     },
                     text: 'Editar',
                     options: FFButtonOptions(

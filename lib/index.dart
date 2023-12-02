@@ -27,7 +27,7 @@ export '/admin/modulo_trabajadores/trabajadores/trabajadores_widget.dart'
     show TrabajadoresWidget;
 export '/cliente/modulo_servicio/visualizar_servicios_cliente/visualizar_servicios_cliente_widget.dart'
     show VisualizarServiciosClienteWidget;
-export '/cliente/visualizar_trabajadores_cliente/visualizar_trabajadores_cliente_widget.dart'
+export '/cliente/modulo_trabajador_cliente/visualizar_trabajadores_cliente/visualizar_trabajadores_cliente_widget.dart'
     show VisualizarTrabajadoresClienteWidget;
 export '/modulo_usuarios/perfil_de_usuario/perfil_de_usuario_widget.dart'
     show PerfilDeUsuarioWidget;

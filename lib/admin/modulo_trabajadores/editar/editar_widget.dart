@@ -121,6 +121,8 @@ class _EditarWidgetState extends State<EditarWidget> {
                         final selectedMedia =
                             await selectMediaWithSourceBottomSheet(
                           context: context,
+                          maxWidth: 460.00,
+                          maxHeight: 460.00,
                           allowPhoto: true,
                         );
                         if (selectedMedia != null &&

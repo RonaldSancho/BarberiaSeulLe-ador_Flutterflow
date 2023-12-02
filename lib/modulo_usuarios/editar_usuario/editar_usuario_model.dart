@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -19,11 +18,6 @@ class EditarUsuarioModel extends FlutterFlowModel<EditarUsuarioWidget> {
   FocusNode? txtNombreUsuarioFocusNode;
   TextEditingController? txtNombreUsuarioController;
   String? Function(BuildContext, String?)? txtNombreUsuarioControllerValidator;
-  // State field(s) for txtCorreoElectronicoNuevo widget.
-  FocusNode? txtCorreoElectronicoNuevoFocusNode;
-  TextEditingController? txtCorreoElectronicoNuevoController;
-  String? Function(BuildContext, String?)?
-      txtCorreoElectronicoNuevoControllerValidator;
   // State field(s) for txtNumeroTelefonico widget.
   FocusNode? txtNumeroTelefonicoFocusNode;
   TextEditingController? txtNumeroTelefonicoController;
@@ -40,9 +34,6 @@ class EditarUsuarioModel extends FlutterFlowModel<EditarUsuarioWidget> {
   void dispose() {
     txtNombreUsuarioFocusNode?.dispose();
     txtNombreUsuarioController?.dispose();
-
-    txtCorreoElectronicoNuevoFocusNode?.dispose();
-    txtCorreoElectronicoNuevoController?.dispose();
 
     txtNumeroTelefonicoFocusNode?.dispose();
     txtNumeroTelefonicoController?.dispose();
