@@ -1,9 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/cliente/modulo_usuarios/cambir_imagen_usuario/cambir_imagen_usuario_widget.dart';
+import '/cliente/modulo_usuarios/editar_perfil/editar_perfil_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/modulo_usuarios/editar_perfil/editar_perfil_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -69,6 +70,65 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Container(
+                    width: 100.0,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: AlignmentDirectional(0.00, 0.00),
+                          child: AuthUserStreamWidget(
+                            builder: (context) => Container(
+                              width: 120.0,
+                              height: 120.0,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.network(
+                                valueOrDefault(
+                                    currentUserDocument?.imagenUsuario, ''),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(1.60, 1.05),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                enableDrag: false,
+                                context: context,
+                                builder: (context) {
+                                  return Padding(
+                                    padding: MediaQuery.viewInsetsOf(context),
+                                    child: CambirImagenUsuarioWidget(),
+                                  );
+                                },
+                              ).then((value) => safeSetState(() {}));
+                            },
+                            child: Icon(
+                              Icons.edit_square,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              size: 30.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Expanded(
                     child: Padding(
                       padding:
@@ -78,23 +138,27 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          AuthUserStreamWidget(
-                            builder: (context) => Text(
-                              valueOrDefault(
-                                  currentUserDocument?.nombreCompleto, ''),
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineSmall
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    color: Colors.white,
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                30.0, 0.0, 0.0, 0.0),
+                            child: AuthUserStreamWidget(
+                              builder: (context) => Text(
+                                valueOrDefault(
+                                    currentUserDocument?.nombreCompleto, ''),
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineSmall
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      color: Colors.white,
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              ),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 4.0, 0.0, 0.0),
+                                30.0, 4.0, 0.0, 0.0),
                             child: Text(
                               currentUserEmail,
                               style: FlutterFlowTheme.of(context)
@@ -196,7 +260,7 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Editar Perfil',
+                              'Editar Datos',
                               style: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(

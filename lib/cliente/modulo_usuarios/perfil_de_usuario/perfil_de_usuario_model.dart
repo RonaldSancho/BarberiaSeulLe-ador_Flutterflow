@@ -1,9 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/cliente/modulo_usuarios/cambir_imagen_usuario/cambir_imagen_usuario_widget.dart';
+import '/cliente/modulo_usuarios/editar_perfil/editar_perfil_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/modulo_usuarios/editar_perfil/editar_perfil_widget.dart';
 import 'perfil_de_usuario_widget.dart' show PerfilDeUsuarioWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

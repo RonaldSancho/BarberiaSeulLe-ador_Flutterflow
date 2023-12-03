@@ -9,9 +9,9 @@ export '/modulo_autenticacion/registrode_usuario/registrode_usuario_widget.dart'
 export '/admin/modulo_bitacoras/bitacoras/bitacoras_widget.dart'
     show BitacorasWidget;
 export '/admin/modulo_bitacoras/errores/errores_widget.dart' show ErroresWidget;
-export '/modulo_usuarios/lista_usuarios/lista_usuarios_widget.dart'
+export '/admin/modulo_usuarios/lista_usuarios/lista_usuarios_widget.dart'
     show ListaUsuariosWidget;
-export '/modulo_usuarios/nuevo_usuario/nuevo_usuario_widget.dart'
+export '/admin/modulo_usuarios/nuevo_usuario/nuevo_usuario_widget.dart'
     show NuevoUsuarioWidget;
 export '/modulo_reserva/lista_reservas/lista_reservas_widget.dart'
     show ListaReservasWidget;
@@ -27,7 +27,7 @@ export '/cliente/modulo_servicio/visualizar_servicios_cliente/visualizar_servici
     show VisualizarServiciosClienteWidget;
 export '/cliente/modulo_trabajador_cliente/visualizar_trabajadores_cliente/visualizar_trabajadores_cliente_widget.dart'
     show VisualizarTrabajadoresClienteWidget;
-export '/modulo_usuarios/perfil_de_usuario/perfil_de_usuario_widget.dart'
+export '/cliente/modulo_usuarios/perfil_de_usuario/perfil_de_usuario_widget.dart'
     show PerfilDeUsuarioWidget;
-export '/modulo_usuarios/cambiar_contrasenna/cambiar_contrasenna_widget.dart'
+export '/cliente/modulo_usuarios/cambiar_contrasenna/cambiar_contrasenna_widget.dart'
     show CambiarContrasennaWidget;
