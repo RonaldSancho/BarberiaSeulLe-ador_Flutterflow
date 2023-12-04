@@ -416,23 +416,28 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           ),
           actions: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  GoRouter.of(context).prepareAuthEvent();
-                  await authManager.signOut();
-                  GoRouter.of(context).clearRedirectLocation();
-
-                  context.goNamedAuth('IniciodeSesion', context.mounted);
-                },
-                child: Icon(
-                  Icons.logout,
-                  color: FlutterFlowTheme.of(context).primaryBtnText,
-                  size: 24.0,
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+              child: AuthUserStreamWidget(
+                builder: (context) => InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('PerfilDeUsuario');
+                  },
+                  child: Container(
+                    width: 130.0,
+                    height: 130.0,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image.network(
+                      valueOrDefault(currentUserDocument?.imagenUsuario, ''),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             ),

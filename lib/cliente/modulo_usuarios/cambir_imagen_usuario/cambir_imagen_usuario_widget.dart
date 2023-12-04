@@ -181,8 +181,6 @@ class _CambirImagenUsuarioWidgetState extends State<CambirImagenUsuarioWidget> {
                   FFButtonWidget(
                     onPressed: () async {
                       final selectedMedia = await selectMedia(
-                        maxWidth: 460.00,
-                        maxHeight: 460.00,
                         mediaSource: MediaSource.photoGallery,
                         multiImage: false,
                       );
