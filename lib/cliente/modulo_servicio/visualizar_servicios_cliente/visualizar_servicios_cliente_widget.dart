@@ -70,7 +70,7 @@ class _VisualizarServiciosClienteWidgetState
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.safePop();
+                  context.pushNamed('HomePage');
                 },
                 child: Icon(
                   Icons.arrow_back_sharp,

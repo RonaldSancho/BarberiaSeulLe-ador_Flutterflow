@@ -69,7 +69,7 @@ class _ErroresWidgetState extends State<ErroresWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.safePop();
+                  context.pushNamed('HomePage');
                 },
                 child: Icon(
                   Icons.arrow_back_rounded,
@@ -295,7 +295,7 @@ class _ErroresWidgetState extends State<ErroresWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.safePop();
+                      context.pushNamed('HomePage');
                     },
                     text: 'Volver',
                     options: FFButtonOptions(

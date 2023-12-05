@@ -110,11 +110,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => RegistrodeUsuarioWidget(),
         ),
         FFRoute(
-          name: 'Bitacoras',
-          path: '/bitacoras',
-          builder: (context, params) => BitacorasWidget(),
-        ),
-        FFRoute(
           name: 'Errores',
           path: '/errores',
           builder: (context, params) => ErroresWidget(),

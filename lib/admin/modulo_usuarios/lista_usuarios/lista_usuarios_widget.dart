@@ -77,7 +77,7 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      context.safePop();
+                      context.pushNamed('HomePage');
                     },
                     child: Icon(
                       Icons.arrow_back_sharp,
@@ -551,7 +551,7 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                       alignment: AlignmentDirectional(-1.00, 1.00),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.safePop();
+                          context.pushNamed('HomePage');
                         },
                         text: 'Volver',
                         options: FFButtonOptions(

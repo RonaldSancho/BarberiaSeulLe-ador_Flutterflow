@@ -6,8 +6,6 @@ export '/modulo_autenticacion/recuperar_contrasenna/recuperar_contrasenna_widget
     show RecuperarContrasennaWidget;
 export '/modulo_autenticacion/registrode_usuario/registrode_usuario_widget.dart'
     show RegistrodeUsuarioWidget;
-export '/admin/modulo_bitacoras/bitacoras/bitacoras_widget.dart'
-    show BitacorasWidget;
 export '/admin/modulo_bitacoras/errores/errores_widget.dart' show ErroresWidget;
 export '/admin/modulo_usuarios/lista_usuarios/lista_usuarios_widget.dart'
     show ListaUsuariosWidget;
