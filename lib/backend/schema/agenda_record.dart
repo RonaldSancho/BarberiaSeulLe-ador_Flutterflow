@@ -8,8 +8,8 @@ import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class ReservasRecord extends FirestoreRecord {
-  ReservasRecord._(
+class AgendaRecord extends FirestoreRecord {
+  AgendaRecord._(
     DocumentReference reference,
     Map<String, dynamic> data,
   ) : super(reference, data) {
@@ -26,81 +26,80 @@ class ReservasRecord extends FirestoreRecord {
   DateTime? get hora => _hora;
   bool hasHora() => _hora != null;
 
-  // "cliente" field.
-  String? _cliente;
-  String get cliente => _cliente ?? '';
-  bool hasCliente() => _cliente != null;
+  // "usuario" field.
+  DocumentReference? _usuario;
+  DocumentReference? get usuario => _usuario;
+  bool hasUsuario() => _usuario != null;
 
   void _initializeFields() {
     _dia = snapshotData['dia'] as DateTime?;
     _hora = snapshotData['hora'] as DateTime?;
-    _cliente = snapshotData['cliente'] as String?;
+    _usuario = snapshotData['usuario'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
-      FirebaseFirestore.instance.collection('reservas');
+      FirebaseFirestore.instance.collection('agenda');
 
-  static Stream<ReservasRecord> getDocument(DocumentReference ref) =>
-      ref.snapshots().map((s) => ReservasRecord.fromSnapshot(s));
+  static Stream<AgendaRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => AgendaRecord.fromSnapshot(s));
 
-  static Future<ReservasRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then((s) => ReservasRecord.fromSnapshot(s));
+  static Future<AgendaRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => AgendaRecord.fromSnapshot(s));
 
-  static ReservasRecord fromSnapshot(DocumentSnapshot snapshot) =>
-      ReservasRecord._(
+  static AgendaRecord fromSnapshot(DocumentSnapshot snapshot) => AgendaRecord._(
         snapshot.reference,
         mapFromFirestore(snapshot.data() as Map<String, dynamic>),
       );
 
-  static ReservasRecord getDocumentFromData(
+  static AgendaRecord getDocumentFromData(
     Map<String, dynamic> data,
     DocumentReference reference,
   ) =>
-      ReservasRecord._(reference, mapFromFirestore(data));
+      AgendaRecord._(reference, mapFromFirestore(data));
 
   @override
   String toString() =>
-      'ReservasRecord(reference: ${reference.path}, data: $snapshotData)';
+      'AgendaRecord(reference: ${reference.path}, data: $snapshotData)';
 
   @override
   int get hashCode => reference.path.hashCode;
 
   @override
   bool operator ==(other) =>
-      other is ReservasRecord &&
+      other is AgendaRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
 }
 
-Map<String, dynamic> createReservasRecordData({
+Map<String, dynamic> createAgendaRecordData({
   DateTime? dia,
   DateTime? hora,
-  String? cliente,
+  DocumentReference? usuario,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'dia': dia,
       'hora': hora,
-      'cliente': cliente,
+      'usuario': usuario,
     }.withoutNulls,
   );
 
   return firestoreData;
 }
 
-class ReservasRecordDocumentEquality implements Equality<ReservasRecord> {
-  const ReservasRecordDocumentEquality();
+class AgendaRecordDocumentEquality implements Equality<AgendaRecord> {
+  const AgendaRecordDocumentEquality();
 
   @override
-  bool equals(ReservasRecord? e1, ReservasRecord? e2) {
+  bool equals(AgendaRecord? e1, AgendaRecord? e2) {
     return e1?.dia == e2?.dia &&
         e1?.hora == e2?.hora &&
-        e1?.cliente == e2?.cliente;
+        e1?.usuario == e2?.usuario;
   }
 
   @override
-  int hash(ReservasRecord? e) =>
-      const ListEquality().hash([e?.dia, e?.hora, e?.cliente]);
+  int hash(AgendaRecord? e) =>
+      const ListEquality().hash([e?.dia, e?.hora, e?.usuario]);
 
   @override
-  bool isValidKey(Object? o) => o is ReservasRecord;
+  bool isValidKey(Object? o) => o is AgendaRecord;
 }

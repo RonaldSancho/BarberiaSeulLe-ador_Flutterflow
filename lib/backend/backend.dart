@@ -9,7 +9,8 @@ import 'schema/users_record.dart';
 import 'schema/bitacora_record.dart';
 import 'schema/errores_record.dart';
 import 'schema/servicios_record.dart';
-import 'schema/reservas_record.dart';
+import 'schema/agenda_record.dart';
+import 'schema/horarios_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,7 +22,8 @@ export 'schema/users_record.dart';
 export 'schema/bitacora_record.dart';
 export 'schema/errores_record.dart';
 export 'schema/servicios_record.dart';
-export 'schema/reservas_record.dart';
+export 'schema/agenda_record.dart';
+export 'schema/horarios_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -171,38 +173,75 @@ Future<List<ServiciosRecord>> queryServiciosRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query ReservasRecords (as a Stream and as a Future).
-Future<int> queryReservasRecordCount({
+/// Functions to query AgendaRecords (as a Stream and as a Future).
+Future<int> queryAgendaRecordCount({
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      ReservasRecord.collection,
+      AgendaRecord.collection,
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<ReservasRecord>> queryReservasRecord({
+Stream<List<AgendaRecord>> queryAgendaRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      ReservasRecord.collection,
-      ReservasRecord.fromSnapshot,
+      AgendaRecord.collection,
+      AgendaRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<ReservasRecord>> queryReservasRecordOnce({
+Future<List<AgendaRecord>> queryAgendaRecordOnce({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      ReservasRecord.collection,
-      ReservasRecord.fromSnapshot,
+      AgendaRecord.collection,
+      AgendaRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query HorariosRecords (as a Stream and as a Future).
+Future<int> queryHorariosRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      HorariosRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<HorariosRecord>> queryHorariosRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      HorariosRecord.collection,
+      HorariosRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<HorariosRecord>> queryHorariosRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      HorariosRecord.collection,
+      HorariosRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

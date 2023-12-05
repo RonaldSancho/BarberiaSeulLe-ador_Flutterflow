@@ -58,14 +58,19 @@ class _ErroresComponenteWidgetState extends State<ErroresComponenteWidget> {
     ));
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    _model.textController4 ??= TextEditingController(
-        text: valueOrDefault<String>(
-      dateTimeFormat('d/M h:mm a', widget.error?.fecha),
-      'No hay valores que mostrar',
-    ));
+    _model.textController4 ??= TextEditingController();
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          _model.textController4?.text = valueOrDefault<String>(
+            dateTimeFormat(
+              'd/M h:mm a',
+              widget.error?.fecha,
+              locale: FFLocalizations.of(context).languageCode,
+            ),
+            'No hay valores que mostrar',
+          );
+        }));
   }
 
   @override

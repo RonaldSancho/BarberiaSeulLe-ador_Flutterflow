@@ -186,8 +186,12 @@ class _ErroresWidgetState extends State<ErroresWidget> {
                                             .bodyMedium,
                                       ),
                                       Text(
-                                        dateTimeFormat('d/M h:mm a',
-                                            dataTableErroresRecord.fecha!),
+                                        dateTimeFormat(
+                                          'd/M h:mm a',
+                                          dataTableErroresRecord.fecha!,
+                                          locale: FFLocalizations.of(context)
+                                              .languageCode,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),

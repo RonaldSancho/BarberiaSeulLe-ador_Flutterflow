@@ -13,8 +13,6 @@ export '/admin/modulo_usuarios/lista_usuarios/lista_usuarios_widget.dart'
     show ListaUsuariosWidget;
 export '/admin/modulo_usuarios/nuevo_usuario/nuevo_usuario_widget.dart'
     show NuevoUsuarioWidget;
-export '/modulo_reserva/lista_reservas/lista_reservas_widget.dart'
-    show ListaReservasWidget;
 export '/admin/modulo_servicio/lista_servicio/lista_servicio_widget.dart'
     show ListaServicioWidget;
 export '/admin/modulo_servicio/nuevo_servicio/nuevo_servicio_widget.dart'
@@ -31,3 +29,6 @@ export '/cliente/modulo_usuarios/perfil_de_usuario/perfil_de_usuario_widget.dart
     show PerfilDeUsuarioWidget;
 export '/cliente/modulo_usuarios/cambiar_contrasenna/cambiar_contrasenna_widget.dart'
     show CambiarContrasennaWidget;
+export '/modulo_reserva/nueva_reserva02/nueva_reserva02_widget.dart'
+    show NuevaReserva02Widget;
+export '/modreserva/prueba/prueba_widget.dart' show PruebaWidget;

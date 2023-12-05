@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,11 +28,6 @@ class _NuevaReservaWidgetState extends State<NuevaReservaWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => NuevaReservaModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.safePop();
-    });
 
     _model.txtClienteController ??= TextEditingController();
     _model.txtClienteFocusNode ??= FocusNode();
@@ -121,6 +115,7 @@ class _NuevaReservaWidgetState extends State<NuevaReservaWidget> {
                   dateStyle: FlutterFlowTheme.of(context).bodyMedium,
                   selectedDateStyle: FlutterFlowTheme.of(context).titleSmall,
                   inactiveDateStyle: FlutterFlowTheme.of(context).labelMedium,
+                  locale: FFLocalizations.of(context).languageCode,
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),

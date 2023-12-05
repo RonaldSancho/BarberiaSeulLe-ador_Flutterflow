@@ -190,8 +190,13 @@ class _BitacorasWidgetState extends State<BitacorasWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Text(
-                                            dateTimeFormat('d/M h:mm a',
-                                                dataTableBitacoraRecord.fecha!),
+                                            dateTimeFormat(
+                                              'd/M h:mm a',
+                                              dataTableBitacoraRecord.fecha!,
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),

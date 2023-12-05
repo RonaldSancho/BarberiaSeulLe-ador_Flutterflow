@@ -130,11 +130,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => NuevoUsuarioWidget(),
         ),
         FFRoute(
-          name: 'ListaReservas',
-          path: '/listaReservas',
-          builder: (context, params) => ListaReservasWidget(),
-        ),
-        FFRoute(
           name: 'ListaServicio',
           path: '/listaServicio',
           builder: (context, params) => ListaServicioWidget(),
@@ -173,6 +168,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'CambiarContrasenna',
           path: '/cambiarContrasenna',
           builder: (context, params) => CambiarContrasennaWidget(),
+        ),
+        FFRoute(
+          name: 'NuevaReserva02',
+          path: '/nuevaReserva02',
+          builder: (context, params) => NuevaReserva02Widget(),
+        ),
+        FFRoute(
+          name: 'PRUEBA',
+          path: '/prueba',
+          builder: (context, params) => PruebaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
