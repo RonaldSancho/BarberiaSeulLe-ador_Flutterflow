@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/modulo_reserva/confirmar_reserva/confirmar_reserva_widget.dart';
+import '/modulo_reserva/sin_espacios/sin_espacios_widget.dart';
 import 'reservar_widget.dart' show ReservarWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

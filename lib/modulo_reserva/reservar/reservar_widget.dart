@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/modulo_reserva/confirmar_reserva/confirmar_reserva_widget.dart';
+import '/modulo_reserva/sin_espacios/sin_espacios_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -162,6 +164,110 @@ class _ReservarWidgetState extends State<ReservarWidget> {
                         inactiveDateStyle:
                             FlutterFlowTheme.of(context).labelMedium,
                         locale: FFLocalizations.of(context).languageCode,
+                      ),
+                      Builder(
+                        builder: (context) {
+                          final disponibilidad = reservarHorariosRecord
+                                  ?.horarios
+                                  ?.map((e) => e)
+                                  .toList()
+                                  ?.toList() ??
+                              [];
+                          if (disponibilidad.isEmpty) {
+                            return SinEspaciosWidget();
+                          }
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: disponibilidad.length,
+                            itemBuilder: (context, disponibilidadIndex) {
+                              final disponibilidadItem =
+                                  disponibilidad[disponibilidadIndex];
+                              return Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 25.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          enableDrag: false,
+                                          context: context,
+                                          builder: (context) {
+                                            return GestureDetector(
+                                              onTap: () => _model.unfocusNode
+                                                      .canRequestFocus
+                                                  ? FocusScope.of(context)
+                                                      .requestFocus(
+                                                          _model.unfocusNode)
+                                                  : FocusScope.of(context)
+                                                      .unfocus(),
+                                              child: Padding(
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
+                                                child: ConfirmarReservaWidget(
+                                                  disponibilidadref:
+                                                      reservarHorariosRecord!
+                                                          .reference,
+                                                  hora: disponibilidadItem,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ).then((value) => safeSetState(() {}));
+                                      },
+                                      child: Container(
+                                        width: 227.0,
+                                        height: 47.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          border: Border.all(
+                                            color: Color(0xFF006BFF),
+                                            width: 2.0,
+                                          ),
+                                        ),
+                                        child: Align(
+                                          alignment:
+                                              AlignmentDirectional(0.00, 0.00),
+                                          child: Text(
+                                            dateTimeFormat(
+                                              'Hm',
+                                              disponibilidadItem,
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Open Sans',
+                                                  color: Color(0xFF006BFF),
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                       Padding(
                         padding:
