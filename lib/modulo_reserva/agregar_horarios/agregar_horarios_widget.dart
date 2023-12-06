@@ -13,25 +13,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'nueva_reserva02_model.dart';
-export 'nueva_reserva02_model.dart';
+import 'agregar_horarios_model.dart';
+export 'agregar_horarios_model.dart';
 
-class NuevaReserva02Widget extends StatefulWidget {
-  const NuevaReserva02Widget({Key? key}) : super(key: key);
+class AgregarHorariosWidget extends StatefulWidget {
+  const AgregarHorariosWidget({Key? key}) : super(key: key);
 
   @override
-  _NuevaReserva02WidgetState createState() => _NuevaReserva02WidgetState();
+  _AgregarHorariosWidgetState createState() => _AgregarHorariosWidgetState();
 }
 
-class _NuevaReserva02WidgetState extends State<NuevaReserva02Widget> {
-  late NuevaReserva02Model _model;
+class _AgregarHorariosWidgetState extends State<AgregarHorariosWidget> {
+  late AgregarHorariosModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => NuevaReserva02Model());
+    _model = createModel(context, () => AgregarHorariosModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -76,7 +76,7 @@ class _NuevaReserva02WidgetState extends State<NuevaReserva02Widget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                 child: Text(
-                  'Nueva Reserva',
+                  'Agendar Horarios',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Open Sans',
                         color: Colors.white,
@@ -120,95 +120,105 @@ class _NuevaReserva02WidgetState extends State<NuevaReserva02Widget> {
                     inactiveDateStyle: FlutterFlowTheme.of(context).labelMedium,
                     locale: FFLocalizations.of(context).languageCode,
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      FlutterFlowDropDown<String>(
-                        controller: _model.dropDownValueController1 ??=
-                            FormFieldController<String>(null),
-                        options: [
-                          '8:00',
-                          '9:00',
-                          '10:00',
-                          '11:00',
-                          '12:00',
-                          '13:00',
-                          '14:00',
-                          '15:00',
-                          '16:00',
-                          '17:00',
-                          '18:00'
-                        ],
-                        onChanged: (val) =>
-                            setState(() => _model.dropDownValue1 = val),
-                        width: 300.0,
-                        height: 50.0,
-                        textStyle: FlutterFlowTheme.of(context).bodyMedium,
-                        hintText: 'Seleccione un horario',
-                        icon: Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FlutterFlowDropDown<String>(
+                          controller: _model.dropDownValueController1 ??=
+                              FormFieldController<String>(null),
+                          options: [
+                            '8:00',
+                            '9:00',
+                            '10:00',
+                            '11:00',
+                            '12:00',
+                            '13:00',
+                            '14:00',
+                            '15:00',
+                            '16:00',
+                            '17:00',
+                            '18:00'
+                          ],
+                          onChanged: (val) =>
+                              setState(() => _model.dropDownValue1 = val),
+                          width: 300.0,
+                          height: 50.0,
+                          textStyle: FlutterFlowTheme.of(context).bodyMedium,
+                          hintText: 'Seleccione hora de apertura',
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                          fillColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          elevation: 2.0,
+                          borderColor: FlutterFlowTheme.of(context).alternate,
+                          borderWidth: 2.0,
+                          borderRadius: 8.0,
+                          margin: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 4.0, 16.0, 4.0),
+                          hidesUnderline: true,
+                          isOverButton: true,
+                          isSearchable: false,
+                          isMultiSelect: false,
                         ),
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        elevation: 2.0,
-                        borderColor: FlutterFlowTheme.of(context).alternate,
-                        borderWidth: 2.0,
-                        borderRadius: 8.0,
-                        margin: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 4.0, 16.0, 4.0),
-                        hidesUnderline: true,
-                        isOverButton: true,
-                        isSearchable: false,
-                        isMultiSelect: false,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      FlutterFlowDropDown<String>(
-                        controller: _model.dropDownValueController2 ??=
-                            FormFieldController<String>(null),
-                        options: [
-                          '8:00',
-                          '9:00',
-                          '10:00',
-                          '11:00',
-                          '12:00',
-                          '13:00',
-                          '14:00',
-                          '15:00',
-                          '16:00',
-                          '17:00',
-                          '18:00'
-                        ],
-                        onChanged: (val) =>
-                            setState(() => _model.dropDownValue2 = val),
-                        width: 300.0,
-                        height: 50.0,
-                        textStyle: FlutterFlowTheme.of(context).bodyMedium,
-                        hintText: 'Seleccione un horario',
-                        icon: Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FlutterFlowDropDown<String>(
+                          controller: _model.dropDownValueController2 ??=
+                              FormFieldController<String>(null),
+                          options: [
+                            '8:00',
+                            '9:00',
+                            '10:00',
+                            '11:00',
+                            '12:00',
+                            '13:00',
+                            '14:00',
+                            '15:00',
+                            '16:00',
+                            '17:00',
+                            '18:00'
+                          ],
+                          onChanged: (val) =>
+                              setState(() => _model.dropDownValue2 = val),
+                          width: 300.0,
+                          height: 50.0,
+                          textStyle: FlutterFlowTheme.of(context).bodyMedium,
+                          hintText: 'Seleccione hora de cierre',
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                          fillColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          elevation: 2.0,
+                          borderColor: FlutterFlowTheme.of(context).alternate,
+                          borderWidth: 2.0,
+                          borderRadius: 8.0,
+                          margin: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 4.0, 16.0, 4.0),
+                          hidesUnderline: true,
+                          isOverButton: true,
+                          isSearchable: false,
+                          isMultiSelect: false,
                         ),
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        elevation: 2.0,
-                        borderColor: FlutterFlowTheme.of(context).alternate,
-                        borderWidth: 2.0,
-                        borderRadius: 8.0,
-                        margin: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 4.0, 16.0, 4.0),
-                        hidesUnderline: true,
-                        isOverButton: true,
-                        isSearchable: false,
-                        isMultiSelect: false,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Padding(
                     padding:

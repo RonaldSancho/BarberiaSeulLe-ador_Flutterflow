@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -126,7 +127,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      context.pushNamed('NuevaReserva02');
+                      context.pushNamed('agregarHorarios');
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -187,36 +188,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ),
-                if (valueOrDefault(currentUserDocument?.tipoUsuario, '') ==
-                    'Administrador')
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 10.0, 20.0),
-                    child: AuthUserStreamWidget(
-                      builder: (context) => Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Trabajadores',
-                            style: FlutterFlowTheme.of(context)
-                                .labelLarge
-                                .override(
-                                  fontFamily: 'Open Sans',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: Color(0xFF2B5DA5),
-                            size: 24.0,
-                          ),
-                        ],
                       ),
                     ),
                   ),
@@ -378,26 +349,34 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           ),
           actions: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
-              child: AuthUserStreamWidget(
-                builder: (context) => InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed('PerfilDeUsuario');
-                  },
-                  child: Container(
-                    width: 130.0,
-                    height: 130.0,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                    ),
-                    child: Image.network(
-                      valueOrDefault(currentUserDocument?.imagenUsuario, ''),
-                      fit: BoxFit.cover,
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+              child: Container(
+                width: 39.0,
+                height: 39.0,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  shape: BoxShape.circle,
+                ),
+                child: AuthUserStreamWidget(
+                  builder: (context) => InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('PerfilDeUsuario');
+                    },
+                    child: Container(
+                      width: 120.0,
+                      height: 120.0,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: Image.network(
+                        valueOrDefault(currentUserDocument?.imagenUsuario, ''),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -444,64 +423,34 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Container(
                     width: 500.0,
-                    height: 100.0,
+                    height: 200.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       borderRadius: BorderRadius.circular(0.0),
+                      border: Border.all(
+                        width: 0.0,
+                      ),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Align(
-                          alignment: AlignmentDirectional(0.00, 0.00),
-                          child: Text(
-                            ' Seúl Leñador Barber Studio',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context).titleLarge,
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 0.98,
+                          height: MediaQuery.sizeOf(context).height * 1.0,
+                          child: custom_widgets.AnimatedText(
+                            width: MediaQuery.sizeOf(context).width * 0.98,
+                            height: MediaQuery.sizeOf(context).height * 1.0,
+                            texto1: 'Seúl Leñador Barber Studio',
+                            texto2:
+                                'Seúl Leñador Barber \nStudio presenta una\ntransición revolucionaria',
+                            texto3:
+                                'entre barbería de precisión\ny la barbería contemporánea,\nuna fusión de habilidad \ny técnica.',
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 115.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.circular(0.0),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
-                        child: Container(
-                          width: 400.0,
-                          height: 500.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Text(
-                            'Seúl Leñador Barber Studio presenta una transición revolucionaria entre barbería de precisión y la barbería contemporánea, una fusión de habilidad y técnica.\n',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context)
-                                .labelLarge
-                                .override(
-                                  fontFamily: 'OpenSans ',
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: false,
-                                ),
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ),
                 Container(
@@ -693,7 +642,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             snapshot.data!;
                         return FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('NuevaReserva02');
+                            context.pushNamed('agregarHorarios');
                           },
                           text: 'Button',
                           options: FFButtonOptions(

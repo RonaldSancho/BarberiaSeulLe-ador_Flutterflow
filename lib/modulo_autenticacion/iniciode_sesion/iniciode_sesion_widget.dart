@@ -437,9 +437,7 @@ class _IniciodeSesionWidgetState extends State<IniciodeSesionWidget>
                                                   .labelLarge
                                                   .override(
                                                     fontFamily: 'OpenSans ',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
+                                                    color: Color(0xFF4B39EF),
                                                     fontSize: 16.0,
                                                     fontWeight: FontWeight.w500,
                                                     useGoogleFonts: false,

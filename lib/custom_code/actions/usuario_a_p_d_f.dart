@@ -33,7 +33,7 @@ Future usuarioAPDF() async {
 
   final pdf = pw.Document();
 
-  // Titulo del PDF
+// Titulo del PDF
   pdf.addPage(pw.Page(
     pageFormat: PdfPageFormat.a4,
     build: (pw.Context context) {
@@ -41,7 +41,9 @@ Future usuarioAPDF() async {
         pw.Text("Lista de usuarios",
             style: const pw.TextStyle(
                 fontSize: 40, fontWeight: pw.FontWeight.bold)),
-        pw.SizedBox(height: 20),
+        pw.Container(
+          margin: pw.EdgeInsets.only(bottom: 20),
+        ),
         for (var usuario in usuarios)
           pw.Container(
             margin: pw.EdgeInsets.only(bottom: 20),

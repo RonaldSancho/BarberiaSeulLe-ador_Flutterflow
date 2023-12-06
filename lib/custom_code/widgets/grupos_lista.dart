@@ -1,0 +1,86 @@
+// Automatic FlutterFlow imports
+import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'index.dart'; // Imports other custom widgets
+import '/custom_code/actions/index.dart'; // Imports custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
+import 'package:flutter/material.dart';
+// Begin custom widget code
+// DO NOT REMOVE OR MODIFY THE CODE ABOVE!
+
+import 'package:grouped_list/grouped_list.dart';
+
+List _elements = [
+  {'name': 'John', 'group': 'Team A'},
+  {'name': 'Will', 'group': 'Team B'},
+  {'name': 'Beth', 'group': 'Team A'},
+  {'name': 'Miranda', 'group': 'Team B'},
+  {'name': 'Mike', 'group': 'Team C'},
+  {'name': 'Danny', 'group': 'Team C'},
+];
+
+class GruposLista extends StatefulWidget {
+  const GruposLista({
+    Key? key,
+    this.width,
+    this.height,
+  }) : super(key: key);
+
+  final double? width;
+  final double? height;
+
+  @override
+  _GruposListaState createState() => _GruposListaState();
+}
+
+class _GruposListaState extends State<GruposLista> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Grouped List View Example'),
+        ),
+        body: GroupedListView<dynamic, String>(
+          elements: _elements,
+          groupBy: (element) => element['group'],
+          groupComparator: (value1, value2) => value2.compareTo(value1),
+          itemComparator: (item1, item2) =>
+              item1['name'].compareTo(item2['name']),
+          order: GroupedListOrder.DESC,
+          useStickyGroupSeparators: true,
+          groupSeparatorBuilder: (String value) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              value,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          itemBuilder: (c, element) {
+            return Card(
+              elevation: 8.0,
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+              child: SizedBox(
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 10.0),
+                  leading: const Icon(Icons.account_circle),
+                  title: Text(element['name']),
+                  trailing: const Icon(Icons.arrow_forward),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}

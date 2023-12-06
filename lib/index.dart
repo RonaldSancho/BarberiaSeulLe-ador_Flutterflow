@@ -27,6 +27,7 @@ export '/cliente/modulo_usuarios/perfil_de_usuario/perfil_de_usuario_widget.dart
     show PerfilDeUsuarioWidget;
 export '/cliente/modulo_usuarios/cambiar_contrasenna/cambiar_contrasenna_widget.dart'
     show CambiarContrasennaWidget;
-export '/modulo_reserva/nueva_reserva02/nueva_reserva02_widget.dart'
-    show NuevaReserva02Widget;
+export '/modulo_reserva/agregar_horarios/agregar_horarios_widget.dart'
+    show AgregarHorariosWidget;
 export '/modreserva/prueba/prueba_widget.dart' show PruebaWidget;
+export '/modulo_reserva/reservar/reservar_widget.dart' show ReservarWidget;

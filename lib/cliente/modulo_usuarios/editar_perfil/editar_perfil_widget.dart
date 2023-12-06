@@ -321,14 +321,16 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0xFFE0E3E7),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     width: 2.0,
                                   ),
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0xFFE0E3E7),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     width: 2.0,
                                   ),
                                   borderRadius: BorderRadius.circular(12.0),
@@ -344,6 +346,7 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
+                              maxLength: 8,
                               keyboardType: TextInputType.phone,
                               validator: _model
                                   .txtNumeroTelefonicoControllerValidator

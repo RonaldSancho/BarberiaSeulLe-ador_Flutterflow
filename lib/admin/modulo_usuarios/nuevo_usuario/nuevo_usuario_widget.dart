@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -78,36 +79,30 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
         appBar: AppBar(
           backgroundColor: Color(0xFF2B5DA5),
           automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.safePop();
-                },
-                child: Icon(
-                  Icons.arrow_back_sharp,
-                  color: FlutterFlowTheme.of(context).primaryBtnText,
-                  size: 29.0,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                child: Text(
-                  'Nuevo Usuario',
-                  style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Open Sans',
-                        color: Colors.white,
-                        fontSize: 29.0,
-                      ),
-                ),
-              ),
-            ],
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
+          title: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+            child: Text(
+              'Nuevo Usuario',
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily: 'Open Sans',
+                    color: Colors.white,
+                    fontSize: 29.0,
+                  ),
+            ),
           ),
           actions: [],
           centerTitle: false,
@@ -438,6 +433,7 @@ class _NuevoUsuarioWidgetState extends State<NuevoUsuarioWidget> {
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
+                              maxLength: 8,
                               keyboardType: TextInputType.phone,
                               validator: _model.txtTelefonoControllerValidator
                                   .asValidator(context),

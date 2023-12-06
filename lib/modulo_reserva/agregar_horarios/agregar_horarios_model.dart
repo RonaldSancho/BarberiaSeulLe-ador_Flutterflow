@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'nueva_reserva02_widget.dart' show NuevaReserva02Widget;
+import 'agregar_horarios_widget.dart' show AgregarHorariosWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +15,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class NuevaReserva02Model extends FlutterFlowModel<NuevaReserva02Widget> {
+class AgregarHorariosModel extends FlutterFlowModel<AgregarHorariosWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

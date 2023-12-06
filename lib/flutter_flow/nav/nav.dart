@@ -165,14 +165,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CambiarContrasennaWidget(),
         ),
         FFRoute(
-          name: 'NuevaReserva02',
-          path: '/nuevaReserva02',
-          builder: (context, params) => NuevaReserva02Widget(),
+          name: 'agregarHorarios',
+          path: '/agregarHorarios',
+          builder: (context, params) => AgregarHorariosWidget(),
         ),
         FFRoute(
           name: 'PRUEBA',
           path: '/prueba',
           builder: (context, params) => PruebaWidget(),
+        ),
+        FFRoute(
+          name: 'reservar',
+          path: '/reservar',
+          builder: (context, params) => ReservarWidget(
+            userRef: params.getParam(
+                'userRef', ParamType.DocumentReference, false, ['users']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
