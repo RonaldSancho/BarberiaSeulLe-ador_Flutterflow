@@ -15,10 +15,6 @@ export '/admin/modulo_servicio/lista_servicio/lista_servicio_widget.dart'
     show ListaServicioWidget;
 export '/admin/modulo_servicio/nuevo_servicio/nuevo_servicio_widget.dart'
     show NuevoServicioWidget;
-export '/modulo_reserva/nueva_reserva/nueva_reserva_widget.dart'
-    show NuevaReservaWidget;
-export '/modulo_reserva/editar_reserva/editar_reserva_widget.dart'
-    show EditarReservaWidget;
 export '/cliente/modulo_servicio/visualizar_servicios_cliente/visualizar_servicios_cliente_widget.dart'
     show VisualizarServiciosClienteWidget;
 export '/cliente/modulo_trabajador_cliente/visualizar_trabajadores_cliente/visualizar_trabajadores_cliente_widget.dart'
@@ -29,5 +25,6 @@ export '/cliente/modulo_usuarios/cambiar_contrasenna/cambiar_contrasenna_widget.
     show CambiarContrasennaWidget;
 export '/modulo_reserva/agregar_horarios/agregar_horarios_widget.dart'
     show AgregarHorariosWidget;
-export '/modreserva/prueba/prueba_widget.dart' show PruebaWidget;
 export '/modulo_reserva/reservar/reservar_widget.dart' show ReservarWidget;
+export '/modulo_reserva/visualizar_reserva/visualizar_reserva_widget.dart'
+    show VisualizarReservaWidget;

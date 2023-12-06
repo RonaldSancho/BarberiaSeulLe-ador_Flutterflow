@@ -14,12 +14,10 @@ class GruposLista extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
-    required this.colecciondatos,
   }) : super(key: key);
 
   final double? width;
   final double? height;
-  final List<AgendaRecord> colecciondatos;
 
   @override
   _GruposListaState createState() => _GruposListaState();

@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/modulo_reserva/confirmar_reserva/confirmar_reserva_widget.dart';
 import '/modulo_reserva/sin_espacios/sin_espacios_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -15,12 +14,7 @@ import 'reservar_model.dart';
 export 'reservar_model.dart';
 
 class ReservarWidget extends StatefulWidget {
-  const ReservarWidget({
-    Key? key,
-    required this.userRef,
-  }) : super(key: key);
-
-  final DocumentReference? userRef;
+  const ReservarWidget({Key? key}) : super(key: key);
 
   @override
   _ReservarWidgetState createState() => _ReservarWidgetState();
@@ -59,15 +53,6 @@ class _ReservarWidgetState extends State<ReservarWidget> {
 
     return StreamBuilder<List<HorariosRecord>>(
       stream: queryHorariosRecord(
-        queryBuilder: (horariosRecord) => horariosRecord
-            .where(
-              'dia',
-              isEqualTo: _model.calendarSelectedDay?.start,
-            )
-            .where(
-              'usuario',
-              isEqualTo: widget.userRef,
-            ),
         singleRecord: true,
       ),
       builder: (context, snapshot) {
@@ -167,23 +152,21 @@ class _ReservarWidgetState extends State<ReservarWidget> {
                       ),
                       Builder(
                         builder: (context) {
-                          final disponibilidad = reservarHorariosRecord
-                                  ?.horarios
+                          final horarios = reservarHorariosRecord?.horarios
                                   ?.map((e) => e)
                                   .toList()
                                   ?.toList() ??
                               [];
-                          if (disponibilidad.isEmpty) {
+                          if (horarios.isEmpty) {
                             return SinEspaciosWidget();
                           }
                           return ListView.builder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            itemCount: disponibilidad.length,
-                            itemBuilder: (context, disponibilidadIndex) {
-                              final disponibilidadItem =
-                                  disponibilidad[disponibilidadIndex];
+                            itemCount: horarios.length,
+                            itemBuilder: (context, horariosIndex) {
+                              final horariosItem = horarios[horariosIndex];
                               return Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 25.0, 0.0, 0.0),
@@ -219,7 +202,7 @@ class _ReservarWidgetState extends State<ReservarWidget> {
                                                   disponibilidadref:
                                                       reservarHorariosRecord!
                                                           .reference,
-                                                  hora: disponibilidadItem,
+                                                  hora: horariosItem,
                                                 ),
                                               ),
                                             );
@@ -245,7 +228,7 @@ class _ReservarWidgetState extends State<ReservarWidget> {
                                           child: Text(
                                             dateTimeFormat(
                                               'Hm',
-                                              disponibilidadItem,
+                                              horariosItem,
                                               locale:
                                                   FFLocalizations.of(context)
                                                       .languageCode,
@@ -268,68 +251,6 @@ class _ReservarWidgetState extends State<ReservarWidget> {
                             },
                           );
                         },
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            FFButtonWidget(
-                              onPressed: () {
-                                print('btnCrear pressed ...');
-                              },
-                              text: 'Guardar',
-                              options: FFButtonOptions(
-                                height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: Color(0xFF3D9B9F),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Open Sans',
-                                      color: Colors.white,
-                                    ),
-                                elevation: 3.0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                            FFButtonWidget(
-                              onPressed: () async {
-                                context.safePop();
-                              },
-                              text: 'Cancelar',
-                              options: FFButtonOptions(
-                                height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: Color(0xFF585D62),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Open Sans',
-                                      color: Colors.white,
-                                    ),
-                                elevation: 3.0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                          ],
-                        ),
                       ),
                     ],
                   ),
