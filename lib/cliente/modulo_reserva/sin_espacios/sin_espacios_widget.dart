@@ -50,7 +50,7 @@ class _SinEspaciosWidgetState extends State<SinEspaciosWidget> {
           width: 300.0,
           height: 250.0,
           decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).secondaryBackground,
+            color: Color(0xE4F1F4F8),
             boxShadow: [
               BoxShadow(
                 blurRadius: 4.0,
@@ -71,7 +71,7 @@ class _SinEspaciosWidgetState extends State<SinEspaciosWidget> {
                     child: Align(
                       alignment: AlignmentDirectional(0.00, 0.00),
                       child: Text(
-                        'NO HAY CUPOS DISPONIBLES',
+                        'No hay cupos disponibles',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Open Sans',

@@ -133,7 +133,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Reservas',
+                          'Reservar',
                           style: FlutterFlowTheme.of(context)
                               .labelLarge
                               .override(
@@ -402,7 +402,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Ver Reserva',
+                          'Ver Reservas',
                           style: FlutterFlowTheme.of(context)
                               .labelLarge
                               .override(
@@ -688,13 +688,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 333.0,
+                  height: 359.0,
                   decoration: BoxDecoration(
                     color: Color(0xFF2B5DA5),
                     borderRadius: BorderRadius.circular(0.0),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding:
@@ -854,33 +855,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
-                  children: [
-                    FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
-                      },
-                      text: 'Button',
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).accent3,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Open Sans',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ],
+                  children: [],
                 ),
               ],
             ),

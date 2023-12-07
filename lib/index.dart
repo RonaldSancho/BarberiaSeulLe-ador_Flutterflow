@@ -23,10 +23,11 @@ export '/cliente/modulo_usuarios/perfil_de_usuario/perfil_de_usuario_widget.dart
     show PerfilDeUsuarioWidget;
 export '/cliente/modulo_usuarios/cambiar_contrasenna/cambiar_contrasenna_widget.dart'
     show CambiarContrasennaWidget;
-export '/modulo_reserva/agregar_horarios/agregar_horarios_widget.dart'
+export '/admin/modulo_reserva/agregar_horarios/agregar_horarios_widget.dart'
     show AgregarHorariosWidget;
-export '/modulo_reserva/reservar/reservar_widget.dart' show ReservarWidget;
-export '/modulo_reserva/visualizar_reservas/visualizar_reservas_widget.dart'
+export '/cliente/modulo_reserva/reservar/reservar_widget.dart'
+    show ReservarWidget;
+export '/admin/modulo_reserva/visualizar_reservas/visualizar_reservas_widget.dart'
     show VisualizarReservasWidget;
 export '/recomendaciones/recomendaciones_usuarios/recomendaciones_usuarios_widget.dart'
     show RecomendacionesUsuariosWidget;

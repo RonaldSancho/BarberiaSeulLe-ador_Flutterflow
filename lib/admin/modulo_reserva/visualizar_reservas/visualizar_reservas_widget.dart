@@ -64,15 +64,24 @@ class _VisualizarReservasWidgetState extends State<VisualizarReservasWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
-                Icons.arrow_back_sharp,
-                color: FlutterFlowTheme.of(context).primaryBtnText,
-                size: 29.0,
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.pushNamed('HomePage');
+                },
+                child: Icon(
+                  Icons.arrow_back_sharp,
+                  color: FlutterFlowTheme.of(context).primaryBtnText,
+                  size: 29.0,
+                ),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                 child: Text(
-                  'Agendar Horarios',
+                  'Reservas',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Open Sans',
                         color: Colors.white,
@@ -162,7 +171,8 @@ class _VisualizarReservasWidgetState extends State<VisualizarReservasWidget> {
                                         .secondaryBackground,
                                     borderRadius: BorderRadius.circular(12.0),
                                     border: Border.all(
-                                      color: Color(0xFF006BFF),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       width: 2.0,
                                     ),
                                   ),
@@ -177,7 +187,7 @@ class _VisualizarReservasWidgetState extends State<VisualizarReservasWidget> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Hora Agendada:',
+                                            'Hora Reservada:',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -211,7 +221,7 @@ class _VisualizarReservasWidgetState extends State<VisualizarReservasWidget> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            ' Agendado por:  ',
+                                            ' Reserva de:  ',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),

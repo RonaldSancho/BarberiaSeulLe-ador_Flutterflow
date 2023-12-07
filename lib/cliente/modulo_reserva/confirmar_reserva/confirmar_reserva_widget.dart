@@ -84,9 +84,9 @@ class _ConfirmarReservaWidgetState extends State<ConfirmarReservaWidget> {
           final containerHorariosRecord = snapshot.data!;
           return Container(
             width: MediaQuery.sizeOf(context).width * 1.0,
-            height: 336.0,
+            height: 357.0,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).secondaryBackground,
+              color: Color(0xE4F1F4F8),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(0.0),
                 bottomRight: Radius.circular(0.0),
@@ -215,7 +215,7 @@ class _ConfirmarReservaWidgetState extends State<ConfirmarReservaWidget> {
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     borderRadius: BorderRadius.circular(8.0),
                     border: Border.all(
-                      color: Color(0xFF006BFF),
+                      color: FlutterFlowTheme.of(context).primaryText,
                       width: 2.0,
                     ),
                   ),
@@ -251,16 +251,36 @@ class _ConfirmarReservaWidgetState extends State<ConfirmarReservaWidget> {
                                 hora: widget.hora,
                                 usuario: containerHorariosRecord.usuario,
                               ));
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Confirmación de Reserva'),
+                                content: Text('Su reserva ha sido confirmada'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Aceptar'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+
+                          context.pushNamed('visualizarReservas');
+
+                          await widget.disponibilidadref!
+                              .update(createHorariosRecordData());
                         },
-                        text: 'CONFIRMAR',
+                        text: 'Aceptar',
                         options: FFButtonOptions(
-                          width: 275.0,
-                          height: 45.0,
+                          height: 40.0,
                           padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: Color(0xFF006BFF),
+                          color: Color(0xFF3D9B9F),
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Open Sans',
@@ -272,6 +292,36 @@ class _ConfirmarReservaWidgetState extends State<ConfirmarReservaWidget> {
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            context.pushNamed('reservar');
+                          },
+                          text: 'Cancelar',
+                          options: FFButtonOptions(
+                            height: 40.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: Color(0xFF585D62),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  color: Colors.white,
+                                ),
+                            elevation: 3.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
                         ),
                       ),
                     ],
