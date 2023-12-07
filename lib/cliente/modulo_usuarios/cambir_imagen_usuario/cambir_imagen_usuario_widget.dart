@@ -117,7 +117,11 @@ class _CambirImagenUsuarioWidgetState extends State<CambirImagenUsuarioWidget> {
                         shape: BoxShape.circle,
                       ),
                       child: Image.network(
-                        valueOrDefault(currentUserDocument?.imagenUsuario, ''),
+                        valueOrDefault<String>(
+                          valueOrDefault(
+                              currentUserDocument?.imagenUsuario, ''),
+                          'https://icon-library.com/images/generic-user-icon/generic-user-icon-13.jpg',
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),

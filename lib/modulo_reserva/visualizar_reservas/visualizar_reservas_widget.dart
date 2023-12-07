@@ -8,26 +8,26 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'visualizar_reserva_model.dart';
-export 'visualizar_reserva_model.dart';
+import 'visualizar_reservas_model.dart';
+export 'visualizar_reservas_model.dart';
 
-class VisualizarReservaWidget extends StatefulWidget {
-  const VisualizarReservaWidget({Key? key}) : super(key: key);
+class VisualizarReservasWidget extends StatefulWidget {
+  const VisualizarReservasWidget({Key? key}) : super(key: key);
 
   @override
-  _VisualizarReservaWidgetState createState() =>
-      _VisualizarReservaWidgetState();
+  _VisualizarReservasWidgetState createState() =>
+      _VisualizarReservasWidgetState();
 }
 
-class _VisualizarReservaWidgetState extends State<VisualizarReservaWidget> {
-  late VisualizarReservaModel _model;
+class _VisualizarReservasWidgetState extends State<VisualizarReservasWidget> {
+  late VisualizarReservasModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => VisualizarReservaModel());
+    _model = createModel(context, () => VisualizarReservasModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -72,7 +72,7 @@ class _VisualizarReservaWidgetState extends State<VisualizarReservaWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                 child: Text(
-                  'Reservas',
+                  'Agendar Horarios',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Open Sans',
                         color: Colors.white,
@@ -235,7 +235,7 @@ class _VisualizarReservaWidgetState extends State<VisualizarReservaWidget> {
                                               final textUsersRecord =
                                                   snapshot.data!;
                                               return Text(
-                                                textUsersRecord.displayName,
+                                                textUsersRecord.nombreCompleto,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium,

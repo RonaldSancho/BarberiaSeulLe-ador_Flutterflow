@@ -17,10 +17,12 @@ class ConfirmarReservaWidget extends StatefulWidget {
     Key? key,
     required this.disponibilidadref,
     required this.hora,
+    required this.day,
   }) : super(key: key);
 
   final DocumentReference? disponibilidadref;
   final DateTime? hora;
+  final DateTime? day;
 
   @override
   _ConfirmarReservaWidgetState createState() => _ConfirmarReservaWidgetState();
@@ -40,7 +42,16 @@ class _ConfirmarReservaWidgetState extends State<ConfirmarReservaWidget> {
     super.initState();
     _model = createModel(context, () => ConfirmarReservaModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          _model.textController?.text = dateTimeFormat(
+            'd/M/y',
+            widget.day,
+            locale: FFLocalizations.of(context).languageCode,
+          );
+        }));
   }
 
   @override
@@ -93,7 +104,7 @@ class _ConfirmarReservaWidgetState extends State<ConfirmarReservaWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '¿Quieres confirmar la agenda?',
+                        'Confirmar la reserva',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Open Sans',
                               fontSize: 22.0,
@@ -124,17 +135,58 @@ class _ConfirmarReservaWidgetState extends State<ConfirmarReservaWidget> {
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        dateTimeFormat(
-                          'd/M/y',
-                          containerHorariosRecord.dia!,
-                          locale: FFLocalizations.of(context).languageCode,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Open Sans',
-                              fontSize: 16.0,
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              8.0, 0.0, 8.0, 0.0),
+                          child: TextFormField(
+                            controller: _model.textController,
+                            focusNode: _model.textFieldFocusNode,
+                            autofocus: true,
+                            readOnly: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelStyle:
+                                  FlutterFlowTheme.of(context).labelMedium,
+                              hintStyle:
+                                  FlutterFlowTheme.of(context).labelMedium,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
                             ),
+                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            textAlign: TextAlign.center,
+                            validator: _model.textControllerValidator
+                                .asValidator(context),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -156,44 +208,32 @@ class _ConfirmarReservaWidgetState extends State<ConfirmarReservaWidget> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 227.0,
-                        height: 47.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          border: Border.all(
-                            color: Color(0xFF006BFF),
-                            width: 2.0,
-                          ),
-                        ),
-                        child: Align(
-                          alignment: AlignmentDirectional(0.00, 0.00),
-                          child: Text(
-                            dateTimeFormat(
-                              'Hm',
-                              widget.hora,
-                              locale: FFLocalizations.of(context).languageCode,
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Open Sans',
-                                  color: Color(0xFF006BFF),
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                          ),
-                        ),
+                Container(
+                  width: 227.0,
+                  height: 47.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    borderRadius: BorderRadius.circular(8.0),
+                    border: Border.all(
+                      color: Color(0xFF006BFF),
+                      width: 2.0,
+                    ),
+                  ),
+                  child: Align(
+                    alignment: AlignmentDirectional(0.00, 0.00),
+                    child: Text(
+                      dateTimeFormat(
+                        'Hm',
+                        widget.hora,
+                        locale: FFLocalizations.of(context).languageCode,
                       ),
-                    ],
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Open Sans',
+                            color: Color(0xFF006BFF),
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
                   ),
                 ),
                 Padding(
@@ -235,6 +275,14 @@ class _ConfirmarReservaWidgetState extends State<ConfirmarReservaWidget> {
                         ),
                       ),
                     ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [],
                   ),
                 ),
               ],

@@ -165,9 +165,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ReservarWidget(),
         ),
         FFRoute(
-          name: 'visualizarReserva',
-          path: '/visualizarReserva',
-          builder: (context, params) => VisualizarReservaWidget(),
+          name: 'visualizarReservas',
+          path: '/visualizarReservas',
+          builder: (context, params) => VisualizarReservasWidget(),
+        ),
+        FFRoute(
+          name: 'recomendacionesUsuarios',
+          path: '/recomendacionesUsuarios',
+          builder: (context, params) => RecomendacionesUsuariosWidget(),
+        ),
+        FFRoute(
+          name: 'verRecomendaciones',
+          path: '/verRecomendaciones',
+          builder: (context, params) => VerRecomendacionesWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

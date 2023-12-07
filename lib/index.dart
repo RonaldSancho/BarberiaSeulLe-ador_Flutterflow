@@ -26,5 +26,9 @@ export '/cliente/modulo_usuarios/cambiar_contrasenna/cambiar_contrasenna_widget.
 export '/modulo_reserva/agregar_horarios/agregar_horarios_widget.dart'
     show AgregarHorariosWidget;
 export '/modulo_reserva/reservar/reservar_widget.dart' show ReservarWidget;
-export '/modulo_reserva/visualizar_reserva/visualizar_reserva_widget.dart'
-    show VisualizarReservaWidget;
+export '/modulo_reserva/visualizar_reservas/visualizar_reservas_widget.dart'
+    show VisualizarReservasWidget;
+export '/recomendaciones/recomendaciones_usuarios/recomendaciones_usuarios_widget.dart'
+    show RecomendacionesUsuariosWidget;
+export '/recomendaciones/ver_recomendaciones/ver_recomendaciones_widget.dart'
+    show VerRecomendacionesWidget;

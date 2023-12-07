@@ -11,6 +11,7 @@ import 'schema/errores_record.dart';
 import 'schema/servicios_record.dart';
 import 'schema/agenda_record.dart';
 import 'schema/horarios_record.dart';
+import 'schema/recomendaciones_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,6 +25,7 @@ export 'schema/errores_record.dart';
 export 'schema/servicios_record.dart';
 export 'schema/agenda_record.dart';
 export 'schema/horarios_record.dart';
+export 'schema/recomendaciones_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -242,6 +244,43 @@ Future<List<HorariosRecord>> queryHorariosRecordOnce({
     queryCollectionOnce(
       HorariosRecord.collection,
       HorariosRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query RecomendacionesRecords (as a Stream and as a Future).
+Future<int> queryRecomendacionesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      RecomendacionesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<RecomendacionesRecord>> queryRecomendacionesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      RecomendacionesRecord.collection,
+      RecomendacionesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<RecomendacionesRecord>> queryRecomendacionesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      RecomendacionesRecord.collection,
+      RecomendacionesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

@@ -94,10 +94,19 @@ class _ReservarWidgetState extends State<ReservarWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.arrow_back_sharp,
-                    color: FlutterFlowTheme.of(context).primaryBtnText,
-                    size: 29.0,
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('HomePage');
+                    },
+                    child: Icon(
+                      Icons.arrow_back_sharp,
+                      color: FlutterFlowTheme.of(context).primaryBtnText,
+                      size: 29.0,
+                    ),
                   ),
                   Padding(
                     padding:
@@ -120,141 +129,188 @@ class _ReservarWidgetState extends State<ReservarWidget> {
             ),
             body: SafeArea(
               top: true,
-              child: Form(
-                key: _model.formKey,
-                autovalidateMode: AutovalidateMode.disabled,
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FlutterFlowCalendar(
-                        color: FlutterFlowTheme.of(context).primary,
-                        iconColor: FlutterFlowTheme.of(context).secondaryText,
-                        weekFormat: false,
-                        weekStartsMonday: false,
-                        initialDate: dateTimeFromSecondsSinceEpoch(
-                            getCurrentTimestamp.secondsSinceEpoch),
-                        rowHeight: 40.0,
-                        onChange: (DateTimeRange? newSelectedDate) {
-                          setState(() =>
-                              _model.calendarSelectedDay = newSelectedDate);
-                        },
-                        titleStyle: FlutterFlowTheme.of(context).headlineSmall,
-                        dayOfWeekStyle: FlutterFlowTheme.of(context).labelLarge,
-                        dateStyle: FlutterFlowTheme.of(context).bodyMedium,
-                        selectedDateStyle:
-                            FlutterFlowTheme.of(context).titleSmall,
-                        inactiveDateStyle:
-                            FlutterFlowTheme.of(context).labelMedium,
-                        locale: FFLocalizations.of(context).languageCode,
+              child: StreamBuilder<List<HorariosRecord>>(
+                stream: queryHorariosRecord(
+                  queryBuilder: (horariosRecord) => horariosRecord.where(
+                    'dia',
+                    isEqualTo: _model.calendarSelectedDay?.start,
+                  ),
+                  singleRecord: true,
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: SpinKitCircle(
+                          color: Color(0xFF929090),
+                          size: 50.0,
+                        ),
                       ),
-                      Builder(
-                        builder: (context) {
-                          final horarios = reservarHorariosRecord?.horarios
-                                  ?.map((e) => e)
-                                  .toList()
-                                  ?.toList() ??
-                              [];
-                          if (horarios.isEmpty) {
-                            return SinEspaciosWidget();
-                          }
-                          return ListView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: horarios.length,
-                            itemBuilder: (context, horariosIndex) {
-                              final horariosItem = horarios[horariosIndex];
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 25.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.transparent,
-                                          enableDrag: false,
-                                          context: context,
-                                          builder: (context) {
-                                            return GestureDetector(
-                                              onTap: () => _model.unfocusNode
-                                                      .canRequestFocus
-                                                  ? FocusScope.of(context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode)
-                                                  : FocusScope.of(context)
-                                                      .unfocus(),
-                                              child: Padding(
-                                                padding:
-                                                    MediaQuery.viewInsetsOf(
-                                                        context),
-                                                child: ConfirmarReservaWidget(
-                                                  disponibilidadref:
-                                                      reservarHorariosRecord!
-                                                          .reference,
-                                                  hora: horariosItem,
-                                                ),
-                                              ),
-                                            );
+                    );
+                  }
+                  List<HorariosRecord> formHorariosRecordList = snapshot.data!;
+                  // Return an empty Container when the item does not exist.
+                  if (snapshot.data!.isEmpty) {
+                    return Container();
+                  }
+                  final formHorariosRecord = formHorariosRecordList.isNotEmpty
+                      ? formHorariosRecordList.first
+                      : null;
+                  return Form(
+                    key: _model.formKey,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FlutterFlowCalendar(
+                            color: FlutterFlowTheme.of(context).primary,
+                            iconColor:
+                                FlutterFlowTheme.of(context).secondaryText,
+                            weekFormat: false,
+                            weekStartsMonday: false,
+                            initialDate: dateTimeFromSecondsSinceEpoch(
+                                getCurrentTimestamp.secondsSinceEpoch),
+                            rowHeight: 40.0,
+                            onChange: (DateTimeRange? newSelectedDate) {
+                              setState(() =>
+                                  _model.calendarSelectedDay = newSelectedDate);
+                            },
+                            titleStyle:
+                                FlutterFlowTheme.of(context).headlineSmall,
+                            dayOfWeekStyle:
+                                FlutterFlowTheme.of(context).labelLarge,
+                            dateStyle: FlutterFlowTheme.of(context).bodyMedium,
+                            selectedDateStyle:
+                                FlutterFlowTheme.of(context).titleSmall,
+                            inactiveDateStyle:
+                                FlutterFlowTheme.of(context).labelMedium,
+                            locale: FFLocalizations.of(context).languageCode,
+                          ),
+                          Builder(
+                            builder: (context) {
+                              final horarios = reservarHorariosRecord?.horarios
+                                      ?.map((e) => e)
+                                      .toList()
+                                      ?.toList() ??
+                                  [];
+                              if (horarios.isEmpty) {
+                                return SinEspaciosWidget();
+                              }
+                              return ListView.builder(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: horarios.length,
+                                itemBuilder: (context, horariosIndex) {
+                                  final horariosItem = horarios[horariosIndex];
+                                  return Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 25.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child:
+                                                        ConfirmarReservaWidget(
+                                                      disponibilidadref:
+                                                          reservarHorariosRecord!
+                                                              .reference,
+                                                      hora: horariosItem,
+                                                      day: _model
+                                                          .calendarSelectedDay!
+                                                          .start,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
                                           },
-                                        ).then((value) => safeSetState(() {}));
-                                      },
-                                      child: Container(
-                                        width: 227.0,
-                                        height: 47.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          border: Border.all(
-                                            color: Color(0xFF006BFF),
-                                            width: 2.0,
-                                          ),
-                                        ),
-                                        child: Align(
-                                          alignment:
-                                              AlignmentDirectional(0.00, 0.00),
-                                          child: Text(
-                                            dateTimeFormat(
-                                              'Hm',
-                                              horariosItem,
-                                              locale:
-                                                  FFLocalizations.of(context)
-                                                      .languageCode,
+                                          child: Container(
+                                            width: 227.0,
+                                            height: 47.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              border: Border.all(
+                                                color: Color(0xFF006BFF),
+                                                width: 2.0,
+                                              ),
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Open Sans',
-                                                  color: Color(0xFF006BFF),
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.w600,
+                                            child: Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.00, 0.00),
+                                              child: Text(
+                                                dateTimeFormat(
+                                                  'Hm',
+                                                  horariosItem,
+                                                  locale: FFLocalizations.of(
+                                                          context)
+                                                      .languageCode,
                                                 ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color: Color(0xFF006BFF),
+                                                      fontSize: 16.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  );
+                                },
                               );
                             },
-                          );
-                        },
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
             ),
           ),

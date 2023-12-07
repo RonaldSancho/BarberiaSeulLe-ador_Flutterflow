@@ -397,6 +397,23 @@ class _EditarPerfilWidgetState extends State<EditarPerfilWidget> {
                               _model.txtCorreoElectronicoNuevoController.text,
                         ));
                         await authManager.sendEmailVerification();
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('¡Importante!'),
+                              content: Text(
+                                  'La sesión será cargada para cargar los datos exitosamente.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('De acuerdo.'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                         GoRouter.of(context).prepareAuthEvent();
                         await authManager.signOut();
                         GoRouter.of(context).clearRedirectLocation();

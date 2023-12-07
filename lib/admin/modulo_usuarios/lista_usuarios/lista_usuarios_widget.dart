@@ -75,7 +75,7 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pop();
+              context.pushNamed('HomePage');
             },
           ),
           title: Padding(
@@ -467,10 +467,10 @@ class _ListaUsuariosWidgetState extends State<ListaUsuariosWidget> {
                                                       .delete();
                                                   await authManager
                                                       .deleteUser(context);
-                                                }
 
-                                                context.goNamedAuth('HomePage',
-                                                    context.mounted);
+                                                  context.pushNamed(
+                                                      'ListaUsuarios');
+                                                }
                                               },
                                               text: 'Eliminar',
                                               options: FFButtonOptions(

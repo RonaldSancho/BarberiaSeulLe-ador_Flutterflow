@@ -76,35 +76,29 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
                       Stack(
                         children: [
                           Container(
-                            width: 102.0,
-                            height: 102.0,
+                            width: 100.0,
+                            height: 100.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              color: Color(0xFF2B5DA5),
                               shape: BoxShape.circle,
                             ),
-                            child: Stack(
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(0.00, 0.00),
-                                  child: AuthUserStreamWidget(
-                                    builder: (context) => Container(
-                                      width: 120.0,
-                                      height: 120.0,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Image.network(
-                                        valueOrDefault(
-                                            currentUserDocument?.imagenUsuario,
-                                            ''),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
+                            child: AuthUserStreamWidget(
+                              builder: (context) => Container(
+                                width: 120.0,
+                                height: 120.0,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
                                 ),
-                              ],
+                                child: Image.network(
+                                  valueOrDefault<String>(
+                                    valueOrDefault(
+                                        currentUserDocument?.imagenUsuario, ''),
+                                    'https://icon-library.com/images/generic-user-icon/generic-user-icon-13.jpg',
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -397,6 +391,8 @@ class _PerfilDeUsuarioWidgetState extends State<PerfilDeUsuarioWidget> {
                   GoRouter.of(context).prepareAuthEvent();
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
+
+                  context.pushNamedAuth('IniciodeSesion', context.mounted);
                 } else {
                   context.pushNamedAuth('PerfilDeUsuario', context.mounted);
                 }

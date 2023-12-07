@@ -1,11 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,11 +27,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed('visualizarReserva');
-    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -127,24 +120,35 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 10.0, 20.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Reservas',
-                        style: FlutterFlowTheme.of(context).labelLarge.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Color(0xFF2B5DA5),
-                        size: 24.0,
-                      ),
-                    ],
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('reservar');
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Reservas',
+                          style: FlutterFlowTheme.of(context)
+                              .labelLarge
+                              .override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color(0xFF2B5DA5),
+                          size: 24.0,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 if (valueOrDefault(currentUserDocument?.tipoUsuario, '') ==
@@ -186,8 +190,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                     ),
                   ),
-                if (valueOrDefault(currentUserDocument?.tipoUsuario, '') ==
-                    'Administrador')
+                if (valueOrDefault(currentUserDocument?.tipoUsuario, '') !=
+                    FFAppConstants.rolUsuario)
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 10.0, 20.0),
@@ -245,6 +249,236 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           children: [
                             Text(
                               'Errores',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF2B5DA5),
+                              size: 24.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                if (valueOrDefault(currentUserDocument?.tipoUsuario, '') ==
+                    'Administrador')
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 10.0, 20.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('agregarHorarios');
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Horarios',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF2B5DA5),
+                              size: 24.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                if (valueOrDefault(currentUserDocument?.tipoUsuario, '') ==
+                    FFAppConstants.rolUsuario)
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 10.0, 20.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('VisualizarServiciosCliente');
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Ver Servicios',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF2B5DA5),
+                              size: 24.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                if (valueOrDefault(currentUserDocument?.tipoUsuario, '') ==
+                    FFAppConstants.rolUsuario)
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 10.0, 20.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context
+                                  .pushNamed('VisualizarTrabajadoresCliente');
+                            },
+                            child: Text(
+                              'Ver Trabajadores',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Color(0xFF2B5DA5),
+                            size: 24.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 10.0, 20.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('visualizarReservas');
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Ver Reserva',
+                          style: FlutterFlowTheme.of(context)
+                              .labelLarge
+                              .override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color(0xFF2B5DA5),
+                          size: 24.0,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                if (valueOrDefault(currentUserDocument?.tipoUsuario, '') !=
+                    'Administrador')
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 10.0, 20.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('recomendacionesUsuarios');
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Dar Recomendaciones',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF2B5DA5),
+                              size: 24.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                if (valueOrDefault(currentUserDocument?.tipoUsuario, '') ==
+                    'Administrador')
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 10.0, 20.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('verRecomendaciones');
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Ver Recomendaciones',
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
@@ -346,8 +580,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
               child: Container(
-                width: 39.0,
-                height: 39.0,
+                width: 45.0,
+                height: 45.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                   shape: BoxShape.circle,
@@ -369,7 +603,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         shape: BoxShape.circle,
                       ),
                       child: Image.network(
-                        valueOrDefault(currentUserDocument?.imagenUsuario, ''),
+                        valueOrDefault<String>(
+                          valueOrDefault(
+                              currentUserDocument?.imagenUsuario, ''),
+                          'https://icon-library.com/images/generic-user-icon/generic-user-icon-13.jpg',
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -617,117 +855,30 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    StreamBuilder<List<UsersRecord>>(
-                      stream: queryUsersRecord(
-                        singleRecord: true,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: SpinKitCircle(
-                                color: Color(0xFF929090),
-                                size: 50.0,
-                              ),
-                            ),
-                          );
-                        }
-                        List<UsersRecord> buttonUsersRecordList =
-                            snapshot.data!;
-                        // Return an empty Container when the item does not exist.
-                        if (snapshot.data!.isEmpty) {
-                          return Container();
-                        }
-                        final buttonUsersRecord =
-                            buttonUsersRecordList.isNotEmpty
-                                ? buttonUsersRecordList.first
-                                : null;
-                        return FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('reservar');
-                          },
-                          text: 'Button',
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).accent3,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
+                    FFButtonWidget(
+                      onPressed: () {
+                        print('Button pressed ...');
+                      },
+                      text: 'Button',
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).accent3,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Open Sans',
                                   color: Colors.white,
                                 ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        );
-                      },
-                    ),
-                    StreamBuilder<List<UsersRecord>>(
-                      stream: queryUsersRecord(
-                        singleRecord: true,
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: SpinKitCircle(
-                                color: Color(0xFF929090),
-                                size: 50.0,
-                              ),
-                            ),
-                          );
-                        }
-                        List<UsersRecord> buttonUsersRecordList =
-                            snapshot.data!;
-                        // Return an empty Container when the item does not exist.
-                        if (snapshot.data!.isEmpty) {
-                          return Container();
-                        }
-                        final buttonUsersRecord =
-                            buttonUsersRecordList.isNotEmpty
-                                ? buttonUsersRecordList.first
-                                : null;
-                        return FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('visualizarReserva');
-                          },
-                          text: 'Button',
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).accent1,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Open Sans',
-                                  color: Colors.white,
-                                ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        );
-                      },
                     ),
                   ],
                 ),
