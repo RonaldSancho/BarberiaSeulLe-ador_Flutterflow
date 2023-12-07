@@ -236,10 +236,10 @@ class _AgregarHorariosWidgetState extends State<AgregarHorariosWidget> {
                               ),
                               ...mapToFirestore(
                                 {
-                                  'horarios': functions.newCustomFunction(
-                                      functions.newCustomFunction2(
+                                  'horarios': functions.listaTiempo(
+                                      functions.textToDateTime(
                                           _model.dropDownValue1!),
-                                      functions.newCustomFunction2(
+                                      functions.textToDateTime(
                                           _model.dropDownValue2!)),
                                 },
                               ),

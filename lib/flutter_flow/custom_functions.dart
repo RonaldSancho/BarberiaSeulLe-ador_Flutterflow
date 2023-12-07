@@ -12,7 +12,7 @@ import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
-List<DateTime> newCustomFunction(
+List<DateTime> listaTiempo(
   DateTime openHour,
   DateTime closeHour,
 ) {
@@ -34,7 +34,7 @@ List<DateTime> newCustomFunction(
   return hours;
 }
 
-DateTime newCustomFunction2(String hora) {
+DateTime textToDateTime(String hora) {
   final now = DateTime.now();
   final hourAndMinute = hora.split(':');
   final hour = int.parse(hourAndMinute[0]);
